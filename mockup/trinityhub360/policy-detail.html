@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrinityHub360 — Policy Detail 360°</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      "primary":"#002045","primary-container":"#1a365d","primary-fixed":"#d6e3ff","primary-fixed-dim":"#adc7f7",
+      "on-primary":"#ffffff","on-primary-container":"#86a0cd","on-primary-fixed":"#001b3c",
+      "secondary":"#555f70","secondary-container":"#d9e3f8","on-secondary":"#ffffff","on-secondary-container":"#5b6577",
+      "tertiary":"#321b00","tertiary-container":"#4f2e00","tertiary-fixed":"#ffddba",
+      "on-tertiary":"#ffffff","on-tertiary-container":"#c6955e",
+      "surface":"#f9f9ff","surface-container-lowest":"#ffffff","surface-container-low":"#f0f3ff","surface-container":"#e7eeff",
+      "surface-container-high":"#dee8ff","surface-container-highest":"#d8e3fa","surface-variant":"#d8e3fa",
+      "on-surface":"#111c2c","on-surface-variant":"#43474e",
+      "outline":"#74777f","outline-variant":"#c4c6cf",
+      "error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a"
+    },
+    borderRadius: { "DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.75rem","full":"9999px" },
+    fontFamily: { "headline":["Manrope","sans-serif"],"body":["Inter","sans-serif"] }
+  }}
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #111c2c; }
+h1,h2,h3,h4,.font-headline { font-family: 'Manrope', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #c4c6cf; border-radius: 4px; }
+
+/* Flyout nav */
+.nav-section-item { outline: none; }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="flex bg-surface">
+
+<!-- SIDEBAR -->
+<aside class="fixed left-0 top-0 h-screen w-72 bg-white flex flex-col z-40 shadow-sm">
+  <div class="px-5 py-5 border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-md flex-shrink-0">
+        <span class="material-symbols-outlined text-white icon-fill">shield</span>
+      </div>
+      <div>
+        <div class="text-[15px] font-bold font-headline text-primary leading-tight">TrinityHub360</div>
+        <div class="text-[9px] font-semibold text-on-secondary-container uppercase tracking-[0.15em]">Cardali Group Inc.</div>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+    <a href="index.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="my-agency">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="flex-1">My Agency</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="policy-list.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] bg-primary-fixed text-primary font-semibold transition-colors" data-section="policy">
+      <span class="material-symbols-outlined text-[20px] icon-fill">description</span>
+      <span class="flex-1">Policy</span>
+      <span class="material-symbols-outlined text-[13px] text-primary/40">chevron_right</span>
+    </a>
+    <a href="customers.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="business-book">
+      <span class="material-symbols-outlined text-[20px]">menu_book</span>
+      <span class="flex-1">Business Book</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="contracts-agents.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="contracts">
+      <span class="material-symbols-outlined text-[20px]">handshake</span>
+      <span class="flex-1">Contracts</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="commissions.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="commissions">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="flex-1">Commissions</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="marketing.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="marketing">
+      <span class="material-symbols-outlined text-[20px]">campaign</span>
+      <span class="flex-1">Marketing</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <div class="pt-3 mt-2 border-t border-surface-container-low">
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span class="flex-1">Settings</span>
+      </a>
+    </div>
+  </nav>
+  <div class="px-4 py-4 border-t border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm flex-shrink-0">AT</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-semibold text-on-surface truncate">Alex Thompson</p>
+        <p class="text-[11px] text-on-secondary-container truncate">Agency Manager</p>
+      </div>
+      <button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">logout</span></button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white/90 backdrop-blur-xl border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <a href="policy-list.html" class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors text-sm"><span class="material-symbols-outlined text-[18px]">arrow_back</span> Back to Policies</a>
+    </div>
+    <div class="flex items-center gap-1">
+      <button class="relative p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error border-2 border-white"></span></button>
+      <div class="ml-2 flex items-center gap-3 pl-3 border-l border-surface-container-high">
+        <div class="text-right"><p class="text-sm font-semibold text-on-surface leading-tight">Alex Thompson</p><p class="text-[11px] text-on-secondary-container leading-tight">Agency Manager</p></div>
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm">AT</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-8">
+    <!-- WORKFLOW STATUS BAR -->
+    <div class="bg-white rounded-full p-1.5 flex items-center mb-8 shadow-sm">
+      <div class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full text-sm text-on-surface-variant font-medium">
+        <span class="material-symbols-outlined text-[18px] text-green-600 icon-fill">check_circle</span> No Consent
+      </div>
+      <div class="w-px h-4 bg-surface-container-high"></div>
+      <div class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full text-sm text-on-surface-variant font-medium">
+        <span class="material-symbols-outlined text-[18px] text-green-600 icon-fill">check_circle</span> No Eligibility
+      </div>
+      <div class="w-px h-4 bg-surface-container-high"></div>
+      <div class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full bg-amber-50 text-amber-700 font-bold text-sm shadow-inner">
+        <span class="material-symbols-outlined text-[18px] icon-fill">pending</span> Pending Documents
+      </div>
+      <div class="w-px h-4 bg-surface-container-high"></div>
+      <div class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full text-sm text-on-surface-variant/50 font-medium">
+        <span class="material-symbols-outlined text-[18px]">hourglass_empty</span> Binder Payment
+      </div>
+    </div>
+
+    <!-- PAGE TITLE + ACTIONS -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold tracking-wider uppercase">Active Lead</span>
+          <span class="text-on-surface-variant text-sm">#POL-882910</span>
+        </div>
+        <h2 class="text-4xl font-bold font-headline text-primary tracking-tight">Julianne Moretz <span class="font-normal text-on-surface-variant">&amp; Family</span></h2>
+        <p class="text-on-surface-variant flex items-center gap-1.5 mt-1.5 text-sm">
+          <span class="material-symbols-outlined text-[16px]">location_on</span> 742 Evergreen Terrace, Springfield, IL 62704
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-primary font-semibold hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[18px]">edit</span> Edit Details
+        </button>
+        <button class="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all">
+          <span class="material-symbols-outlined text-[18px]">send</span> Request Signature
+        </button>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-full mb-8 w-fit">
+      <button class="px-5 py-2 bg-white rounded-full text-sm font-bold text-primary shadow-sm">Policy Summary</button>
+      <button class="px-5 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-white/60 transition-colors">Policy Members</button>
+      <button class="px-5 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-white/60 transition-colors">Activities</button>
+      <button class="px-5 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-white/60 transition-colors">Documents</button>
+      <button class="px-5 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-white/60 transition-colors">Attachments</button>
+      <button class="px-5 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-white/60 transition-colors">Change Control</button>
+    </div>
+
+    <!-- BENTO GRID CONTENT -->
+    <div class="grid grid-cols-12 gap-6">
+      <!-- LEFT MAIN (8 cols) -->
+      <div class="col-span-8 space-y-6">
+        <!-- Carrier + Signature Row -->
+        <div class="grid grid-cols-2 gap-6">
+          <!-- Carrier Card -->
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-xs font-bold text-primary uppercase tracking-widest">Primary Carrier</h3>
+              <span class="material-symbols-outlined text-blue-500 icon-fill">verified</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-xl bg-surface-container-low flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-[36px]">health_and_safety</span>
+              </div>
+              <div>
+                <p class="text-lg font-bold">BlueShield Premier</p>
+                <p class="text-sm text-on-surface-variant">HMO Platinum Plus 2024</p>
+                <p class="text-xs font-semibold text-primary mt-1">Est. Premium: $842.10/mo</p>
+              </div>
+            </div>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="bg-surface-container-low p-3 rounded-xl">
+                <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Policy Type</div>
+                <div class="text-sm font-semibold">Health – ACA</div>
+              </div>
+              <div class="bg-surface-container-low p-3 rounded-xl">
+                <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Coverage Year</div>
+                <div class="text-sm font-semibold">2024</div>
+              </div>
+              <div class="bg-surface-container-low p-3 rounded-xl">
+                <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Effective Date</div>
+                <div class="text-sm font-semibold">Jan 01, 2024</div>
+              </div>
+              <div class="bg-surface-container-low p-3 rounded-xl">
+                <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Monthly Premium</div>
+                <div class="text-sm font-semibold text-primary">$842.10</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signature Status -->
+          <div class="bg-surface-container-low p-6 rounded-xl flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xs font-bold text-primary uppercase tracking-widest">Digital Signature</h3>
+              <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full">PENDING</span>
+            </div>
+            <div class="flex-1">
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 bg-white rounded-xl">
+                  <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-green-600 text-[16px] icon-fill">check_circle</span></div>
+                  <div><p class="text-xs font-semibold">Julianne Moretz</p><p class="text-[10px] text-on-secondary-container">Primary Insured • Signed Oct 12</p></div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-white rounded-xl">
+                  <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-green-600 text-[16px] icon-fill">check_circle</span></div>
+                  <div><p class="text-xs font-semibold">David Moretz</p><p class="text-[10px] text-on-secondary-container">Spouse • Signed Oct 14</p></div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-white rounded-xl border-2 border-dashed border-amber-200">
+                  <div class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-amber-500 text-[16px]">schedule</span></div>
+                  <div><p class="text-xs font-semibold">Agent Signature</p><p class="text-[10px] text-amber-600 font-semibold">Pending — Action Required</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] text-on-secondary-container">2 of 3 Signatures Collected</span>
+                <span class="text-[10px] font-bold text-amber-600">66%</span>
+              </div>
+              <div class="w-full h-2 bg-white rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width:66%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Family Composition -->
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-bold font-headline">Family Composition</h3>
+            <button class="flex items-center gap-1.5 text-primary text-sm font-semibold hover:underline"><span class="material-symbols-outlined text-[16px]">add</span> Add Member</button>
+          </div>
+          <div>
+            <div class="grid grid-cols-12 px-4 mb-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+              <div class="col-span-5">Name &amp; Relationship</div>
+              <div class="col-span-3">DOB / Age</div>
+              <div class="col-span-2">Status</div>
+              <div class="col-span-2 text-right">Actions</div>
+            </div>
+            <div class="space-y-1">
+              <div class="grid grid-cols-12 px-4 py-3.5 items-center bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
+                <div class="col-span-5 flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs flex-shrink-0">JM</div>
+                  <div><p class="text-sm font-bold">Julianne Moretz</p><p class="text-[11px] text-on-secondary-container">Primary Insured</p></div>
+                </div>
+                <div class="col-span-3"><p class="text-sm">May 12, 1988</p><p class="text-[11px] text-on-secondary-container">35 Years</p></div>
+                <div class="col-span-2"><span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Non-Smoker</span></div>
+                <div class="col-span-2 text-right"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div>
+              </div>
+              <div class="grid grid-cols-12 px-4 py-3.5 items-center hover:bg-surface-container-low rounded-xl transition-colors">
+                <div class="col-span-5 flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs flex-shrink-0">DM</div>
+                  <div><p class="text-sm font-bold">David Moretz</p><p class="text-[11px] text-on-secondary-container">Spouse</p></div>
+                </div>
+                <div class="col-span-3"><p class="text-sm">Jan 04, 1985</p><p class="text-[11px] text-on-secondary-container">39 Years</p></div>
+                <div class="col-span-2"><span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Non-Smoker</span></div>
+                <div class="col-span-2 text-right"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div>
+              </div>
+              <div class="grid grid-cols-12 px-4 py-3.5 items-center hover:bg-surface-container-low rounded-xl transition-colors">
+                <div class="col-span-5 flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-container font-bold text-xs flex-shrink-0">LM</div>
+                  <div><p class="text-sm font-bold">Lily Moretz</p><p class="text-[11px] text-on-secondary-container">Child / Dependent</p></div>
+                </div>
+                <div class="col-span-3"><p class="text-sm">Sep 21, 2018</p><p class="text-[11px] text-on-secondary-container">5 Years</p></div>
+                <div class="col-span-2"><span class="px-2 py-0.5 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded-full uppercase">N/A</span></div>
+                <div class="col-span-2 text-right"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Policy Summary Info -->
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <h3 class="text-lg font-bold font-headline mb-5">Policy Summary</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Customer</div><p class="text-sm font-semibold">Julianne Moretz</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Agent</div><p class="text-sm font-semibold">Alex Thompson</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Agency</div><p class="text-sm font-semibold">Cardali Group Inc.</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Date of Birth</div><p class="text-sm">May 12, 1988</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Email</div><p class="text-sm">j.moretz@email.com</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Phone</div><p class="text-sm">(312) 555-0192</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Immigration Status</div><p class="text-sm">US Citizen</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Income Group</div><p class="text-sm">$50k – $75k</p></div>
+            <div><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Marital Status</div><p class="text-sm">Married</p></div>
+            <div class="col-span-3"><div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider mb-1">Mailing Address</div><p class="text-sm">742 Evergreen Terrace, Springfield, IL 62704</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR (4 cols) -->
+      <div class="col-span-4 space-y-5">
+        <!-- Quick Stats -->
+        <div class="bg-gradient-to-br from-primary to-primary-container p-6 rounded-xl text-white relative overflow-hidden">
+          <div class="absolute -right-4 -bottom-4 opacity-10"><span class="material-symbols-outlined text-[80px]">description</span></div>
+          <div class="relative z-10 space-y-4">
+            <div class="text-[10px] font-bold uppercase tracking-widest opacity-70">Policy Status</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span><span class="text-sm font-bold">Pending Documents</span></div>
+            <div class="h-px bg-white/10"></div>
+            <div class="grid grid-cols-2 gap-3">
+              <div><div class="text-2xl font-bold font-headline">3</div><div class="text-[10px] opacity-70">Family Members</div></div>
+              <div><div class="text-2xl font-bold font-headline">$842</div><div class="text-[10px] opacity-70">Monthly Premium</div></div>
+              <div><div class="text-2xl font-bold font-headline">5</div><div class="text-[10px] opacity-70">Activities</div></div>
+              <div><div class="text-2xl font-bold font-headline">2</div><div class="text-[10px] opacity-70">Attachments</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attachments -->
+        <div class="bg-white p-5 rounded-xl shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xs font-bold text-primary uppercase tracking-widest">Attachments</h3>
+            <button class="text-primary hover:bg-primary-fixed p-1 rounded-full transition-colors"><span class="material-symbols-outlined text-[18px]">upload_file</span></button>
+          </div>
+          <div class="space-y-2">
+            <div class="p-3 bg-surface-container-low rounded-xl flex items-center gap-3 hover:bg-surface-container cursor-pointer group">
+              <div class="w-9 h-9 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-red-600 text-[18px]">picture_as_pdf</span></div>
+              <div class="flex-1 min-w-0"><p class="text-xs font-bold truncate">Birth_Certificate_Lily.pdf</p><p class="text-[10px] text-on-secondary-container">Eligibility Docs</p></div>
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-[18px]">download</span>
+            </div>
+            <div class="p-3 bg-surface-container-low rounded-xl flex items-center gap-3 hover:bg-surface-container cursor-pointer group">
+              <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-blue-600 text-[18px]">description</span></div>
+              <div class="flex-1 min-w-0"><p class="text-xs font-bold truncate">Carrier_Consent_Form.pdf</p><p class="text-[10px] text-on-secondary-container">Legal / Consent</p></div>
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-[18px]">download</span>
+            </div>
+            <button class="w-full p-3 border-2 border-dashed border-surface-container-high rounded-xl flex items-center justify-center gap-2 text-on-surface-variant text-xs font-bold hover:border-primary/30 hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-[16px]">add</span> Add Document
+            </button>
+          </div>
+        </div>
+
+        <!-- Audit History -->
+        <div class="bg-white p-5 rounded-xl shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xs font-bold text-primary uppercase tracking-widest">Audit History</h3>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">history</span>
+          </div>
+          <div class="relative space-y-5 before:absolute before:left-[9px] before:top-2 before:bottom-2 before:w-px before:bg-surface-container-high">
+            <div class="relative flex items-start gap-3">
+              <div class="w-5 h-5 rounded-full bg-blue-100 border-4 border-white flex-shrink-0 z-10 mt-0.5"></div>
+              <div>
+                <p class="text-[11px] font-bold">Signature Collected</p>
+                <p class="text-[10px] text-on-secondary-container">David Moretz signed Digital Consent</p>
+                <p class="text-[9px] text-on-surface-variant/60 mt-0.5 font-semibold uppercase">2 hours ago · Automated</p>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-3">
+              <div class="w-5 h-5 rounded-full bg-amber-100 border-4 border-white flex-shrink-0 z-10 mt-0.5"></div>
+              <div>
+                <p class="text-[11px] font-bold">Document Requested</p>
+                <p class="text-[10px] text-on-secondary-container">Missing Birth Certificate for Lily</p>
+                <p class="text-[9px] text-on-surface-variant/60 mt-0.5 font-semibold uppercase">Yesterday, 4:22 PM · Alex T.</p>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-3">
+              <div class="w-5 h-5 rounded-full bg-primary-fixed border-4 border-white flex-shrink-0 z-10 mt-0.5"></div>
+              <div>
+                <p class="text-[11px] font-bold">Status Changed</p>
+                <p class="text-[10px] text-on-secondary-container">Draft → Active Lead</p>
+                <p class="text-[9px] text-on-surface-variant/60 mt-0.5 font-semibold uppercase">Oct 12, 11:00 AM · Alex T.</p>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-3">
+              <div class="w-5 h-5 rounded-full bg-surface-container-high border-4 border-white flex-shrink-0 z-10 mt-0.5"></div>
+              <div>
+                <p class="text-[11px] font-bold">Case Created</p>
+                <p class="text-[10px] text-on-secondary-container">Initial application entered</p>
+                <p class="text-[9px] text-on-surface-variant/60 mt-0.5 font-semibold uppercase">Oct 12, 10:15 AM · System</p>
+              </div>
+            </div>
+          </div>
+          <button class="w-full mt-4 py-2 text-[10px] font-bold text-primary uppercase tracking-widest border border-surface-container-high rounded-xl hover:bg-surface-container-low transition-colors">View Full History</button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-surface-container-low p-5 rounded-xl">
+          <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-3">Quick Actions</h3>
+          <div class="space-y-2">
+            <button class="w-full flex items-center gap-3 p-3 bg-white rounded-xl text-sm font-medium hover:bg-surface-container-high transition-colors">
+              <span class="material-symbols-outlined text-primary text-[18px]">autorenew</span> Renew Policy
+            </button>
+            <button class="w-full flex items-center gap-3 p-3 bg-white rounded-xl text-sm font-medium hover:bg-surface-container-high transition-colors">
+              <span class="material-symbols-outlined text-primary text-[18px]">swap_horiz</span> Insurance Change
+            </button>
+            <button class="w-full flex items-center gap-3 p-3 bg-white rounded-xl text-sm font-medium hover:bg-surface-container-high transition-colors">
+              <span class="material-symbols-outlined text-primary text-[18px]">person_swap</span> Policy Holder Change
+            </button>
+            <button class="w-full flex items-center gap-3 p-3 bg-white rounded-xl text-sm font-medium hover:bg-surface-container-high transition-colors">
+              <span class="material-symbols-outlined text-primary text-[18px]">picture_as_pdf</span> Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-2xl shadow-primary/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+  <span class="material-symbols-outlined text-[24px]">chat</span>
+</button>
+<!-- NAV-FLYOUT-START -->
+<style>#nav-flyout a.fl:hover{background:#f0f3ff !important;}</style>
+<div id="nav-flyout" style="position:fixed;left:288px;top:0;z-index:9999;min-width:224px;max-width:264px;background:#fff;border-radius:0 18px 18px 0;box-shadow:4px 0 24px rgba(0,32,69,.13),0 2px 8px rgba(0,32,69,.07);border-left:1px solid #e8edf8;display:none;">
+  <div id="nav-flyout-inner" style="padding:10px 8px;"></div>
+</div>
+<script>
+(function(){
+  var S={"my-agency":[{l:"Dashboard",h:"index.html",i:"dashboard"}, {l:"Pipeline",h:"pipeline.html",i:"schema"}, {l:"Notifications",h:"notifications.html",i:"notifications"}, {l:"Messages",h:"messages.html",i:"forum"}],"policy":[{l:"All Policies",h:"policy-list.html",i:"description"}, {l:"Drafts",h:"policy-drafts.html",i:"draft"}, {l:"Add Policy",h:"policy-wizard.html",i:"add_circle"}, {l:"Activities",h:"policy-activities.html",i:"task_alt"}, {l:"Sales Projection",h:"policy-sales.html",i:"trending_up"}, {l:"Bulk Actions",h:"policy-bulk.html",i:"checklist"}],"business-book":[{l:"Customers",h:"customers.html",i:"people"}, {l:"Opportunities",h:"pipeline.html",i:"schema"}],"contracts":[{l:"Agents",h:"contracts-agents.html",i:"badge"}, {l:"Licenses",h:"contracts-licenses.html",i:"verified"}, {l:"Queue",h:"contracts-queue.html",i:"pending_actions"}, {l:"Notifications",h:"contracts-notifications.html",i:"notifications_active"}, {l:"Messages",h:"contracts-messages.html",i:"sms"}],"commissions":[{l:"Overview",h:"commissions.html",i:"payments"}, {l:"Statement",h:"commissions-statement.html",i:"receipt_long"}, {l:"Notifications",h:"commissions-notifications.html",i:"notification_important"}, {l:"Messages",h:"commissions-messages.html",i:"chat_bubble"}, {l:"Activities",h:"commissions-activities.html",i:"event_note"}],"marketing":[{l:"Overview",h:"marketing.html",i:"campaign"}, {l:"SMS",h:"marketing-sms.html",i:"sms"}, {l:"WhatsApp",h:"marketing-whatsapp.html",i:"chat"}, {l:"Telegram Bots",h:"marketing-telegram.html",i:"send"}, {l:"WA Configuration",h:"whatsapp.html",i:"settings_applications"}]};
+  var L={"my-agency":"My Agency","policy":"Policy","business-book":"Business Book","contracts":"Contracts","commissions":"Commissions","marketing":"Marketing"};
+  var fly=document.getElementById("nav-flyout");
+  var inn=document.getElementById("nav-flyout-inner");
+  var cur=(location.pathname.split("/").pop()||"index.html");
+  var t=null;
+  function show(id,el){
+    clearTimeout(t);
+    var items=S[id];
+    if(!items||!items.length){hide();return;}
+    var h="<div style=\"padding:6px 12px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#43474e;opacity:.65;\">"+(L[id]||id)+"</div>";
+    items.forEach(function(item){
+      var active=cur===item.h;
+      var sty=active?"background:rgba(0,32,69,.08);color:#002045;font-weight:600;":"color:#43474e;";
+      h+="<a href=\""+item.h+"\" class=\"fl\" style=\"display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13px;text-decoration:none;"+sty+"\">"
+        +"<span class=\"material-symbols-outlined\" style=\"font-size:18px;opacity:"+(active?"1":".55")+"\">"+item.i+"</span>"
+        +"<span>"+item.l+"</span>"
+        +"</a>";
+    });
+    inn.innerHTML=h;
+    var r=el.getBoundingClientRect();
+    fly.style.top=Math.max(0,r.top-6)+"px";
+    fly.style.display="block";
+  }
+  function hide(){t=setTimeout(function(){fly.style.display="none";},140);}
+  document.querySelectorAll(".nav-section-item").forEach(function(el){
+    el.addEventListener("mouseenter",function(){show(el.dataset.section,el);});
+    el.addEventListener("mouseleave",hide);
+  });
+  fly.addEventListener("mouseenter",function(){clearTimeout(t);});
+  fly.addEventListener("mouseleave",hide);
+})();
+</script>
+<!-- NAV-FLYOUT-END -->
+</body>
+</html>

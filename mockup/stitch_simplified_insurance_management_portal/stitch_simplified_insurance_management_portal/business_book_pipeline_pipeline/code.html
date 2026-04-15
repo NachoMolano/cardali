@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Opportunity Pipeline | CardalAI CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#86a0cd",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary-container": "#4f2e00",
+                        "on-surface-variant": "#43474e",
+                        "outline-variant": "#c4c6cf",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "background": "#f9f9ff",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#111c2c",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-dim": "#cfdaf1",
+                        "surface-container-high": "#dee8ff",
+                        "on-tertiary-container": "#c6955e",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "on-secondary-fixed": "#121c2b",
+                        "on-background": "#111c2c",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#d8e3fa",
+                        "inverse-on-surface": "#ebf1ff",
+                        "secondary-fixed-dim": "#bdc7db",
+                        "primary-container": "#1a365d",
+                        "outline": "#74777f",
+                        "inverse-primary": "#adc7f7",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-variant": "#d8e3fa",
+                        "surface-tint": "#455f88",
+                        "secondary-container": "#d9e3f8",
+                        "inverse-surface": "#263142",
+                        "tertiary": "#321b00",
+                        "secondary-fixed": "#d9e3f8",
+                        "secondary": "#555f70",
+                        "on-primary-fixed": "#001b3c",
+                        "tertiary-fixed": "#ffddba",
+                        "primary": "#002045",
+                        "on-secondary-container": "#5b6577",
+                        "on-secondary-fixed-variant": "#3e4758"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar (Shell Component) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 h-screen w-64 bg-slate-50 dark:bg-slate-900 border-r-0 z-50">
+<div class="mb-8 px-2">
+<h1 class="text-xl font-bold tracking-tight text-[#1a365d] dark:text-white">CardalAI</h1>
+<p class="text-xs text-slate-500 font-medium">Business Book</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_search">person_search</span>
+<span class="text-[0.875rem]">Catalog</span>
+</a>
+<!-- Active State: Opportunities (Mapping to Business Book intent) -->
+<a class="flex items-center gap-3 px-4 py-2.5 bg-[#d6e3ff] text-[#1a365d] dark:bg-blue-900 dark:text-blue-100 rounded-full font-semibold group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="view_kanban">view_kanban</span>
+<span class="text-[0.875rem]">Opportunities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[0.875rem]">Communication</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-[0.875rem]">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/50 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-[#1a365d] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="text-[0.875rem]">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span class="text-[0.875rem]">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Shell Component) -->
+<header class="w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex justify-between items-center px-8 shadow-[0_20px_40px_rgba(17,28,44,0.05)]">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[20px]" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-primary-fixed-dim transition-all" placeholder="Search opportunities..." type="text"/>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-500 hover:text-[#1a365d] transition-opacity text-sm font-medium" href="#">Dashboard</a>
+<a class="text-[#1a365d] dark:text-blue-400 border-b-2 border-[#1a365d] pb-1 text-sm font-semibold" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-full text-sm font-semibold hover:scale-95 transition-transform">
+                    Create Ticket
+                </button>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border-2 border-surface-container-high" data-alt="Professional business executive portrait in a modern glass office environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtEGmYnDqZioNTrZLTmMAN7X9q0m_l1p84OoxL6x0Ka24p6_NhnQoEk5mNGNl71RJ0uRlpIq1oeT9Ju64C99zfXFSweikwi_av6xxAndEbZbAKGX1KvZYG2mjrJ0I1UTY7v_JHUYwuyMIDh07_DX4SxdzaHJBsPrwOEGij6G7CtgTI5zPJ0FCrNoHLjCuihrkntpId3g6xSYrGTyIc2iLwnZ16BWDfNjum83gjOgvHDp9cZbI5YCMl3DodSO-muGB_4J8HqrvYRdS0"/>
+</div>
+</header>
+<!-- Kanban Board Area -->
+<section class="p-8 flex-1 flex flex-col">
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-[1.75rem] font-semibold text-on-surface leading-tight">Opportunity Pipeline</h2>
+<p class="text-slate-500 text-sm mt-1">Manage and track your active business leads</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest text-primary border border-outline-variant/30 rounded-xl text-sm font-medium hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                        New Opportunity
+                    </button>
+</div>
+</div>
+<!-- Board Columns -->
+<div class="flex-1 grid grid-cols-4 gap-6 min-h-0">
+<!-- Column: Lead -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-blue-400"></span>
+<h3 class="font-semibold text-sm text-on-surface">Lead</h3>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">3</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="more_horiz">more_horiz</span>
+</div>
+<div class="flex flex-col gap-4 p-2 bg-surface-container-low rounded-2xl flex-1 no-scrollbar overflow-y-auto">
+<!-- Kanban Card -->
+<div class="group bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing border border-transparent hover:border-primary-fixed">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-on-secondary-container bg-secondary-container px-2 py-1 rounded">Residential</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<h4 class="font-semibold text-on-surface mb-1">Julian Alvarez</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.25rem] font-bold text-primary">$45,000</span>
+<span class="text-[0.6875rem] text-slate-400">USD</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50">
+<div class="flex items-center gap-1.5 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span class="text-[0.75rem]">2h ago</span>
+</div>
+<img alt="Agent" class="w-6 h-6 rounded-full grayscale opacity-70" data-alt="Portrait of a smiling young male agent in a casual professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFb_jDeh0oyanD2vNRKFUnJkL8WNwoIhYPJGZqBbxK7pgXHWcIZ0tNh2gVwhDkt60QPdogEkjpunorOxT2FvYpODvgth40AWXtOB2sVAFAfHcnJudO5A5wuCVBKt4JTo0YRepBEK2Wn70qzU-xKxWI60zKMqbgkQscxnlV8rXVhhSAR9jSp0l2QhHzSmzGQzkRTaAsrq9aL-6WlX1P-o8lNuO-3K2suuG_OcSLiF8CqX7fAJueK3PXFHlwRWPhu1npPbvoXpKMukzy"/>
+</div>
+</div>
+<!-- Kanban Card 2 -->
+<div class="group bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all cursor-grab border border-transparent">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-on-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">Commercial</span>
+<span class="material-symbols-outlined text-slate-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<h4 class="font-semibold text-on-surface mb-1">Marta Rodriguez</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.25rem] font-bold text-primary">$128,000</span>
+<span class="text-[0.6875rem] text-slate-400">USD</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50">
+<div class="flex items-center gap-1.5 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="call">call</span>
+<span class="text-[0.75rem]">Yesterday</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">MR</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Cita -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-orange-400"></span>
+<h3 class="font-semibold text-sm text-on-surface">Cita</h3>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">1</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="more_horiz">more_horiz</span>
+</div>
+<div class="flex flex-col gap-4 p-2 bg-surface-container-low rounded-2xl flex-1">
+<div class="group bg-surface-container-lowest p-4 rounded-xl shadow-sm hover:shadow-md transition-all cursor-grab border border-transparent">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-on-primary-fixed-variant bg-primary-fixed px-2 py-1 rounded">Priority</span>
+<span class="material-symbols-outlined text-slate-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<h4 class="font-semibold text-on-surface mb-1">Carlos Mendez</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.25rem] font-bold text-primary">$72,400</span>
+<span class="text-[0.6875rem] text-slate-400">USD</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="event">event</span>
+<span class="text-[0.75rem] font-medium text-on-surface">Oct 24, 14:00</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50">
+<div class="flex items-center gap-1.5 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="mail">mail</span>
+<span class="text-[0.75rem]">Invite Sent</span>
+</div>
+<img alt="Agent" class="w-6 h-6 rounded-full object-cover" data-alt="Close up portrait of a professional woman with a focused and friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCueWBWfSKKpfOIqXudUo4fgTHDipADmX98P5-hcjYE4e_WfXKkHEiMO5ZTZKD4ddRs3kssXeFyPyjb0v3AHNdU1fl3EdhI7ngpXb1UkYC5OG0DOqAS2xN-n8pXP9qiwuxYgdqtNOR2v3EPGzu2sHeeJQGq_5YGwb46p6_U-ugjTy15kRwV5z27nnbw8YniuaBcCyI4sw6Q9Pf1_l5QzV3a21ymVZVfc8HJDO81FmO12wbrlrBOVLkSEVAZVtXxbYwpXleeDaAVPtT"/>
+</div>
+</div>
+<!-- Empty drop target area -->
+<div class="flex-1 border-2 border-dashed border-outline-variant/20 rounded-xl flex items-center justify-center">
+<span class="text-xs text-slate-400">Drop here</span>
+</div>
+</div>
+</div>
+<!-- Column: Visita Casa -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+<h3 class="font-semibold text-sm text-on-surface">Visita Casa</h3>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">2</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="more_horiz">more_horiz</span>
+</div>
+<div class="flex flex-col gap-4 p-2 bg-surface-container-low rounded-2xl flex-1">
+<div class="group bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-on-secondary-container bg-secondary-container px-2 py-1 rounded">Residential</span>
+<span class="material-symbols-outlined text-slate-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<h4 class="font-semibold text-on-surface mb-1">Beatriz Elena</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.25rem] font-bold text-primary">$310,000</span>
+<span class="text-[0.6875rem] text-slate-400">USD</span>
+</div>
+<div class="flex -space-x-2 mb-4">
+<img alt="Customer" class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Face of a middle-aged woman with a warm and approachable look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB66dakkNPrkrbQ3nvDMrECV298Yju_tgGMqI_Ax5Qdo1LQbIpfe-cN8Pss5O1jHd6G7oMn_ZNtbqj2cM29wJbDsw5-D05x6y0iAyzs9gfrVCx-XwYM55QUeQozx0pSGh8IkyLjRY_P6lZ7vixpykED7ogGbKL1H6Y2T9PcJADV89IFSSimhh4kys7_rPl66Shz1c6TlrgTxg2f4la8D6HDCFbaTH-d5eiZPZCaYlFyrxRh0vhb7McPm6_mMKbt0-CwaPsB48oWn-Ar"/>
+<div class="w-6 h-6 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[8px] font-bold">+1</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50">
+<div class="flex items-center gap-1.5 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+<span class="text-[0.75rem]">Visited yesterday</span>
+</div>
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="group bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-transparent opacity-60">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-on-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">Commercial</span>
+<span class="material-symbols-outlined text-slate-300" data-icon="drag_indicator">drag_indicator</span>
+</div>
+<h4 class="font-semibold text-on-surface mb-1">Inversiones Delta</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.25rem] font-bold text-primary">$890,000</span>
+<span class="text-[0.6875rem] text-slate-400">USD</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50">
+<div class="flex items-center gap-1.5 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="task_alt">task_alt</span>
+<span class="text-[0.75rem]">Docs signed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Vendido -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<h3 class="font-semibold text-sm text-on-surface">Vendido</h3>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant">1</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-4 p-2 bg-emerald-50/50 dark:bg-emerald-950/20 rounded-2xl flex-1 border border-emerald-100">
+<div class="group relative bg-surface-container-lowest p-5 rounded-xl shadow-[0_10px_20px_rgba(16,185,129,0.1)] border border-emerald-200">
+<div class="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[0.6875rem] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-1 rounded">Success</span>
+</div>
+<h4 class="font-bold text-on-surface text-lg mb-1">Fabian Solis</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-[1.5rem] font-extrabold text-emerald-600">$52,000</span>
+<span class="text-[0.75rem] text-emerald-400 font-medium">CLOSED</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-emerald-50">
+<div class="flex items-center gap-1.5 text-emerald-600 font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="celebration">celebration</span>
+<span class="text-[0.75rem]">Oct 20, 2023</span>
+</div>
+<div class="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]" data-icon="thumb_up">thumb_up</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Overlap Widget -->
+<div class="fixed bottom-8 right-8 flex items-center gap-4 bg-primary text-white p-1 rounded-full shadow-2xl">
+<div class="flex items-center gap-3 pl-6 pr-4">
+<div class="flex flex-col">
+<span class="text-[0.625rem] opacity-70 uppercase tracking-widest font-bold">Monthly Target</span>
+<span class="text-lg font-bold leading-none">$1.2M <span class="text-[10px] font-medium text-emerald-400">+12%</span></span>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-white/10 border-t-white flex items-center justify-center">
+<span class="text-[10px] font-bold">84%</span>
+</div>
+</div>
+<button class="w-14 h-14 bg-white text-primary rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-xl">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</main>
+</body></html>

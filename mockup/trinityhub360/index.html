@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrinityHub360 — Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      "primary":"#002045","primary-container":"#1a365d","primary-fixed":"#d6e3ff","primary-fixed-dim":"#adc7f7",
+      "on-primary":"#ffffff","on-primary-container":"#86a0cd","on-primary-fixed":"#001b3c","on-primary-fixed-variant":"#2d476f",
+      "secondary":"#555f70","secondary-container":"#d9e3f8","secondary-fixed":"#d9e3f8","secondary-fixed-dim":"#bdc7db",
+      "on-secondary":"#ffffff","on-secondary-container":"#5b6577","on-secondary-fixed":"#121c2b","on-secondary-fixed-variant":"#3e4758",
+      "tertiary":"#321b00","tertiary-container":"#4f2e00","tertiary-fixed":"#ffddba","tertiary-fixed-dim":"#f2bc82",
+      "on-tertiary":"#ffffff","on-tertiary-container":"#c6955e","on-tertiary-fixed":"#2b1700",
+      "surface":"#f9f9ff","surface-dim":"#cfdaf1","surface-bright":"#f9f9ff",
+      "surface-container-lowest":"#ffffff","surface-container-low":"#f0f3ff","surface-container":"#e7eeff",
+      "surface-container-high":"#dee8ff","surface-container-highest":"#d8e3fa","surface-variant":"#d8e3fa",
+      "on-surface":"#111c2c","on-surface-variant":"#43474e",
+      "background":"#f9f9ff","on-background":"#111c2c",
+      "outline":"#74777f","outline-variant":"#c4c6cf",
+      "error":"#ba1a1a","error-container":"#ffdad6","on-error":"#ffffff","on-error-container":"#93000a",
+      "inverse-surface":"#263142","inverse-on-surface":"#ebf1ff","inverse-primary":"#adc7f7"
+    },
+    borderRadius: { "DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.75rem","full":"9999px" },
+    fontFamily: { "headline":["Manrope","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"] }
+  }}
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #111c2c; }
+h1,h2,h3,h4,.font-headline { font-family: 'Manrope', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #c4c6cf; border-radius: 4px; }
+
+/* Flyout nav */
+.nav-section-item { outline: none; }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="flex bg-surface">
+
+<!-- SIDEBAR -->
+<aside class="fixed left-0 top-0 h-screen w-72 bg-white flex flex-col z-40 shadow-sm">
+  <div class="px-5 py-5 border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-md flex-shrink-0">
+        <span class="material-symbols-outlined text-white icon-fill">shield</span>
+      </div>
+      <div>
+        <div class="text-[15px] font-bold font-headline text-primary leading-tight">TrinityHub360</div>
+        <div class="text-[9px] font-semibold text-on-secondary-container uppercase tracking-[0.15em]">Cardali Group Inc.</div>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+    <a href="index.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] bg-primary-fixed text-primary font-semibold transition-colors" data-section="my-agency">
+      <span class="material-symbols-outlined text-[20px] icon-fill">dashboard</span>
+      <span class="flex-1">My Agency</span>
+      <span class="material-symbols-outlined text-[13px] text-primary/40">chevron_right</span>
+    </a>
+    <a href="policy-list.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="policy">
+      <span class="material-symbols-outlined text-[20px]">description</span>
+      <span class="flex-1">Policy</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="customers.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="business-book">
+      <span class="material-symbols-outlined text-[20px]">menu_book</span>
+      <span class="flex-1">Business Book</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="contracts-agents.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="contracts">
+      <span class="material-symbols-outlined text-[20px]">handshake</span>
+      <span class="flex-1">Contracts</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="commissions.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="commissions">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="flex-1">Commissions</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="marketing.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="marketing">
+      <span class="material-symbols-outlined text-[20px]">campaign</span>
+      <span class="flex-1">Marketing</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <div class="pt-3 mt-2 border-t border-surface-container-low">
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span class="flex-1">Settings</span>
+      </a>
+    </div>
+  </nav>
+  <div class="px-4 py-4 border-t border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm flex-shrink-0">AT</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-semibold text-on-surface truncate">Alex Thompson</p>
+        <p class="text-[11px] text-on-secondary-container truncate">Agency Manager</p>
+      </div>
+      <button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">logout</span></button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen">
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white/90 backdrop-blur-xl border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-4 flex-1 max-w-lg">
+      <div class="relative w-full">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+        <input type="text" placeholder="Search policies, customers, agents..." class="w-full bg-surface-container-low border-none rounded-full py-2.5 pl-10 pr-4 text-sm text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/20"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-1">
+      <button class="relative p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined text-[22px]">notifications</span>
+        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error border-2 border-white"></span>
+      </button>
+      <button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">chat</span></button>
+      <button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">help_outline</span></button>
+      <div class="ml-2 flex items-center gap-3 pl-3 border-l border-surface-container-high">
+        <div class="text-right">
+          <p class="text-sm font-semibold text-on-surface leading-tight">Alex Thompson</p>
+          <p class="text-[11px] text-on-secondary-container leading-tight">Agency Manager</p>
+        </div>
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm">AT</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <div class="p-8 flex-1">
+    <!-- Page Title -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-4xl font-bold font-headline text-on-surface tracking-tight">Agency Overview</h2>
+        <p class="text-on-secondary-container mt-1 font-medium">Welcome back, Alex. Your agency is performing <span class="text-primary font-semibold">12% above target</span>.</p>
+      </div>
+      <div class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full">
+        <span class="text-xs font-semibold text-primary">Last 30 Days</span>
+        <span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+      </div>
+    </div>
+
+    <!-- KPI GRID -->
+    <div class="grid grid-cols-4 gap-6 mb-8">
+      <div class="col-span-2 bg-gradient-to-br from-primary to-primary-container p-8 rounded-xl text-white flex flex-col justify-between min-h-[200px] shadow-xl shadow-primary/20 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 opacity-10"><span class="material-symbols-outlined text-[120px] icon-fill">shield</span></div>
+        <div class="flex justify-between items-start relative z-10">
+          <span class="text-xs font-bold tracking-widest uppercase opacity-80">Total Managed Policies</span>
+          <span class="bg-white/20 px-2 py-0.5 rounded-full text-xs font-bold">+4.2%</span>
+        </div>
+        <div class="relative z-10">
+          <div class="text-6xl font-bold font-headline leading-none mt-4">1,284</div>
+          <div class="text-sm opacity-70 mt-2">Valued at $4.2M GWP across all carriers</div>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+        <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center"><span class="material-symbols-outlined text-primary icon-fill">task_alt</span></div>
+        <div>
+          <div class="text-sm font-medium text-on-secondary-container mb-1">Active Tasks</div>
+          <div class="text-4xl font-bold font-headline text-on-surface">28</div>
+          <div class="text-xs text-on-secondary-container mt-1">3 overdue</div>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+        <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-primary">person_add</span></div>
+        <div>
+          <div class="text-sm font-medium text-on-secondary-container mb-1">New Leads</div>
+          <div class="text-4xl font-bold font-headline text-on-surface">12</div>
+          <div class="text-xs text-on-secondary-container mt-1">This week</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECOND ROW KPIs -->
+    <div class="grid grid-cols-4 gap-6 mb-8">
+      <div class="bg-surface-container-low p-5 rounded-xl flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-error-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-error text-[20px]">cancel</span></div>
+        <div>
+          <div class="text-xs text-on-secondary-container font-medium">Cancellations</div>
+          <div class="text-2xl font-bold font-headline text-on-surface">47</div>
+          <div class="text-[11px] text-error font-semibold">↑ 3.6%</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-5 rounded-xl flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-[20px]">verified</span></div>
+        <div>
+          <div class="text-xs text-on-secondary-container font-medium">NPN Overrides</div>
+          <div class="text-2xl font-bold font-headline text-on-surface">284</div>
+          <div class="text-[11px] text-on-secondary-container">22%</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-5 rounded-xl flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-[20px]">share</span></div>
+        <div>
+          <div class="text-xs text-on-secondary-container font-medium">Referrals</div>
+          <div class="text-2xl font-bold font-headline text-on-surface">119</div>
+          <div class="text-[11px] text-primary font-semibold">↑ 8.1%</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-5 rounded-xl flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-tertiary-container text-[20px]">payments</span></div>
+        <div>
+          <div class="text-xs text-on-secondary-container font-medium">Commissions</div>
+          <div class="text-2xl font-bold font-headline text-on-surface">$32.4k</div>
+          <div class="text-[11px] text-primary font-semibold">This month</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="grid grid-cols-3 gap-8">
+      <!-- Left 2 cols: Chart + Notifications -->
+      <div class="col-span-2 space-y-6">
+        <!-- Revenue Chart -->
+        <div class="bg-white rounded-xl p-8 shadow-sm min-h-[320px] flex flex-col">
+          <div class="flex justify-between items-center mb-8">
+            <div>
+              <h3 class="text-xl font-bold font-headline">Revenue Trajectory</h3>
+              <p class="text-xs text-on-secondary-container mt-0.5">Monthly commission & premium revenue</p>
+            </div>
+            <div class="flex gap-4 text-xs">
+              <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-primary"></div><span class="text-on-surface-variant">Current Year</span></div>
+              <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-primary-fixed"></div><span class="text-on-surface-variant">Prior Year</span></div>
+            </div>
+          </div>
+          <div class="flex-1 flex items-end justify-between gap-3 px-2 pb-2">
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed rounded-t-lg" style="height:60px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Jan</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed rounded-t-lg" style="height:80px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Feb</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed rounded-t-lg" style="height:70px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Mar</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary rounded-t-lg" style="height:100px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Apr</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary rounded-t-lg" style="height:120px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">May</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1 relative">
+              <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-on-surface text-white px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap">Peak</div>
+              <div class="w-full bg-primary rounded-t-lg" style="height:145px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Jun</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary rounded-t-lg" style="height:130px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Jul</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed rounded-t-lg" style="height:90px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Aug</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed rounded-t-lg opacity-50 rounded-t-lg border-2 border-dashed border-primary-fixed-dim" style="height:105px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Sep</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed opacity-40 rounded-t-lg border-2 border-dashed border-primary-fixed-dim" style="height:115px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Oct</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed opacity-30 rounded-t-lg border-2 border-dashed border-primary-fixed-dim" style="height:110px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Nov</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-primary-fixed opacity-20 rounded-t-lg border-2 border-dashed border-primary-fixed-dim" style="height:125px"></div>
+              <span class="text-[10px] text-on-surface-variant font-bold">Dec</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Notifications -->
+        <div class="bg-white rounded-xl p-8 shadow-sm">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold font-headline">Recent Notifications</h3>
+            <a href="notifications.html" class="text-primary text-sm font-semibold hover:underline">View All</a>
+          </div>
+          <div class="space-y-1">
+            <div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors group cursor-pointer">
+              <div class="w-11 h-11 rounded-xl bg-error-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-error">warning</span></div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">Policy Expiration Alert</p>
+                <p class="text-xs text-on-secondary-container">John Hancock's Home Policy expires in 48 hours.</p>
+              </div>
+              <span class="text-[10px] font-medium text-on-secondary-container opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">2m ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors group cursor-pointer">
+              <div class="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary">payments</span></div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">Commission Payout Initiated</p>
+                <p class="text-xs text-on-secondary-container">A deposit of $4,200.00 has been initiated to your account.</p>
+              </div>
+              <span class="text-[10px] font-medium text-on-secondary-container opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">1h ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors group cursor-pointer">
+              <div class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-secondary-container">contact_mail</span></div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">New Business Inquiry</p>
+                <p class="text-xs text-on-secondary-container">Sarah Jenkins requested a quote for Commercial Auto.</p>
+              </div>
+              <span class="text-[10px] font-medium text-on-secondary-container opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">3h ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors group cursor-pointer">
+              <div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary">badge</span></div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold">New Agent Onboarded</p>
+                <p class="text-xs text-on-secondary-container">Emily Parker has completed her onboarding documents.</p>
+              </div>
+              <span class="text-[10px] font-medium text-on-secondary-container opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">5h ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right col: Tasks + Promo -->
+      <div class="space-y-6">
+        <!-- Notifications KPIs -->
+        <div class="bg-surface-container-low p-6 rounded-xl">
+          <h4 class="text-sm font-bold font-headline mb-4">Notification Status</h4>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl text-center"><div class="text-2xl font-bold font-headline text-on-surface">84</div><div class="text-xs text-on-secondary-container mt-1">Total</div></div>
+            <div class="bg-white p-4 rounded-xl text-center"><div class="text-2xl font-bold font-headline text-primary">32</div><div class="text-xs text-on-secondary-container mt-1">Open</div></div>
+            <div class="bg-white p-4 rounded-xl text-center"><div class="text-2xl font-bold font-headline text-on-surface">52</div><div class="text-xs text-on-secondary-container mt-1">Closed</div></div>
+            <div class="bg-primary-fixed p-4 rounded-xl text-center"><div class="text-2xl font-bold font-headline text-primary">12</div><div class="text-xs text-primary/70 mt-1">This Month</div></div>
+          </div>
+        </div>
+
+        <!-- Task Queue -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <div class="flex justify-between items-center mb-5">
+            <h3 class="text-lg font-bold font-headline">Task Queue</h3>
+            <div class="w-6 h-6 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold">8</div>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded border-2 border-outline-variant mt-0.5 flex-shrink-0 cursor-pointer hover:border-primary transition-colors"></div>
+              <div>
+                <p class="text-sm font-semibold">Review Q3 Compliance Audit</p>
+                <span class="text-[10px] text-error font-bold uppercase">Due Today</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded border-2 border-outline-variant mt-0.5 flex-shrink-0 cursor-pointer hover:border-primary transition-colors"></div>
+              <div>
+                <p class="text-sm font-semibold">Call Lead: Michael Chen</p>
+                <span class="text-[10px] text-on-secondary-container font-bold uppercase">Tomorrow</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded border-2 border-outline-variant mt-0.5 flex-shrink-0 cursor-pointer hover:border-primary transition-colors"></div>
+              <div>
+                <p class="text-sm font-semibold">Renew Professional Liability</p>
+                <span class="text-[10px] text-on-secondary-container font-bold uppercase">Aug 24</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded border-2 border-outline-variant mt-0.5 flex-shrink-0 cursor-pointer hover:border-primary transition-colors"></div>
+              <div>
+                <p class="text-sm font-semibold">Onboard New Agent: Emily</p>
+                <span class="text-[10px] text-on-secondary-container font-bold uppercase">Aug 28</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 opacity-50">
+              <div class="w-5 h-5 rounded bg-primary-fixed border-2 border-primary mt-0.5 flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[12px]">check</span></div>
+              <div>
+                <p class="text-sm line-through text-on-surface-variant">Upload Q2 Commission Statements</p>
+                <span class="text-[10px] text-on-secondary-container font-bold uppercase">Done</span>
+              </div>
+            </div>
+          </div>
+          <button class="mt-5 py-2.5 w-full bg-surface-container-low rounded-xl text-primary font-semibold text-sm hover:bg-surface-container transition-colors">+ Add New Task</button>
+        </div>
+
+        <!-- Activities KPIs -->
+        <div class="bg-surface-container-low p-6 rounded-xl">
+          <h4 class="text-sm font-bold font-headline mb-4">Activities Overview</h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-on-surface-variant font-medium">Pending</span>
+              <div class="flex items-center gap-2 flex-1 mx-3">
+                <div class="flex-1 h-1.5 bg-surface-container-high rounded-full"><div class="h-full bg-primary rounded-full" style="width:45%"></div></div>
+              </div>
+              <span class="text-xs font-bold text-on-surface">18</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-on-surface-variant font-medium">Overdue</span>
+              <div class="flex items-center gap-2 flex-1 mx-3">
+                <div class="flex-1 h-1.5 bg-surface-container-high rounded-full"><div class="h-full bg-error rounded-full" style="width:15%"></div></div>
+              </div>
+              <span class="text-xs font-bold text-error">6</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-on-surface-variant font-medium">Completed</span>
+              <div class="flex items-center gap-2 flex-1 mx-3">
+                <div class="flex-1 h-1.5 bg-surface-container-high rounded-full"><div class="h-full bg-green-500 rounded-full" style="width:75%"></div></div>
+              </div>
+              <span class="text-xs font-bold text-green-600">30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FAB -->
+<button onclick="location.href='policy-wizard.html'" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-2xl shadow-primary/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+  <span class="material-symbols-outlined text-[24px]">add</span>
+</button>
+<!-- NAV-FLYOUT-START -->
+<style>#nav-flyout a.fl:hover{background:#f0f3ff !important;}</style>
+<div id="nav-flyout" style="position:fixed;left:288px;top:0;z-index:9999;min-width:224px;max-width:264px;background:#fff;border-radius:0 18px 18px 0;box-shadow:4px 0 24px rgba(0,32,69,.13),0 2px 8px rgba(0,32,69,.07);border-left:1px solid #e8edf8;display:none;">
+  <div id="nav-flyout-inner" style="padding:10px 8px;"></div>
+</div>
+<script>
+(function(){
+  var S={"my-agency":[{l:"Dashboard",h:"index.html",i:"dashboard"}, {l:"Pipeline",h:"pipeline.html",i:"schema"}, {l:"Notifications",h:"notifications.html",i:"notifications"}, {l:"Messages",h:"messages.html",i:"forum"}],"policy":[{l:"All Policies",h:"policy-list.html",i:"description"}, {l:"Drafts",h:"policy-drafts.html",i:"draft"}, {l:"Add Policy",h:"policy-wizard.html",i:"add_circle"}, {l:"Activities",h:"policy-activities.html",i:"task_alt"}, {l:"Sales Projection",h:"policy-sales.html",i:"trending_up"}, {l:"Bulk Actions",h:"policy-bulk.html",i:"checklist"}],"business-book":[{l:"Customers",h:"customers.html",i:"people"}, {l:"Opportunities",h:"pipeline.html",i:"schema"}],"contracts":[{l:"Agents",h:"contracts-agents.html",i:"badge"}, {l:"Licenses",h:"contracts-licenses.html",i:"verified"}, {l:"Queue",h:"contracts-queue.html",i:"pending_actions"}, {l:"Notifications",h:"contracts-notifications.html",i:"notifications_active"}, {l:"Messages",h:"contracts-messages.html",i:"sms"}],"commissions":[{l:"Overview",h:"commissions.html",i:"payments"}, {l:"Statement",h:"commissions-statement.html",i:"receipt_long"}, {l:"Notifications",h:"commissions-notifications.html",i:"notification_important"}, {l:"Messages",h:"commissions-messages.html",i:"chat_bubble"}, {l:"Activities",h:"commissions-activities.html",i:"event_note"}],"marketing":[{l:"Overview",h:"marketing.html",i:"campaign"}, {l:"SMS",h:"marketing-sms.html",i:"sms"}, {l:"WhatsApp",h:"marketing-whatsapp.html",i:"chat"}, {l:"Telegram Bots",h:"marketing-telegram.html",i:"send"}, {l:"WA Configuration",h:"whatsapp.html",i:"settings_applications"}]};
+  var L={"my-agency":"My Agency","policy":"Policy","business-book":"Business Book","contracts":"Contracts","commissions":"Commissions","marketing":"Marketing"};
+  var fly=document.getElementById("nav-flyout");
+  var inn=document.getElementById("nav-flyout-inner");
+  var cur=(location.pathname.split("/").pop()||"index.html");
+  var t=null;
+  function show(id,el){
+    clearTimeout(t);
+    var items=S[id];
+    if(!items||!items.length){hide();return;}
+    var h="<div style=\"padding:6px 12px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#43474e;opacity:.65;\">"+(L[id]||id)+"</div>";
+    items.forEach(function(item){
+      var active=cur===item.h;
+      var sty=active?"background:rgba(0,32,69,.08);color:#002045;font-weight:600;":"color:#43474e;";
+      h+="<a href=\""+item.h+"\" class=\"fl\" style=\"display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13px;text-decoration:none;"+sty+"\">"
+        +"<span class=\"material-symbols-outlined\" style=\"font-size:18px;opacity:"+(active?"1":".55")+"\">"+item.i+"</span>"
+        +"<span>"+item.l+"</span>"
+        +"</a>";
+    });
+    inn.innerHTML=h;
+    var r=el.getBoundingClientRect();
+    fly.style.top=Math.max(0,r.top-6)+"px";
+    fly.style.display="block";
+  }
+  function hide(){t=setTimeout(function(){fly.style.display="none";},140);}
+  document.querySelectorAll(".nav-section-item").forEach(function(el){
+    el.addEventListener("mouseenter",function(){show(el.dataset.section,el);});
+    el.addEventListener("mouseleave",hide);
+  });
+  fly.addEventListener("mouseenter",function(){clearTimeout(t);});
+  fly.addEventListener("mouseleave",hide);
+})();
+</script>
+<!-- NAV-FLYOUT-END -->
+</body>
+</html>

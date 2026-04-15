@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrinityHub360 — Customers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      "primary":"#002045","primary-container":"#1a365d","primary-fixed":"#d6e3ff","primary-fixed-dim":"#adc7f7",
+      "on-primary":"#ffffff","on-primary-container":"#86a0cd",
+      "secondary":"#555f70","secondary-container":"#d9e3f8","on-secondary":"#ffffff","on-secondary-container":"#5b6577",
+      "tertiary":"#321b00","tertiary-fixed":"#ffddba","on-tertiary-container":"#c6955e",
+      "surface":"#f9f9ff","surface-container-lowest":"#ffffff","surface-container-low":"#f0f3ff","surface-container":"#e7eeff",
+      "surface-container-high":"#dee8ff","surface-container-highest":"#d8e3fa",
+      "on-surface":"#111c2c","on-surface-variant":"#43474e",
+      "outline":"#74777f","outline-variant":"#c4c6cf",
+      "error":"#ba1a1a","error-container":"#ffdad6","on-error-container":"#93000a"
+    },
+    borderRadius: { "DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.75rem","full":"9999px" },
+    fontFamily: { "headline":["Manrope","sans-serif"] }
+  }}
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #111c2c; }
+h1,h2,h3,h4,.font-headline { font-family: 'Manrope', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* Flyout nav */
+.nav-section-item { outline: none; }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="flex bg-surface">
+
+<!-- SIDEBAR (Business Book active) -->
+<!-- SIDEBAR -->
+<aside class="fixed left-0 top-0 h-screen w-72 bg-white flex flex-col z-40 shadow-sm">
+  <div class="px-5 py-5 border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-md flex-shrink-0">
+        <span class="material-symbols-outlined text-white icon-fill">shield</span>
+      </div>
+      <div>
+        <div class="text-[15px] font-bold font-headline text-primary leading-tight">TrinityHub360</div>
+        <div class="text-[9px] font-semibold text-on-secondary-container uppercase tracking-[0.15em]">Cardali Group Inc.</div>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+    <a href="index.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="my-agency">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="flex-1">My Agency</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="policy-list.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="policy">
+      <span class="material-symbols-outlined text-[20px]">description</span>
+      <span class="flex-1">Policy</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="customers.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] bg-primary-fixed text-primary font-semibold transition-colors" data-section="business-book">
+      <span class="material-symbols-outlined text-[20px] icon-fill">menu_book</span>
+      <span class="flex-1">Business Book</span>
+      <span class="material-symbols-outlined text-[13px] text-primary/40">chevron_right</span>
+    </a>
+    <a href="contracts-agents.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="contracts">
+      <span class="material-symbols-outlined text-[20px]">handshake</span>
+      <span class="flex-1">Contracts</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="commissions.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="commissions">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="flex-1">Commissions</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="marketing.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="marketing">
+      <span class="material-symbols-outlined text-[20px]">campaign</span>
+      <span class="flex-1">Marketing</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <div class="pt-3 mt-2 border-t border-surface-container-low">
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span class="flex-1">Settings</span>
+      </a>
+    </div>
+  </nav>
+  <div class="px-4 py-4 border-t border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm flex-shrink-0">AT</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-semibold text-on-surface truncate">Alex Thompson</p>
+        <p class="text-[11px] text-on-secondary-container truncate">Agency Manager</p>
+      </div>
+      <button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">logout</span></button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen">
+  <header class="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white/90 backdrop-blur-xl border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-4 flex-1 max-w-lg">
+      <div class="relative w-full">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+        <input type="text" placeholder="Search customers by name, phone, email..." class="w-full bg-surface-container-low border-none rounded-full py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-1">
+      <button class="relative p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error border-2 border-white"></span></button>
+      <div class="ml-2 flex items-center gap-3 pl-3 border-l border-surface-container-high">
+        <div class="text-right"><p class="text-sm font-semibold text-on-surface leading-tight">Alex Thompson</p><p class="text-[11px] text-on-secondary-container leading-tight">Agency Manager</p></div>
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm">AT</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-8">
+    <!-- Header -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-4xl font-bold font-headline tracking-tight">Customer Catalog</h2>
+        <p class="text-on-secondary-container mt-1">Manage your complete book of business — <span class="font-semibold text-on-surface">8,432 customers</span></p>
+      </div>
+      <div class="flex gap-3">
+        <button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface text-sm font-medium hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">mail</span> Mass Email</button>
+        <button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-low text-on-surface text-sm font-medium hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">download</span> Export</button>
+        <button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-sm font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all"><span class="material-symbols-outlined text-[18px]">person_add</span> Add Customer</button>
+      </div>
+    </div>
+
+    <!-- SMART SEGMENTS -->
+    <div class="grid grid-cols-3 gap-5 mb-8">
+      <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-amber-400 hover:bg-surface-container-low cursor-pointer group transition-colors">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1.5">Without Active Policy</div>
+            <div class="text-3xl font-bold font-headline text-on-surface">1,204</div>
+            <div class="text-xs text-amber-600 font-semibold mt-1">Renewal opportunity</div>
+          </div>
+          <span class="material-symbols-outlined text-amber-400 text-[32px] opacity-30 group-hover:opacity-60 transition-opacity">policy</span>
+        </div>
+      </div>
+      <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-blue-400 hover:bg-surface-container-low cursor-pointer group transition-colors">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1.5">Dependents Turning 26</div>
+            <div class="text-3xl font-bold font-headline text-on-surface">87</div>
+            <div class="text-xs text-primary font-semibold mt-1">Needs individual plan</div>
+          </div>
+          <span class="material-symbols-outlined text-blue-400 text-[32px] opacity-30 group-hover:opacity-60 transition-opacity">cake</span>
+        </div>
+      </div>
+      <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-red-400 hover:bg-surface-container-low cursor-pointer group transition-colors">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1.5">Leads — No Contact 48h</div>
+            <div class="text-3xl font-bold font-headline text-error">43</div>
+            <div class="text-xs text-error font-semibold mt-1">Urgent follow-up</div>
+          </div>
+          <span class="material-symbols-outlined text-red-400 text-[32px] opacity-30 group-hover:opacity-60 transition-opacity">schedule</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="bg-white rounded-xl p-5 mb-6 shadow-sm flex items-center gap-3 flex-wrap">
+      <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Filters:</span>
+      <select class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <option>All Agents</option><option>Alex Thompson</option><option>Maria Garcia</option>
+      </select>
+      <select class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <option>All Carriers</option><option>BlueShield</option><option>Humana</option><option>Aetna</option>
+      </select>
+      <select class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <option>All Policy Types</option><option>Health - ACA</option><option>Medicare</option><option>Life</option>
+      </select>
+      <select class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <option>All Customer Types</option><option>Primary</option><option>Dependent</option><option>Lead</option>
+      </select>
+      <select class="bg-surface-container-low border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <option>All Ages</option><option>Under 26</option><option>26-65</option><option>65+</option>
+      </select>
+    </div>
+
+    <!-- TABLE -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div class="px-6 py-4 bg-surface-container-low/40 border-b border-surface-container-high flex items-center justify-between">
+        <span class="text-sm font-bold text-on-surface">All Customers <span class="text-on-secondary-container font-normal">— 8,432</span></span>
+        <div class="flex gap-2">
+          <button class="text-xs font-bold text-primary px-3 py-1.5 rounded-full hover:bg-primary-fixed transition-colors">Growth Index: <span class="font-bold">72%</span></button>
+          <button class="text-xs font-bold text-primary px-3 py-1.5 rounded-full hover:bg-primary-fixed transition-colors">Portfolio Value: <span class="font-bold">$4.2M</span></button>
+          <button class="text-xs font-bold text-primary px-3 py-1.5 rounded-full hover:bg-primary-fixed transition-colors">Retention: <span class="font-bold">94.8%</span></button>
+        </div>
+      </div>
+      <table class="w-full">
+        <thead>
+          <tr class="bg-surface-container-low text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+            <th class="px-6 py-3 text-left w-10"><input type="checkbox" class="rounded"/></th>
+            <th class="px-4 py-3 text-left">Agent</th>
+            <th class="px-4 py-3 text-left">Customer</th>
+            <th class="px-4 py-3 text-left">Family Income</th>
+            <th class="px-4 py-3 text-left">Immigration Status</th>
+            <th class="px-4 py-3 text-left">Country of Origin</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-container-low">
+          <tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+            <td class="px-6 py-4"><input type="checkbox" class="rounded"/></td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-[10px]">AT</div><span class="text-sm">Alex T.</span></div></td>
+            <td class="px-4 py-4"><a href="customer-detail.html" class="hover:text-primary transition-colors"><p class="text-sm font-semibold">Eleanor Vance</p><p class="text-xs text-on-secondary-container">DOB: Mar 15, 1975 • 48y</p></a></td>
+            <td class="px-4 py-4"><span class="text-sm">$240,000</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full">US Citizen</span></td>
+            <td class="px-4 py-4"><span class="text-sm">United States</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-primary-fixed text-primary text-[11px] font-bold rounded-full">Premium Member</span></td>
+            <td class="px-4 py-4 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><a href="customer-detail.html" class="p-1.5 rounded-full hover:bg-primary-fixed text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></a><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+            <td class="px-6 py-4"><input type="checkbox" class="rounded"/></td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-[10px]">MG</div><span class="text-sm">Maria G.</span></div></td>
+            <td class="px-4 py-4"><a href="customer-detail.html" class="hover:text-primary transition-colors"><p class="text-sm font-semibold">Carlos Mendez</p><p class="text-xs text-on-secondary-container">DOB: Jul 02, 1982 • 41y</p></a></td>
+            <td class="px-4 py-4"><span class="text-sm">$65,000</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-blue-100 text-blue-700 text-[11px] font-bold rounded-full">Resident Alien</span></td>
+            <td class="px-4 py-4"><span class="text-sm">Mexico</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full">Active Policy</span></td>
+            <td class="px-4 py-4 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><a href="customer-detail.html" class="p-1.5 rounded-full hover:bg-primary-fixed text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></a><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+            <td class="px-6 py-4"><input type="checkbox" class="rounded"/></td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-container font-bold text-[10px]">RL</div><span class="text-sm">Rosa L.</span></div></td>
+            <td class="px-4 py-4"><a href="customer-detail.html" class="hover:text-primary transition-colors"><p class="text-sm font-semibold">Amara Osei</p><p class="text-xs text-on-secondary-container">DOB: Nov 18, 1990 • 33y</p></a></td>
+            <td class="px-4 py-4"><span class="text-sm">$48,500</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-full">Work Permit</span></td>
+            <td class="px-4 py-4"><span class="text-sm">Ghana</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-full">Lead</span></td>
+            <td class="px-4 py-4 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><a href="customer-detail.html" class="p-1.5 rounded-full hover:bg-primary-fixed text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></a><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+            <td class="px-6 py-4"><input type="checkbox" class="rounded"/></td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-[10px]">JD</div><span class="text-sm">John D.</span></div></td>
+            <td class="px-4 py-4"><a href="customer-detail.html" class="hover:text-primary transition-colors"><p class="text-sm font-semibold">Fatima Al-Rashid & Family</p><p class="text-xs text-on-secondary-container">DOB: Apr 05, 1978 • 45y</p></a></td>
+            <td class="px-4 py-4"><span class="text-sm">$88,000</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-blue-100 text-blue-700 text-[11px] font-bold rounded-full">Resident Alien</span></td>
+            <td class="px-4 py-4"><span class="text-sm">Saudi Arabia</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full">Active Policy</span></td>
+            <td class="px-4 py-4 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><a href="customer-detail.html" class="p-1.5 rounded-full hover:bg-primary-fixed text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></a><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+            <td class="px-6 py-4"><input type="checkbox" class="rounded"/></td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-[10px]">SP</div><span class="text-sm">Sandra P.</span></div></td>
+            <td class="px-4 py-4"><a href="customer-detail.html" class="hover:text-primary transition-colors"><p class="text-sm font-semibold">Julianne Moretz</p><p class="text-xs text-on-secondary-container">DOB: May 12, 1988 • 35y</p></a></td>
+            <td class="px-4 py-4"><span class="text-sm">$52,000</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full">US Citizen</span></td>
+            <td class="px-4 py-4"><span class="text-sm">United States</span></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full">Active Policy</span></td>
+            <td class="px-4 py-4 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><a href="customer-detail.html" class="p-1.5 rounded-full hover:bg-primary-fixed text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></a><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 bg-surface-container-low/30 border-t border-surface-container-high flex items-center justify-between">
+        <span class="text-[11px] text-on-surface-variant font-medium">Showing 1–5 of 8,432 customers</span>
+        <div class="flex items-center gap-1">
+          <button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+          <button class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold">1</button>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">2</button>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">3</button>
+          <span class="text-on-surface-variant px-1">…</span>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">1687</button>
+          <button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-2xl shadow-primary/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+  <span class="material-symbols-outlined text-[24px]">person_add</span>
+</button>
+<!-- NAV-FLYOUT-START -->
+<style>#nav-flyout a.fl:hover{background:#f0f3ff !important;}</style>
+<div id="nav-flyout" style="position:fixed;left:288px;top:0;z-index:9999;min-width:224px;max-width:264px;background:#fff;border-radius:0 18px 18px 0;box-shadow:4px 0 24px rgba(0,32,69,.13),0 2px 8px rgba(0,32,69,.07);border-left:1px solid #e8edf8;display:none;">
+  <div id="nav-flyout-inner" style="padding:10px 8px;"></div>
+</div>
+<script>
+(function(){
+  var S={"my-agency":[{l:"Dashboard",h:"index.html",i:"dashboard"}, {l:"Pipeline",h:"pipeline.html",i:"schema"}, {l:"Notifications",h:"notifications.html",i:"notifications"}, {l:"Messages",h:"messages.html",i:"forum"}],"policy":[{l:"All Policies",h:"policy-list.html",i:"description"}, {l:"Drafts",h:"policy-drafts.html",i:"draft"}, {l:"Add Policy",h:"policy-wizard.html",i:"add_circle"}, {l:"Activities",h:"policy-activities.html",i:"task_alt"}, {l:"Sales Projection",h:"policy-sales.html",i:"trending_up"}, {l:"Bulk Actions",h:"policy-bulk.html",i:"checklist"}],"business-book":[{l:"Customers",h:"customers.html",i:"people"}, {l:"Opportunities",h:"pipeline.html",i:"schema"}],"contracts":[{l:"Agents",h:"contracts-agents.html",i:"badge"}, {l:"Licenses",h:"contracts-licenses.html",i:"verified"}, {l:"Queue",h:"contracts-queue.html",i:"pending_actions"}, {l:"Notifications",h:"contracts-notifications.html",i:"notifications_active"}, {l:"Messages",h:"contracts-messages.html",i:"sms"}],"commissions":[{l:"Overview",h:"commissions.html",i:"payments"}, {l:"Statement",h:"commissions-statement.html",i:"receipt_long"}, {l:"Notifications",h:"commissions-notifications.html",i:"notification_important"}, {l:"Messages",h:"commissions-messages.html",i:"chat_bubble"}, {l:"Activities",h:"commissions-activities.html",i:"event_note"}],"marketing":[{l:"Overview",h:"marketing.html",i:"campaign"}, {l:"SMS",h:"marketing-sms.html",i:"sms"}, {l:"WhatsApp",h:"marketing-whatsapp.html",i:"chat"}, {l:"Telegram Bots",h:"marketing-telegram.html",i:"send"}, {l:"WA Configuration",h:"whatsapp.html",i:"settings_applications"}]};
+  var L={"my-agency":"My Agency","policy":"Policy","business-book":"Business Book","contracts":"Contracts","commissions":"Commissions","marketing":"Marketing"};
+  var fly=document.getElementById("nav-flyout");
+  var inn=document.getElementById("nav-flyout-inner");
+  var cur=(location.pathname.split("/").pop()||"index.html");
+  var t=null;
+  function show(id,el){
+    clearTimeout(t);
+    var items=S[id];
+    if(!items||!items.length){hide();return;}
+    var h="<div style=\"padding:6px 12px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#43474e;opacity:.65;\">"+(L[id]||id)+"</div>";
+    items.forEach(function(item){
+      var active=cur===item.h;
+      var sty=active?"background:rgba(0,32,69,.08);color:#002045;font-weight:600;":"color:#43474e;";
+      h+="<a href=\""+item.h+"\" class=\"fl\" style=\"display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13px;text-decoration:none;"+sty+"\">"
+        +"<span class=\"material-symbols-outlined\" style=\"font-size:18px;opacity:"+(active?"1":".55")+"\">"+item.i+"</span>"
+        +"<span>"+item.l+"</span>"
+        +"</a>";
+    });
+    inn.innerHTML=h;
+    var r=el.getBoundingClientRect();
+    fly.style.top=Math.max(0,r.top-6)+"px";
+    fly.style.display="block";
+  }
+  function hide(){t=setTimeout(function(){fly.style.display="none";},140);}
+  document.querySelectorAll(".nav-section-item").forEach(function(el){
+    el.addEventListener("mouseenter",function(){show(el.dataset.section,el);});
+    el.addEventListener("mouseleave",hide);
+  });
+  fly.addEventListener("mouseenter",function(){clearTimeout(t);});
+  fly.addEventListener("mouseleave",hide);
+})();
+</script>
+<!-- NAV-FLYOUT-END -->
+</body>
+</html>

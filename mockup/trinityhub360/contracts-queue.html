@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrinityHub360 — Contracts Requests Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      "primary":"#002045","primary-container":"#1a365d","primary-fixed":"#d6e3ff","primary-fixed-dim":"#adc7f7",
+      "on-primary":"#ffffff","on-primary-container":"#86a0cd",
+      "secondary":"#555f70","secondary-container":"#d9e3f8","on-secondary":"#ffffff","on-secondary-container":"#5b6577",
+      "tertiary":"#321b00","tertiary-container":"#4f2e00","tertiary-fixed":"#ffddba","on-tertiary-container":"#c6955e",
+      "surface":"#f9f9ff","surface-container-lowest":"#ffffff","surface-container-low":"#f0f3ff",
+      "surface-container":"#e7eeff","surface-container-high":"#dee8ff","surface-container-highest":"#d8e3fa",
+      "on-surface":"#111c2c","on-surface-variant":"#43474e",
+      "outline":"#74777f","outline-variant":"#c4c6cf",
+      "error":"#ba1a1a","error-container":"#ffdad6","on-error-container":"#93000a"
+    },
+    borderRadius: { "DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.75rem","full":"9999px" },
+    fontFamily: { "headline":["Manrope","sans-serif"] }
+  }}
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #111c2c; }
+h1,h2,h3,h4,.font-headline { font-family: 'Manrope', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* Flyout nav */
+.nav-section-item { outline: none; }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="flex bg-surface">
+
+<!-- SIDEBAR (Contracts > Requests active) -->
+<!-- SIDEBAR -->
+<aside class="fixed left-0 top-0 h-screen w-72 bg-white flex flex-col z-40 shadow-sm">
+  <div class="px-5 py-5 border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-md flex-shrink-0">
+        <span class="material-symbols-outlined text-white icon-fill">shield</span>
+      </div>
+      <div>
+        <div class="text-[15px] font-bold font-headline text-primary leading-tight">TrinityHub360</div>
+        <div class="text-[9px] font-semibold text-on-secondary-container uppercase tracking-[0.15em]">Cardali Group Inc.</div>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+    <a href="index.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="my-agency">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="flex-1">My Agency</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="policy-list.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="policy">
+      <span class="material-symbols-outlined text-[20px]">description</span>
+      <span class="flex-1">Policy</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="customers.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="business-book">
+      <span class="material-symbols-outlined text-[20px]">menu_book</span>
+      <span class="flex-1">Business Book</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="contracts-agents.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] bg-primary-fixed text-primary font-semibold transition-colors" data-section="contracts">
+      <span class="material-symbols-outlined text-[20px] icon-fill">handshake</span>
+      <span class="flex-1">Contracts</span>
+      <span class="material-symbols-outlined text-[13px] text-primary/40">chevron_right</span>
+    </a>
+    <a href="commissions.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="commissions">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="flex-1">Commissions</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <a href="marketing.html" class="nav-section-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors" data-section="marketing">
+      <span class="material-symbols-outlined text-[20px]">campaign</span>
+      <span class="flex-1">Marketing</span>
+      <span class="material-symbols-outlined text-[13px] opacity-25">chevron_right</span>
+    </a>
+    <div class="pt-3 mt-2 border-t border-surface-container-low">
+      <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span class="flex-1">Settings</span>
+      </a>
+    </div>
+  </nav>
+  <div class="px-4 py-4 border-t border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm flex-shrink-0">AT</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-semibold text-on-surface truncate">Alex Thompson</p>
+        <p class="text-[11px] text-on-secondary-container truncate">Agency Manager</p>
+      </div>
+      <button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">logout</span></button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen">
+  <header class="sticky top-0 z-30 h-16 flex items-center justify-between px-8 bg-white/90 backdrop-blur-xl border-b border-surface-container-low flex-shrink-0">
+    <div class="flex items-center gap-4 flex-1 max-w-lg">
+      <div class="relative w-full">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+        <input type="text" placeholder="Search contracts, agents, or carriers..." class="w-full bg-surface-container-low border-none rounded-full py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="relative p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error border-2 border-white"></span></button>
+      <div class="ml-2 flex items-center gap-3 pl-3 border-l border-surface-container-high">
+        <div class="text-right"><p class="text-sm font-semibold text-on-surface leading-tight">Alex Thompson</p><p class="text-[11px] text-on-secondary-container leading-tight">Agency Manager</p></div>
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold text-sm">AT</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-8">
+    <!-- Header -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-4xl font-bold font-headline tracking-tight">Contract Requests</h2>
+        <p class="text-on-secondary-container mt-1">Monitor and manage agent licensing and company appointments.</p>
+      </div>
+      <div class="flex gap-3">
+        <button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-container-low text-sm font-medium hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">filter_list</span> Filter View</button>
+        <button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-sm font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all"><span class="material-symbols-outlined text-[18px]">summarize</span> Generate Report</button>
+      </div>
+    </div>
+
+    <!-- KPI GRID -->
+    <div class="grid grid-cols-4 gap-5 mb-8">
+      <div class="bg-gradient-to-br from-primary to-primary-container p-6 rounded-xl text-white shadow-xl shadow-primary/20 relative overflow-hidden">
+        <div class="absolute -right-3 -top-3 opacity-10"><span class="material-symbols-outlined text-[80px]">description</span></div>
+        <p class="text-[10px] font-bold uppercase tracking-widest opacity-70">Total Requests</p>
+        <div class="text-4xl font-bold font-headline mt-3">11,824</div>
+        <p class="text-[11px] mt-2 flex items-center gap-1 opacity-80"><span class="material-symbols-outlined text-[14px]">trending_up</span> +12% from last month</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm hover:bg-primary-fixed/20 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Active</p>
+          <span class="material-symbols-outlined text-green-600 text-[20px] icon-fill">check_circle</span>
+        </div>
+        <div class="text-4xl font-bold font-headline text-primary">7,039</div>
+        <div class="mt-3 h-1.5 bg-surface-container-high rounded-full"><div class="h-full bg-primary rounded-full" style="width:60%"></div></div>
+        <p class="text-[10px] text-on-secondary-container mt-1">60% of total</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm hover:bg-primary-fixed/20 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Pending</p>
+          <span class="material-symbols-outlined text-amber-500 text-[20px] icon-fill">pending</span>
+        </div>
+        <div class="text-4xl font-bold font-headline text-primary">429</div>
+        <div class="mt-3 h-1.5 bg-surface-container-high rounded-full"><div class="h-full bg-amber-400 rounded-full" style="width:4%"></div></div>
+        <p class="text-[10px] text-on-secondary-container mt-1">0.09% of total</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm hover:bg-primary-fixed/20 transition-colors">
+        <div class="flex justify-between items-start mb-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Refused</p>
+          <span class="material-symbols-outlined text-error text-[20px] icon-fill">cancel</span>
+        </div>
+        <div class="text-4xl font-bold font-headline text-error">197</div>
+        <p class="text-[11px] text-on-secondary-container mt-3">Requires attention</p>
+      </div>
+    </div>
+
+    <!-- MAIN TABLE -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+      <div class="px-6 py-4 bg-surface-container-low/40 border-b border-surface-container-high flex items-center justify-between">
+        <h3 class="font-bold text-lg font-headline text-primary">Active Contract Ledger</h3>
+        <span class="px-3 py-1 bg-primary-fixed text-primary text-[10px] font-bold rounded-full uppercase tracking-wide">Live Updates</span>
+      </div>
+      <table class="w-full">
+        <thead>
+          <tr class="bg-surface-container-low text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+            <th class="px-6 py-3 text-left">Agent (NPN)</th>
+            <th class="px-4 py-3 text-left">Agency</th>
+            <th class="px-4 py-3 text-left">Carrier</th>
+            <th class="px-4 py-3 text-left">Insurance Type</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-left">Update Date</th>
+            <th class="px-4 py-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-container-low">
+          <tr class="hover:bg-surface-container-low transition-colors group">
+            <td class="px-6 py-4"><p class="text-sm font-bold text-primary">Alexander Thorne</p><p class="text-[11px] text-on-surface-variant">NPN: 19482710</p></td>
+            <td class="px-4 py-4 text-sm">Apex Insurance Group</td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">PR</div><span class="text-sm">Prudential Financial</span></div></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-primary-fixed text-primary text-[11px] font-bold rounded-full">Health - ACA</span></td>
+            <td class="px-4 py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Approved</span></td>
+            <td class="px-4 py-4 text-sm text-on-secondary-container">Apr 10, 2024</td>
+            <td class="px-4 py-4 text-right"><div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group">
+            <td class="px-6 py-4"><p class="text-sm font-bold text-primary">Marcus Rivera</p><p class="text-[11px] text-on-surface-variant">NPN: 17293845</p></td>
+            <td class="px-4 py-4 text-sm">Rivera &amp; Associates</td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-on-tertiary-container">AT</div><span class="text-sm">Aetna Inc.</span></div></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-primary-fixed text-primary text-[11px] font-bold rounded-full">Health - ACA</span></td>
+            <td class="px-4 py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>Contract Sent</span></td>
+            <td class="px-4 py-4 text-sm text-on-secondary-container">Apr 08, 2024</td>
+            <td class="px-4 py-4 text-right"><div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group">
+            <td class="px-6 py-4"><p class="text-sm font-bold text-primary">Sarah Jennings</p><p class="text-[11px] text-on-surface-variant">NPN: 20559132</p></td>
+            <td class="px-4 py-4 text-sm">Unity Assurance</td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-secondary-container flex items-center justify-center text-[10px] font-bold text-on-secondary-container">NY</div><span class="text-sm">New York Life</span></div></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold rounded-full">Life Insurance</span></td>
+            <td class="px-4 py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-100 text-red-700 text-[11px] font-bold rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>Lapsed</span></td>
+            <td class="px-4 py-4 text-sm text-on-secondary-container">Mar 28, 2024</td>
+            <td class="px-4 py-4 text-right"><div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group">
+            <td class="px-6 py-4"><p class="text-sm font-bold text-primary">Elena Rodriguez</p><p class="text-[11px] text-on-surface-variant">NPN: 18837466</p></td>
+            <td class="px-4 py-4 text-sm">Summit Partners</td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">HM</div><span class="text-sm">Humana</span></div></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-tertiary-fixed text-on-tertiary-container text-[11px] font-bold rounded-full">Medicare</span></td>
+            <td class="px-4 py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Approved</span></td>
+            <td class="px-4 py-4 text-sm text-on-secondary-container">Apr 11, 2024</td>
+            <td class="px-4 py-4 text-right"><div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors group">
+            <td class="px-6 py-4"><p class="text-sm font-bold text-primary">David Kim</p><p class="text-[11px] text-on-surface-variant">NPN: 21044891</p></td>
+            <td class="px-4 py-4 text-sm">Apex Insurance Group</td>
+            <td class="px-4 py-4"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface">MO</div><span class="text-sm">Molina Healthcare</span></div></td>
+            <td class="px-4 py-4"><span class="px-2.5 py-1 bg-primary-fixed text-primary text-[11px] font-bold rounded-full">Health - ACA</span></td>
+            <td class="px-4 py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-100 text-blue-700 text-[11px] font-bold rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Instructions Sent</span></td>
+            <td class="px-4 py-4 text-sm text-on-secondary-container">Apr 12, 2024</td>
+            <td class="px-4 py-4 text-right"><div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 bg-surface-container-low/30 border-t border-surface-container-high flex items-center justify-between">
+        <span class="text-[11px] text-on-surface-variant font-medium">Showing 1–5 of 11,824 entries</span>
+        <div class="flex items-center gap-1">
+          <button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+          <button class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold">1</button>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">2</button>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">3</button>
+          <span class="text-on-surface-variant px-1">…</span>
+          <button class="w-8 h-8 rounded-full text-xs font-bold text-primary hover:bg-primary-fixed">2365</button>
+          <button class="p-1.5 rounded-full hover:bg-primary-fixed text-primary"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM BENTO -->
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <h4 class="font-bold text-primary flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-[20px]">notifications_active</span> Recent Notifications</h4>
+        <div class="space-y-3">
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-[16px]">drafts</span></div>
+            <div><p class="text-xs font-bold">New Contract Uploaded</p><p class="text-[10px] text-on-secondary-container">Alexander Thorne attached E&amp;O insurance.</p><span class="text-[9px] text-primary/60 font-bold uppercase mt-0.5 block">2 mins ago</span></div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-error text-[16px]">warning</span></div>
+            <div><p class="text-xs font-bold">License Expiring Soon</p><p class="text-[10px] text-on-secondary-container">Sarah Jennings license expires in 14 days.</p><span class="text-[9px] text-primary/60 font-bold uppercase mt-0.5 block">1 hour ago</span></div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-green-600 text-[16px]">check_circle</span></div>
+            <div><p class="text-xs font-bold">Contract Approved</p><p class="text-[10px] text-on-secondary-container">Elena Rodriguez · Humana Medicare approved.</p><span class="text-[9px] text-primary/60 font-bold uppercase mt-0.5 block">3 hours ago</span></div>
+          </div>
+        </div>
+        <button class="w-full mt-4 py-2 text-xs font-bold text-primary rounded-xl border border-surface-container-high hover:bg-surface-container-low transition-colors">View All Notifications</button>
+      </div>
+      <div class="col-span-2 bg-gradient-to-r from-surface-container-low to-surface p-8 rounded-xl relative overflow-hidden group">
+        <div class="relative z-10">
+          <h4 class="text-2xl font-bold font-headline text-primary mb-2">Automated Renewal Sync</h4>
+          <p class="text-sm text-on-secondary-container max-w-md mb-6">Connect your company portals to TrinityHub360 for real-time appointment status monitoring and automatic renewal processing.</p>
+          <button class="bg-primary text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-primary/20 group-hover:px-8 transition-all">
+            Configure Sync Engine <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-10 group-hover:opacity-20 transition-opacity group-hover:rotate-12 transition-transform duration-700">
+          <span class="material-symbols-outlined text-[120px] text-primary">sync</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- NAV-FLYOUT-START -->
+<style>#nav-flyout a.fl:hover{background:#f0f3ff !important;}</style>
+<div id="nav-flyout" style="position:fixed;left:288px;top:0;z-index:9999;min-width:224px;max-width:264px;background:#fff;border-radius:0 18px 18px 0;box-shadow:4px 0 24px rgba(0,32,69,.13),0 2px 8px rgba(0,32,69,.07);border-left:1px solid #e8edf8;display:none;">
+  <div id="nav-flyout-inner" style="padding:10px 8px;"></div>
+</div>
+<script>
+(function(){
+  var S={"my-agency":[{l:"Dashboard",h:"index.html",i:"dashboard"}, {l:"Pipeline",h:"pipeline.html",i:"schema"}, {l:"Notifications",h:"notifications.html",i:"notifications"}, {l:"Messages",h:"messages.html",i:"forum"}],"policy":[{l:"All Policies",h:"policy-list.html",i:"description"}, {l:"Drafts",h:"policy-drafts.html",i:"draft"}, {l:"Add Policy",h:"policy-wizard.html",i:"add_circle"}, {l:"Activities",h:"policy-activities.html",i:"task_alt"}, {l:"Sales Projection",h:"policy-sales.html",i:"trending_up"}, {l:"Bulk Actions",h:"policy-bulk.html",i:"checklist"}],"business-book":[{l:"Customers",h:"customers.html",i:"people"}, {l:"Opportunities",h:"pipeline.html",i:"schema"}],"contracts":[{l:"Agents",h:"contracts-agents.html",i:"badge"}, {l:"Licenses",h:"contracts-licenses.html",i:"verified"}, {l:"Queue",h:"contracts-queue.html",i:"pending_actions"}, {l:"Notifications",h:"contracts-notifications.html",i:"notifications_active"}, {l:"Messages",h:"contracts-messages.html",i:"sms"}],"commissions":[{l:"Overview",h:"commissions.html",i:"payments"}, {l:"Statement",h:"commissions-statement.html",i:"receipt_long"}, {l:"Notifications",h:"commissions-notifications.html",i:"notification_important"}, {l:"Messages",h:"commissions-messages.html",i:"chat_bubble"}, {l:"Activities",h:"commissions-activities.html",i:"event_note"}],"marketing":[{l:"Overview",h:"marketing.html",i:"campaign"}, {l:"SMS",h:"marketing-sms.html",i:"sms"}, {l:"WhatsApp",h:"marketing-whatsapp.html",i:"chat"}, {l:"Telegram Bots",h:"marketing-telegram.html",i:"send"}, {l:"WA Configuration",h:"whatsapp.html",i:"settings_applications"}]};
+  var L={"my-agency":"My Agency","policy":"Policy","business-book":"Business Book","contracts":"Contracts","commissions":"Commissions","marketing":"Marketing"};
+  var fly=document.getElementById("nav-flyout");
+  var inn=document.getElementById("nav-flyout-inner");
+  var cur=(location.pathname.split("/").pop()||"index.html");
+  var t=null;
+  function show(id,el){
+    clearTimeout(t);
+    var items=S[id];
+    if(!items||!items.length){hide();return;}
+    var h="<div style=\"padding:6px 12px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#43474e;opacity:.65;\">"+(L[id]||id)+"</div>";
+    items.forEach(function(item){
+      var active=cur===item.h;
+      var sty=active?"background:rgba(0,32,69,.08);color:#002045;font-weight:600;":"color:#43474e;";
+      h+="<a href=\""+item.h+"\" class=\"fl\" style=\"display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13px;text-decoration:none;"+sty+"\">"
+        +"<span class=\"material-symbols-outlined\" style=\"font-size:18px;opacity:"+(active?"1":".55")+"\">"+item.i+"</span>"
+        +"<span>"+item.l+"</span>"
+        +"</a>";
+    });
+    inn.innerHTML=h;
+    var r=el.getBoundingClientRect();
+    fly.style.top=Math.max(0,r.top-6)+"px";
+    fly.style.display="block";
+  }
+  function hide(){t=setTimeout(function(){fly.style.display="none";},140);}
+  document.querySelectorAll(".nav-section-item").forEach(function(el){
+    el.addEventListener("mouseenter",function(){show(el.dataset.section,el);});
+    el.addEventListener("mouseleave",hide);
+  });
+  fly.addEventListener("mouseenter",function(){clearTimeout(t);});
+  fly.addEventListener("mouseleave",hide);
+})();
+</script>
+<!-- NAV-FLYOUT-END -->
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CardalAI - Unified 360 Policy Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary-fixed-dim": "#f2bc82",
+                "secondary-container": "#d9e3f8",
+                "primary-fixed-dim": "#adc7f7",
+                "surface-container-low": "#f0f3ff",
+                "surface-tint": "#455f88",
+                "on-primary-fixed": "#001b3c",
+                "surface-dim": "#cfdaf1",
+                "secondary": "#555f70",
+                "on-tertiary-container": "#c6955e",
+                "on-tertiary-fixed-variant": "#633f0f",
+                "surface": "#f9f9ff",
+                "on-secondary-fixed-variant": "#3e4758",
+                "error": "#ba1a1a",
+                "on-secondary-fixed": "#121c2b",
+                "primary": "#002045",
+                "background": "#f9f9ff",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#ffddba",
+                "on-error-container": "#93000a",
+                "outline": "#74777f",
+                "error-container": "#ffdad6",
+                "on-surface-variant": "#43474e",
+                "surface-bright": "#f9f9ff",
+                "secondary-fixed-dim": "#bdc7db",
+                "outline-variant": "#c4c6cf",
+                "on-primary-fixed-variant": "#2d476f",
+                "on-primary-container": "#86a0cd",
+                "on-error": "#ffffff",
+                "surface-variant": "#d8e3fa",
+                "tertiary": "#321b00",
+                "surface-container-highest": "#d8e3fa",
+                "on-secondary-container": "#5b6577",
+                "primary-container": "#1a365d",
+                "on-tertiary-fixed": "#2b1700",
+                "on-tertiary": "#ffffff",
+                "on-primary": "#ffffff",
+                "tertiary-container": "#4f2e00",
+                "surface-container": "#e7eeff",
+                "secondary-fixed": "#d9e3f8",
+                "primary-fixed": "#d6e3ff",
+                "on-surface": "#111c2c",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#263142",
+                "inverse-on-surface": "#ebf1ff",
+                "surface-container-high": "#dee8ff",
+                "inverse-primary": "#adc7f7",
+                "on-background": "#111c2c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9ff; color: #111c2c; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="flex overflow-hidden">
+<!-- SideNavBar from JSON -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 h-screen w-64 bg-slate-50 dark:bg-slate-900 border-r border-transparent">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-50">CardalAI</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Insurance Platform</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Exact labels from JSON: My Agency, Policy, Business Book, Contracts -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">My Agency</span>
+</a>
+<!-- Active State for Policy Detail page -->
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-900 dark:text-blue-100 rounded-lg font-semibold transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-sm">Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-sm">Business Book</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span class="text-sm">Contracts</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="text-sm">Support</span>
+</a>
+</div>
+</aside>
+<main class="ml-64 w-[calc(100%-16rem)] flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar from JSON -->
+<header class="flex justify-between items-center h-16 px-8 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-sm dark:shadow-none z-10">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-blue-600 transition-colors">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search policies or members..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:text-blue-900 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:text-blue-900 transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Eleanor Vance</p>
+<p class="text-[10px] text-slate-500">Senior Underwriter</p>
+</div>
+<img alt="User Profile" class="h-9 w-9 rounded-full object-cover ring-2 ring-primary-fixed" data-alt="Professional portrait of a middle-aged female executive with a confident smile in a modern office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb52N5iOfD-osrJrka6eFPIp-o6KV1OSZQhOcX0P0oeqyy6WS9ggjW8FS4TiNIBfF4AvnVjIo416h70ebMiaBKb1jJJCB4f0F7r4_y6bJt3YTXXW5NBODF1FmYkAIAXBOHZhG5sipeCZKl0I2p2bVbFYWOe77oh56T8v4P2X8t7bXBYPVejpinQyhXrjBgDSrldW7X2KXxBK3YNDheT2xSCyKPSCRuhpmYsQ6yyS_vbXuJjE3hSc2Wk2NkXd4hOfxEqJ7SPjp4-Adt"/>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 hide-scrollbar space-y-8 bg-surface">
+<!-- Workflow Status Bar -->
+<section class="w-full bg-surface-container-lowest rounded-full p-1.5 flex items-center justify-between shadow-sm">
+<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full text-slate-400 font-medium text-sm">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                    No Consent
+                </div>
+<div class="h-4 w-px bg-slate-100"></div>
+<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full text-slate-400 font-medium text-sm">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                    No Eligibility
+                </div>
+<div class="h-4 w-px bg-slate-100"></div>
+<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full bg-primary-container text-on-primary-container font-bold text-sm shadow-inner">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">pending</span>
+                    Pending Documents
+                </div>
+<div class="h-4 w-px bg-slate-100"></div>
+<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full text-slate-400 font-medium text-sm">
+<span class="material-symbols-outlined text-lg">hourglass_empty</span>
+                    Binder Payment
+                </div>
+</section>
+<!-- Page Title & Quick Actions -->
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[10px] font-bold tracking-wider uppercase">Active Lead</span>
+<span class="text-slate-400 text-sm">#POL-882910</span>
+</div>
+<h2 class="text-4xl font-bold tracking-tight text-primary">Julianne Moretz <span class="font-normal text-slate-400">&amp; Family</span></h2>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-base">location_on</span>
+                        742 Evergreen Terrace, Springfield, IL 62704
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-xl text-primary font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+                        Edit Details
+                    </button>
+<button class="px-6 py-2.5 rounded-xl bg-primary text-on-primary font-bold shadow-lg shadow-primary/20 flex items-center gap-2 hover:translate-y-[-1px] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg">send</span>
+                        Request Signature
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Main Info Card -->
+<div class="col-span-8 space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<!-- Carrier Info -->
+<div class="bg-surface-container-lowest p-6 rounded-full shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-sm font-bold text-primary uppercase tracking-widest">Primary Carrier</h3>
+<span class="material-symbols-outlined text-blue-500">verified</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-16 w-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100">
+<img alt="Carrier Logo" class="h-10 w-10 object-contain" data-alt="Modern geometric logo of an insurance company using shades of blue and professional typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEon8WrSgY6N0Okef6xlz7e0McnCU8qo3TO2YmwBycY4coJpUAB1_GW3sjLaY-qMqg5ZEgQRoopUZl2pbgxYT-2snpVVvkgBjBv1UuGz0RwIoLoSt8KccRq3vDiqq_4tfNSmpDfG1aIryOYnbXFHzkK-Cyqxy4-GHBZNpczjpp44ULcX9TcdtSxvEXZvbqLKxjo9aLa9eLaXx6f82YwhseWXkqAdYexV7OtiFtp7vf_P9H2bSLLTxq275Kot2SQyJFDepvT5--2_9h"/>
+</div>
+<div>
+<p class="text-lg font-bold text-on-surface">BlueShield Premier</p>
+<p class="text-sm text-on-surface-variant">HMO Platinum Plus 2024</p>
+<p class="text-xs font-semibold text-blue-600 mt-1">Estimated Premium: $842.10/mo</p>
+</div>
+</div>
+</div>
+<!-- Signature Status -->
+<div class="bg-surface-container-low p-6 rounded-full border border-blue-100 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-sm font-bold text-primary uppercase tracking-widest">Digital Signature</h3>
+<div class="px-2 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded">PENDING</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" data-alt="Portrait of a young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFL7aDYBnLmnKcsrcQWOuX6BD6YIrhvrpXR7iNsTQ3-GY4YDEJx1KS2Ro3t4oq9P7PHqMSXLuisGrPtbdrkI9GK-2hdYGonEqfX8bLHLV2HxE90pvS1ac6jOZT6-6CmjyuZejk_qJZYfuU0G8UaMM1IJSLpZw24sC-Rll-_HBvAfcWoLhIbb7PJ72PLv5ONJbwPOV-7DlQqZXdYGXMml93kYydjcmGAN5NCLwqU-s7uxK0oVUY8LtmgAkB0Fp4VHtUhmcl4olJDPvi"/>
+<div class="h-8 w-8 rounded-full bg-slate-200 ring-2 ring-white flex items-center justify-center text-[10px] font-bold text-slate-500">+1</div>
+</div>
+<div class="flex-1">
+<div class="w-full bg-slate-200 h-1.5 rounded-full mt-1 overflow-hidden">
+<div class="bg-amber-500 h-full w-[66%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1.5 font-medium">2 of 3 Signatures Collected</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Family Members Table-style Container -->
+<div class="bg-surface-container-lowest rounded-full p-8 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-bold text-primary">Family Composition</h3>
+<button class="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-base">add</span> Add Member
+                            </button>
+</div>
+<div class="space-y-4">
+<!-- Header -->
+<div class="grid grid-cols-12 px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+<div class="col-span-5">Name &amp; Relationship</div>
+<div class="col-span-3">DOB / Age</div>
+<div class="col-span-3">Tobacco Status</div>
+<div class="col-span-1 text-right">Actions</div>
+</div>
+<!-- Rows -->
+<div class="grid grid-cols-12 px-4 py-4 items-center bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center gap-3">
+<img class="h-8 w-8 rounded-full object-cover" data-alt="Portrait of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAERvhvhH1iAIplKru1IYriDHfO8sa88lJZf0uWo-LMnh9twe6RqMnyJx147sUjX9e8Dk-D6rk90umXma3zE60baDiN0rbR7XVN7kicIBBZ9_WnjPmXgI5eJa9ZN9uwiZWB33yGOPfVeHleEMecGUZxID-z99dIE2NOk8OZQ1dqhcAvohYyUGgjq65GTgE56bdPd16W7G-GiiEi4AFh1CPFiHg0VMfWR2S-uXSXbVXeey9ByFpalQvJoxeQYhPJLevTLHa6w1w-0f-4"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Julianne Moretz</p>
+<p class="text-[11px] text-slate-500">Primary Insured</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface">May 12, 1988</p>
+<p class="text-[11px] text-slate-500">35 Years</p>
+</div>
+<div class="col-span-3">
+<span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Non-Smoker</span>
+</div>
+<div class="col-span-1 text-right">
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer">more_vert</span>
+</div>
+</div>
+<div class="grid grid-cols-12 px-4 py-4 items-center hover:bg-surface-container-low rounded-xl transition-colors">
+<div class="col-span-5 flex items-center gap-3">
+<img class="h-8 w-8 rounded-full object-cover" data-alt="Portrait of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPVRC1gId8XStWQykyrQE-rSWXoDPR4kC8xER1ftPyFqbn6VxjZpaVqQjd9wutQZYo7pnRt0pQq62TlkhqnLXKU_l_aD8tArDg2wW0NvGnh8mZJoqbKjRFDyNlvJf40oXfKlpRudfbcwg7WPU60mSaI6RZ-PiuZ0-eD0TdnWMCs6NwUZHU5nexHFdYfAfDpYZzTCt7mLVxkourbfURGBSeo9jPiNo4WKr5qkHM6V-iOW1Zn-7axmqT6SLKgjrhUYU5U81WnnQ1SYrb"/>
+<div>
+<p class="text-sm font-bold text-on-surface">David Moretz</p>
+<p class="text-[11px] text-slate-500">Spouse</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface">Jan 04, 1985</p>
+<p class="text-[11px] text-slate-500">39 Years</p>
+</div>
+<div class="col-span-3">
+<span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Non-Smoker</span>
+</div>
+<div class="col-span-1 text-right">
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer">more_vert</span>
+</div>
+</div>
+<div class="grid grid-cols-12 px-4 py-4 items-center hover:bg-surface-container-low rounded-xl transition-colors">
+<div class="col-span-5 flex items-center gap-3">
+<img class="h-8 w-8 rounded-full object-cover" data-alt="Portrait of a young child" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgrl31fO36gDVFdTWqsuD3EZhQVXAYdudo9aEOuRT4wVaMOuVA1ltaiAQvqkY2Gjp-GyvuqYOsGAWmQ8pswMT7SVHHKCWAlstz5BTkTKv6dVXnKm0Nc46Tx0RyLM3XAxCu8lyXbXrVp4gUgN_Cm5ZNc4UQyfa3bisG-Df_RAg_ZpPHAZH4-Y5tnCFL3ZecgeOVopPukDfsMDp9yKvII29mshZmMoTTPwlDBnk9Trctt7AeCSboRZmvS2ZGNYptSu9cbNMGfN8VHVbp"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Lily Moretz</p>
+<p class="text-[11px] text-slate-500">Child / Dependent</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface">Sep 21, 2018</p>
+<p class="text-[11px] text-slate-500">5 Years</p>
+</div>
+<div class="col-span-3">
+<span class="px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded uppercase">N/A</span>
+</div>
+<div class="col-span-1 text-right">
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Panel -->
+<div class="col-span-4 space-y-6">
+<!-- Attachments -->
+<div class="bg-surface-container-lowest rounded-full p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-sm font-bold text-primary uppercase tracking-widest">Attachments</h3>
+<button class="material-symbols-outlined text-blue-600">upload_file</button>
+</div>
+<div class="space-y-3">
+<div class="p-3 bg-surface rounded-xl flex items-center gap-3 group cursor-pointer hover:bg-blue-50 transition-colors">
+<div class="h-10 w-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-bold truncate">Birth_Certificate_Lily.pdf</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold">Eligibility Docs</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">download</span>
+</div>
+<div class="p-3 bg-surface rounded-xl flex items-center gap-3 group cursor-pointer hover:bg-blue-50 transition-colors">
+<div class="h-10 w-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-bold truncate">Carrier_Consent_Form.pdf</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold">Legal / Consent</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary">download</span>
+</div>
+<div class="p-3 bg-surface rounded-xl flex items-center gap-3 group cursor-pointer border-2 border-dashed border-slate-200 hover:border-blue-300 transition-all justify-center text-slate-400">
+<span class="material-symbols-outlined text-lg">add</span>
+<span class="text-xs font-bold">Add Another Document</span>
+</div>
+</div>
+</div>
+<!-- Audit Log -->
+<div class="bg-surface-container-lowest rounded-full p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-sm font-bold text-primary uppercase tracking-widest">Audit History</h3>
+<span class="material-symbols-outlined text-slate-400">history</span>
+</div>
+<div class="relative space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
+<div class="relative flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-blue-100 border-4 border-white flex-shrink-0 z-10"></div>
+<div class="flex-1 -mt-0.5">
+<p class="text-[11px] font-bold text-on-surface">Signature Collected</p>
+<p class="text-[10px] text-slate-500">David Moretz signed Digital Consent</p>
+<p class="text-[9px] text-slate-400 mt-1 uppercase font-semibold">2 hours ago • Automated</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-amber-100 border-4 border-white flex-shrink-0 z-10"></div>
+<div class="flex-1 -mt-0.5">
+<p class="text-[11px] font-bold text-on-surface">Document Requested</p>
+<p class="text-[10px] text-slate-500">Missing Birth Certificate for Lily</p>
+<p class="text-[9px] text-slate-400 mt-1 uppercase font-semibold">Yesterday, 4:22 PM • Eleanor Vance</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-slate-200 border-4 border-white flex-shrink-0 z-10"></div>
+<div class="flex-1 -mt-0.5">
+<p class="text-[11px] font-bold text-on-surface">Case Created</p>
+<p class="text-[10px] text-slate-500">Initial policy application entered</p>
+<p class="text-[9px] text-slate-400 mt-1 uppercase font-semibold">Oct 12, 10:15 AM • System</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-[10px] font-bold text-blue-600 uppercase tracking-widest border border-slate-100 rounded hover:bg-slate-50 transition-colors">View Full History</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB - Restricted to Dashboard/Detail context as per mandate -->
+<button class="fixed bottom-10 right-10 h-16 w-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-20">
+<span class="material-symbols-outlined text-3xl">chat</span>
+</button>
+</body></html>

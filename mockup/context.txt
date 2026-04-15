@@ -1,0 +1,26 @@
+╭─── Claude Code v2.1.108 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                 Welcome back Luis!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│    Sonnet 4.6 · Claude Pro ·                       │                         │
+│    luisf.cortes@javeriana.edu.co's Organization    │                         │
+│               ~/code/cardali/mockup                │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+✻ Conversation compacted (ctrl+o for history)
+
+  ⎿  Referenced file trinityhub360/settings.html
+  ⎿  Referenced file trinityhub360/marketing.html
+  ⎿  Referenced file trinityhub360/contracts-licenses.html
+  ⎿  Referenced file trinityhub360/contracts-messages.html
+  ⎿  Referenced file trinityhub360/messages.html
+  ⎿  You've hit your limit · resets 12pm (America/Bogota)
+     /upgrade to increase your usage limit.
+
+✻ Crunched for 17m 3s
+
+❯ /usage 
+  ⎿  Status dialog dismissed

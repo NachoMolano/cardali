@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Policy Drafts - CardalAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "secondary-container": "#d9e3f8",
+                        "primary-fixed-dim": "#adc7f7",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-tint": "#455f88",
+                        "on-primary-fixed": "#001b3c",
+                        "surface-dim": "#cfdaf1",
+                        "secondary": "#555f70",
+                        "on-tertiary-container": "#c6955e",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "surface": "#f9f9ff",
+                        "on-secondary-fixed-variant": "#3e4758",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#121c2b",
+                        "primary": "#002045",
+                        "background": "#f9f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffddba",
+                        "on-error-container": "#93000a",
+                        "outline": "#74777f",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#43474e",
+                        "surface-bright": "#f9f9ff",
+                        "secondary-fixed-dim": "#bdc7db",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-primary-container": "#86a0cd",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#d8e3fa",
+                        "tertiary": "#321b00",
+                        "surface-container-highest": "#d8e3fa",
+                        "on-secondary-container": "#5b6577",
+                        "primary-container": "#1a365d",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#4f2e00",
+                        "surface-container": "#e7eeff",
+                        "secondary-fixed": "#d9e3f8",
+                        "primary-fixed": "#d6e3ff",
+                        "on-surface": "#111c2c",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#263142",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-high": "#dee8ff",
+                        "inverse-primary": "#adc7f7",
+                        "on-background": "#111c2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+        h1, h2, h3, .font-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 h-screen w-64 border-r border-transparent bg-slate-50 dark:bg-slate-900 z-50">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-50">CardalAI</h1>
+<p class="text-[10px] font-medium uppercase tracking-widest text-on-surface-variant opacity-60">Insurance Platform</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">My Agency</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-900 dark:text-blue-100 rounded-lg font-semibold transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-medium text-sm">Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium text-sm">Business Book</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span class="font-medium text-sm">Contracts</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-surface-variant/30 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-8 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 shadow-sm dark:shadow-none">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 text-xl" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm font-body focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50" placeholder="Search incomplete drafts..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-auto">
+<div class="flex items-center gap-4">
+<button class="relative text-slate-500 hover:text-blue-700 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-slate-500 hover:text-blue-700 transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-semibold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant font-medium">Senior Agent</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-surface-container-high" data-alt="professional headshot of a middle-aged man with short dark hair and a confident smile, wearing a clean white shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAESDUBzAePTJyc-BeW5JwV3Q0dzdnozmjrCXJ2d4k53q25kMaEfo0PrnmS9oK0YEDTlEdt6m1DRAPNYTSLsRQdho3aXuSk_EdnmeGEDCsLQ8RC_PSMq0HngJgGs4YnBZ1YYclJwOiD4is3EbZ9wsah_lGj3tMhoEJW9USDtrpciKmW-jfi7flljchUDRvoKC4mPU04pB8MgZda4bHl0EZtW4NpSeFXyH3zQ5J_CgyY0CfALu2YcTV0cxZgdWCbD_4uYwzzvxf3ihB4"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<div class="p-8 max-w-7xl w-full mx-auto">
+<!-- Page Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-primary font-headline mb-2">Policy Drafts</h2>
+<p class="text-on-surface-variant max-w-md">Review and finalize pending insurance applications. These entries are excluded from the active ledger until submission.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary to-primary-container text-white shadow-lg shadow-primary/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                        New Draft
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Tonal Layering -->
+<div class="grid grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-6 rounded-xl border border-transparent">
+<p class="text-label-sm font-semibold text-on-surface-variant mb-1 uppercase tracking-wider text-[11px]">Total Drafts</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-primary font-headline">24</span>
+<span class="text-xs font-medium text-on-primary-container">+3 today</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-transparent">
+<p class="text-label-sm font-semibold text-on-surface-variant mb-1 uppercase tracking-wider text-[11px]">Pending Signature</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-tertiary-container font-headline">09</span>
+<span class="text-xs font-medium text-tertiary-fixed-dim">Awaiting client</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-transparent">
+<p class="text-label-sm font-semibold text-on-surface-variant mb-1 uppercase tracking-wider text-[11px]">Missing Data</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-error font-headline">15</span>
+<span class="text-xs font-medium text-error/60">Action required</span>
+</div>
+</div>
+</div>
+<!-- List View: The Insurance Ledger -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="grid grid-cols-12 gap-4 px-6 py-4 bg-surface-container-low text-[11px] font-bold uppercase tracking-wider text-on-surface-variant/70">
+<div class="col-span-4">Client &amp; Policy Type</div>
+<div class="col-span-2 text-center">Last Modified</div>
+<div class="col-span-4">Missing Requirements</div>
+<div class="col-span-2 text-right">Actions</div>
+</div>
+<div class="divide-y divide-surface-variant/20">
+<!-- Row 1 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-surface-container-highest/30 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="font-semibold text-on-surface">Johnathan Doe</p>
+<p class="text-xs text-on-surface-variant">Commercial Property • Ref #PR-9921</p>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-sm text-on-surface-variant">Oct 12, 2023</p>
+<p class="text-[10px] text-on-surface-variant/60">2 hours ago</p>
+</div>
+<div class="col-span-4">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-sm bg-error-container text-on-error-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                                    Missing SSN
+                                </span>
+<span class="px-2.5 py-1 rounded-sm bg-secondary-container text-on-secondary-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pending">pending</span>
+                                    Pending Signature
+                                </span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl" data-icon="delete">delete</span>
+</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-container transition-colors">
+                                Continue Editing
+                            </button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-surface-container-highest/30 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold">SM</div>
+<div>
+<p class="font-semibold text-on-surface">Sarah Miller</p>
+<p class="text-xs text-on-surface-variant">Personal Auto • Ref #PA-1044</p>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-sm text-on-surface-variant">Oct 11, 2023</p>
+<p class="text-[10px] text-on-surface-variant/60">Yesterday</p>
+</div>
+<div class="col-span-4">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-sm bg-error-container text-on-error-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                                    Missing VIN
+                                </span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl" data-icon="delete">delete</span>
+</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-container transition-colors">
+                                Continue Editing
+                            </button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-surface-container-highest/30 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold">WL</div>
+<div>
+<p class="font-semibold text-on-surface">Westside Logistics</p>
+<p class="text-xs text-on-surface-variant">Workers Compensation • Ref #WC-5520</p>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-sm text-on-surface-variant">Oct 10, 2023</p>
+<p class="text-[10px] text-on-surface-variant/60">2 days ago</p>
+</div>
+<div class="col-span-4">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-sm bg-secondary-container text-on-secondary-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pending">pending</span>
+                                    Pending Signature
+                                </span>
+<span class="px-2.5 py-1 rounded-sm bg-secondary-container text-on-secondary-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="account_balance">account_balance</span>
+                                    Bank Verification
+                                </span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl" data-icon="delete">delete</span>
+</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-container transition-colors">
+                                Continue Editing
+                            </button>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-surface-container-highest/30 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">EK</div>
+<div>
+<p class="font-semibold text-on-surface">Emily Knight</p>
+<p class="text-xs text-on-surface-variant">Life Insurance • Ref #LF-3381</p>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<p class="text-sm text-on-surface-variant">Oct 09, 2023</p>
+<p class="text-[10px] text-on-surface-variant/60">3 days ago</p>
+</div>
+<div class="col-span-4">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded-sm bg-error-container text-on-error-container text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                                    Missing Health History
+                                </span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-xl" data-icon="delete">delete</span>
+</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-container transition-colors">
+                                Continue Editing
+                            </button>
+</div>
+</div>
+</div>
+<!-- Footer Pagination -->
+<div class="px-6 py-4 bg-surface-container-low/50 flex justify-between items-center text-xs font-medium text-on-surface-variant">
+<p>Showing 1-4 of 24 drafts</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Tip (Editorial Style) -->
+<div class="mt-12 p-8 rounded-2xl bg-gradient-to-br from-primary-container to-primary flex items-center gap-8 text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="relative flex-1">
+<h3 class="text-xl font-bold font-headline mb-2">Automate Follow-ups</h3>
+<p class="text-sm text-on-primary-container leading-relaxed max-w-xl">
+                        Did you know? CardalAI can automatically ping clients for missing information like SSNs or pending signatures. Reduce your administrative workload by enabling "Draft Reminders" in your agency settings.
+                    </p>
+<button class="mt-4 px-6 py-2 rounded-lg bg-primary-fixed text-on-primary-fixed font-bold text-xs hover:bg-primary-fixed-dim transition-colors">
+                        Configure Automation
+                    </button>
+</div>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined text-8xl text-on-primary-container opacity-20" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+</div>
+</main>
+</body></html>

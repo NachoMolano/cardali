@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c4c6cf",
+                    "outline": "#74777f",
+                    "on-primary-container": "#86a0cd",
+                    "on-secondary-container": "#5b6577",
+                    "on-secondary-fixed": "#121c2b",
+                    "primary": "#002045",
+                    "on-tertiary-fixed": "#2b1700",
+                    "tertiary-fixed": "#ffddba",
+                    "on-tertiary-container": "#c6955e",
+                    "on-secondary-fixed-variant": "#3e4758",
+                    "surface-container-low": "#f0f3ff",
+                    "primary-fixed-dim": "#adc7f7",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#adc7f7",
+                    "secondary-fixed": "#d9e3f8",
+                    "on-background": "#111c2c",
+                    "surface-bright": "#f9f9ff",
+                    "primary-container": "#1a365d",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d8e3fa",
+                    "on-tertiary-fixed-variant": "#633f0f",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#bdc7db",
+                    "inverse-surface": "#263142",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "surface-dim": "#cfdaf1",
+                    "tertiary-fixed-dim": "#f2bc82",
+                    "surface-container": "#e7eeff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#111c2c",
+                    "tertiary": "#321b00",
+                    "on-primary-fixed": "#001b3c",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-tint": "#455f88",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#4f2e00",
+                    "surface-container-high": "#dee8ff",
+                    "on-surface-variant": "#43474e",
+                    "secondary": "#555f70",
+                    "background": "#f9f9ff",
+                    "surface-variant": "#d8e3fa",
+                    "secondary-container": "#d9e3f8",
+                    "primary-fixed": "#d6e3ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 px-4 bg-slate-50 dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-xl font-bold tracking-tight text-[#1a365d] dark:text-white">CardalAI</h1>
+<p class="text-label-sm text-on-surface-variant opacity-70">Insurance Platform</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="agency_shell">shield</span>
+<span class="font-medium">My Agency</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="policy">policy</span>
+<span class="font-medium">Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="menu_book">menu_book</span>
+<span class="font-medium">Business Book</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#d6e3ff] dark:bg-[#1a365d] text-[#1a365d] dark:text-white rounded-full font-semibold group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-medium">Contracts</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#1a365d] dark:hover:text-white transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-200" data-icon="help">help</span>
+<span class="font-medium">Support</span>
+</a>
+<div class="mt-6 pt-6 flex items-center gap-3 px-4">
+<img alt="Agency Profile Picture" class="w-10 h-10 rounded-full object-cover" data-alt="professional headshot of a smiling insurance agency director in a clean modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAINqG8J7LSfz8KJXLQf4c_b6jHj6mO-up3UrvCaTEThFlHhaJh34JrJcMiwzuwhVEYm1WBgCRr4pt-hahuJa90N2FPy_IkdGUCcCsgAshQhvur6BoV_UvZ5Ir7ROHOcQAQgRofLDTndOXY_pDdO1eGVowqddWqcvGHi4jzn0z0BZ54RhvZk1LJyMB6ogiX7gFie3pMfEeeB8Rc-EWV4U1t_7oo44Zz82aQ8pkUoybtXuJNS_dcqqkCNPZitTIU_HnatODcv62C3DsO"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Premium Insure</p>
+<p class="text-xs text-on-surface-variant">Global Agency</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 flex items-center justify-between px-8 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full w-96">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-outline/60" placeholder="Smart search with AI..." type="text"/>
+<span class="material-symbols-outlined text-[#1a365d] ml-2 text-lg animate-pulse" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant opacity-30 mx-2"></div>
+<button class="flex items-center gap-2 p-1 pr-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="close up profile photo of a male executive with short hair and professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC_BbBTVabcreTiNHtz_AHMPCTqV50xlnmq8rHeT1llIisD-NPPR76W5fOAxdz-8ZZk-fYsCyoMuHfgLhFRWpowpe9zFBmjhUCKLGmiClH4RP0ut5WJ4Bh2Sf4CV4KIQANiljweHZG_U5CU9pswN1nrDT_nbchwdUaXpPI-Wes8HCRIyjmiJf6-Q_VFH8y9InTMjkWkHozOPC4z36N3XwmEfCtmuO6OMinf-NiAyB-fwmRHQevKdWJt8rEdsec5z_KIoAMdvA90-Xn"/>
+<span class="text-sm font-semibold font-body">Alex Rivera</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 pb-12 px-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<nav class="flex items-center gap-2 text-xs font-semibold text-outline mb-2 uppercase tracking-widest">
+<span>Contracts</span>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary">Notification Log</span>
+</nav>
+<h2 class="text-4xl font-extrabold text-primary tracking-tight">Contract Notifications</h2>
+<p class="text-on-surface-variant mt-1 font-body">Review and manage automated alerts across all carriers.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-surface-container-high text-primary rounded-full font-semibold text-sm hover:scale-[0.98] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="file_download">file_download</span>
+                    Export Log
+                </button>
+<button class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm hover:scale-[0.98] transition-all flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg" data-icon="archive">archive</span>
+                    Archive Read
+                </button>
+</div>
+</div>
+<!-- Filter Bar (Tonal Layering) -->
+<section class="bg-surface-container-low rounded-xl p-4 mb-8 flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-outline uppercase tracking-wider ml-1">Carrier Status</label>
+<div class="flex items-center bg-surface-container-lowest px-4 py-2 rounded-lg gap-2 text-sm font-medium border border-outline-variant/10 cursor-pointer">
+<span>All Statuses</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-outline uppercase tracking-wider ml-1">Insurance Carrier</label>
+<div class="flex items-center bg-surface-container-lowest px-4 py-2 rounded-lg gap-2 text-sm font-medium border border-outline-variant/10 cursor-pointer">
+<span>Blue Shield, AIG, MetLife...</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-outline uppercase tracking-wider ml-1">Sub-Agency</label>
+<div class="flex items-center bg-surface-container-lowest px-4 py-2 rounded-lg gap-2 text-sm font-medium border border-outline-variant/10 cursor-pointer">
+<span>All Agencies</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-outline uppercase tracking-wider ml-1">Date Range</label>
+<div class="flex items-center bg-surface-container-lowest px-4 py-2 rounded-lg gap-2 text-sm font-medium border border-outline-variant/10 cursor-pointer">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="calendar_today">calendar_today</span>
+<span>Last 30 Days</span>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</button>
+</div>
+</section>
+<!-- Notification List (The "Insurance Ledger") -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-xs font-bold text-outline uppercase tracking-widest">
+<th class="px-6 py-4 w-12"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></th>
+<th class="px-6 py-4 font-headline">Date &amp; Time</th>
+<th class="px-6 py-4 font-headline">User / Agency</th>
+<th class="px-6 py-4 font-headline">Carrier &amp; Status</th>
+<th class="px-6 py-4 font-headline">Subject</th>
+<th class="px-6 py-4 font-headline">Preview</th>
+<th class="px-6 py-4 font-headline text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-highest transition-colors group cursor-pointer">
+<td class="px-6 py-5"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-5">
+<p class="text-sm font-bold text-primary">Oct 24, 2023</p>
+<p class="text-xs text-outline">09:45 AM</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs font-bold">JD</div>
+<div>
+<p class="text-sm font-semibold">Jameson Douglas</p>
+<p class="text-xs text-outline">North Peak Agency</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-on-secondary-fixed">Aetna Health</p>
+<span class="inline-flex w-fit px-2 py-0.5 rounded-sm bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-tighter">Processing</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-semibold text-primary truncate max-w-[200px]">Renewal Terms Update</p>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-surface-variant truncate max-w-[300px]">The contract for Group #4421 has been updated with new commission structures...</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-outline hover:text-error transition-all hover:bg-error-container/20 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="archive">archive</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-highest transition-colors group cursor-pointer bg-surface-container-lowest">
+<td class="px-6 py-5"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-5">
+<p class="text-sm font-bold text-primary">Oct 24, 2023</p>
+<p class="text-xs text-outline">08:12 AM</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed text-xs font-bold">SL</div>
+<div>
+<p class="text-sm font-semibold">Sarah Louson</p>
+<p class="text-xs text-outline">Metro Benefits Group</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-on-secondary-fixed">UnitedHealthcare</p>
+<span class="inline-flex w-fit px-2 py-0.5 rounded-sm bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-tighter">Action Required</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-semibold text-primary truncate max-w-[200px]">Signature Missing</p>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-surface-variant truncate max-w-[300px]">Electronic signature failed for the Q4 policy bundle. Please re-upload...</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-outline hover:text-error transition-all hover:bg-error-container/20 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="archive">archive</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-highest transition-colors group cursor-pointer bg-surface-container-lowest">
+<td class="px-6 py-5"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-5">
+<p class="text-sm font-bold text-primary">Oct 23, 2023</p>
+<p class="text-xs text-outline">04:30 PM</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-8 h-8 rounded-full object-cover" data-alt="professional woman executive portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZAFZqkaHmEGuJa4ek0XzWhkm4Pqm-YN9u5DMOoUGz_1BtAfxOEXyhSbLD023jGM00ehadKiHpKN10wgKyVWxEk1bi4J_Qr56ApNuPBwwjYtVdKcISX2yNc7FtoHq38Q6Hw-_SXWemf6YtdQIh4KqOIn9WaS70pMFy7nhsxW0_0qUgiIuqE7QAMk48PYtXwGBDY994PX6z6qlg0NBVgBDssERPz-8OT92GbuaQNeSfJglp8J8-15da2cJSO9kKL-h2xBfvAChD4UYA"/>
+<div>
+<p class="text-sm font-semibold">Elena Vance</p>
+<p class="text-xs text-outline">Vance &amp; Partners</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-on-secondary-fixed">Cigna Global</p>
+<span class="inline-flex w-fit px-2 py-0.5 rounded-sm bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-tighter">Approved</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-semibold text-primary truncate max-w-[200px]">New Agency Appointment</p>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-surface-variant truncate max-w-[300px]">Your appointment with Cigna Global has been finalized. Welcome aboard!</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-outline hover:text-error transition-all hover:bg-error-container/20 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="archive">archive</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-highest transition-colors group cursor-pointer bg-surface-container-lowest">
+<td class="px-6 py-5"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-6 py-5">
+<p class="text-sm font-bold text-primary">Oct 23, 2023</p>
+<p class="text-xs text-outline">01:15 PM</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">MK</div>
+<div>
+<p class="text-sm font-semibold">Marcus Kane</p>
+<p class="text-xs text-outline">Kane Financial</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-on-secondary-fixed">Kaiser Permanente</p>
+<span class="inline-flex w-fit px-2 py-0.5 rounded-sm bg-outline-variant/30 text-on-surface-variant text-[10px] font-bold uppercase tracking-tighter">Draft</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-semibold text-primary truncate max-w-[200px]">Contract Draft Saved</p>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-surface-variant truncate max-w-[300px]">Automatic save of the Kaiser multi-tier plan for North California region...</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-outline hover:text-error transition-all hover:bg-error-container/20 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="archive">archive</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-xs font-medium text-outline">Showing 1 to 10 of 254 notifications</p>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-outline transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-outline text-xs font-bold transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-outline text-xs font-bold transition-colors">3</button>
+<span class="px-2 text-outline text-xs">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-outline text-xs font-bold transition-colors">26</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-outline transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Status Floating Card (Bento style hint) -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary p-6 rounded-2xl text-white flex flex-col justify-between shadow-xl shadow-primary/10">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-3xl opacity-50" data-icon="bolt">bolt</span>
+<span class="text-[10px] font-bold uppercase bg-white/20 px-2 py-0.5 rounded">Live Status</span>
+</div>
+<div>
+<h4 class="text-2xl font-extrabold mt-4">99.8%</h4>
+<p class="text-sm font-medium opacity-70">Automation Delivery Rate</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-2xl flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="assignment_late">assignment_late</span>
+<span class="text-[10px] font-bold uppercase bg-error-container text-on-error-container px-2 py-0.5 rounded">High Priority</span>
+</div>
+<div>
+<h4 class="text-2xl font-extrabold mt-4 text-primary">12</h4>
+<p class="text-sm font-medium text-on-surface-variant">Pending Actions Today</p>
+</div>
+</div>
+<div class="bg-white border border-outline-variant/20 p-6 rounded-2xl flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-3xl text-primary-fixed-dim" data-icon="history">history</span>
+</div>
+<div>
+<h4 class="text-2xl font-extrabold mt-4 text-primary">Archive Health</h4>
+<p class="text-sm font-medium text-on-surface-variant">All logs older than 90 days are safely vaulted.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>
