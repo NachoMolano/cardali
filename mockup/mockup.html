@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aidgency</title>
+
+    <!-- Fuentes: Instrument Sans & Red Hat Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Instrument Sans"', 'sans-serif'],
+                        serif: ['"Red Hat Text"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50:  'var(--brand-50)',
+                            100: 'var(--brand-100)',
+                            200: 'var(--brand-200)',
+                            300: 'var(--brand-300)',
+                            400: 'var(--brand-400)',
+                            500: 'var(--brand-500)',
+                            600: 'var(--brand-600)',
+                            700: 'var(--brand-700)',
+                        },
+                        surface: {
+                            light: '#ffffff',
+                            DEFAULT: '#f8fafc',
+                            dark: '#f1f5f9',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.03)',
+                        'soft-hover': '0 20px 40px -10px var(--shadow-brand), 0 1px 3px rgba(0,0,0,0.03)',
+                        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)',
+                        'main-card': '0 25px 50px -12px rgba(0, 0, 0, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>
