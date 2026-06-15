@@ -3291,7 +3291,77 @@ const StepConsent = ({ t }) => {
         </div>
     );
 };
-const StepQuoting     = (p) => <StepPlaceholder title="Paso 3 · Quoting" />;
+const StepQuoting = ({ t, client }) => {
+    const [selected, setSelected] = useState(new Set());
+    const toggle = id => setSelected(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n; });
+
+    const recommended = [
+        { id: 'amb-s5', carrier: 'Ambetter', name: 'Silver 5', tier: 'Silver · CSR', net: '$42', ded: '$1,500', why: 'Maximiza tu CSR y mantiene a tu médico actual en red.' },
+        { id: 'osc-ss', carrier: 'Oscar', name: 'Silver Simple', tier: 'Silver · CSR', net: '$28', ded: '$2,000', why: 'Prima más baja; red más estrecha que Ambetter.' },
+    ];
+    const others = [
+        { id: 'cig-g', carrier: 'Cigna', name: 'Gold PCP', tier: 'Gold', tierColor: 'bg-amber-100 text-amber-700', net: '$95', ded: '$0' },
+        { id: 'mol-b', carrier: 'Molina', name: 'Bronze', tier: 'Bronze', tierColor: 'bg-slate-100 text-slate-600', net: '$12', ded: '$7,000' },
+    ];
+
+    const Field = ({ label, value }) => (
+        <div className="mb-3">
+            <label className="block text-xs text-slate-500 mb-1">{label}</label>
+            <div className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white text-slate-700">{value}</div>
+        </div>
+    );
+    const Filter = ({ children }) => <span className="border border-slate-200 rounded-lg px-3 py-1.5 text-xs bg-white text-slate-600">{children}</span>;
+    const PlanRow = ({ p, rec }) => (
+        <div className={`bg-white border rounded-xl p-3 flex items-center gap-3 ${rec ? 'border-violet-200' : 'border-slate-200'} ${selected.has(p.id) ? 'ring-2 ring-brand-400' : ''}`}>
+            <div className="flex-1">
+                <p className="font-semibold text-slate-800 text-sm">{p.carrier} · {p.name} <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded ${p.tierColor || 'bg-blue-100 text-blue-700'}`}>{p.tier}</span></p>
+                {p.why && <p className="text-xs text-violet-700 mt-1">✦ {p.why}</p>}
+            </div>
+            <div className="text-right">
+                <p className="text-[10px] text-slate-400">prima neta</p>
+                <p className="text-lg font-bold text-brand-700 font-data leading-none">{p.net}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">ded. {p.ded}</p>
+            </div>
+            <button onClick={() => toggle(p.id)} className={`text-xs font-semibold rounded-lg px-3 py-2 transition-colors ${selected.has(p.id) ? 'bg-brand-500 text-white' : 'border border-brand-400 text-brand-600 hover:bg-brand-50'}`}>
+                {selected.has(p.id) ? '✓ Seleccionado' : 'Seleccionar'}
+            </button>
+        </div>
+    );
+
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr]">
+            {/* Inputs */}
+            <div className="p-5 border-r border-slate-100">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Datos para cotizar</p>
+                <Field label="ZIP / Condado" value={client ? `${client.zip} · ${client.county}` : '33125 · Miami-Dade'} />
+                <Field label="Miembros del hogar" value={client ? `${client.householdSize} personas` : '2 adultos · 1 menor'} />
+                <Field label="Ingreso del hogar" value={client ? client.income : '$48,000'} />
+                <Field label="¿Usa tabaco?" value={client?.smoker || 'No'} />
+                <button className="w-full bg-brand-500 text-white py-2 rounded-lg font-medium text-sm shadow-soft mt-1">Actualizar cotización</button>
+                <div className="mt-3"><AidaHint>Con este ingreso el hogar califica a <strong>APTC ≈ ${client?.fpl === '160%' ? '610' : '420'}/mo</strong> y <strong>CSR</strong> (mejor en planes Silver).</AidaHint></div>
+            </div>
+
+            {/* Resultados */}
+            <div className="p-5">
+                <div className="flex items-center gap-2 flex-wrap mb-4">
+                    <span className="text-xs font-bold text-slate-400 uppercase">Filtros</span>
+                    <Filter>Metal: Silver ▾</Filter><Filter>Carrier ▾</Filter><Filter>Prima máx ▾</Filter><Filter>Deducible ▾</Filter>
+                    <span className="ml-auto text-xs text-slate-400">38 planes</span>
+                </div>
+
+                <div className="bg-violet-50/60 border border-violet-200 rounded-xl p-3 mb-4">
+                    <p className="text-xs font-bold text-violet-700 mb-2">✦ Recomendado por Aida{client ? ` para ${client.firstName}` : ''}</p>
+                    <div className="space-y-2">{recommended.map(p => <PlanRow key={p.id} p={p} rec />)}</div>
+                </div>
+
+                <p className="text-xs font-bold text-slate-400 uppercase mb-2">Todos los planes</p>
+                <div className="space-y-2">{others.map(p => <PlanRow key={p.id} p={p} />)}</div>
+
+                <p className="text-xs text-slate-400 mt-4">Planes seleccionados se guardan en el perfil de la póliza. <strong>{selected.size} seleccionados</strong> · puedes elegir varios candidatos.</p>
+            </div>
+        </div>
+    );
+};
 const StepEligibility = (p) => <StepPlaceholder title="Paso 4 · Eligibility" />;
 const StepDocuments   = (p) => <StepPlaceholder title="Paso 5 · Documentos" />;
 const StepEnrollment  = (p) => <StepPlaceholder title="Paso 6 · Enrollment" />;
