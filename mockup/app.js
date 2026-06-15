@@ -63,6 +63,25 @@ const T = {
     signPending:'Signature Pending', docsReady:'Documents ready', needsAttention:'Needs attention',
     hoursAgo:'2h ago', today:'Today', yesterday:'Yesterday',
     policies:'Policies',
+    // --- Rediseño Pólizas ---
+    tabPolicies:'Policies', tabClients:'Clients',
+    stageConsent:'Consent', stageQuoting:'Quoting', stageEligibility:'Eligibility',
+    stageDocuments:'Documents', stageEnrollment:'Enrollment', stageActive:'Active',
+    resume:'Resume', draft:'draft', newClient:'+ New Client', newClientShort:'New Client',
+    noPlan:'— no plan —', planCol:'Carrier · Plan', aptcCol:'APTC', subsidyEst:'est.',
+    wzClient:'Client', wzConsent:'Consent', wzQuoting:'Quoting', wzEligibility:'Eligibility',
+    wzDocs:'Documents', wzEnrollment:'Enrollment', wzBinder:'Binder',
+    wzStepOf:'Step', wzOf:'of', skipQuoting:'Skip quoting', back:'Back',
+    continueBtn:'Continue', saveExit:'Save & exit', newPolicyFor:'+ New policy',
+    required:'REQUIRED', skippable:'SKIPPABLE',
+    secIdentity:'Identity & contact', secLocation:'Location', secLocationTag:'key for quoting',
+    secHousehold:'Household & finances', secHouseholdTag:'drives subsidy', secEligibility:'Eligibility',
+    secMore:'Additional data', secMoreNote:'(collapsed · rarely used in ACA)',
+    household:'Household / Members', addMember:'+ Add member', member:'Member', relation:'Relation',
+    dobShort:'Birth', taxHousehold:'Tax household', seeksCoverage:'Seeks coverage',
+    editClient:'Edit client', dataTab:'Data', paymentsTab:'Payments',
+    quickPolicies:'Policies', quickHousehold:'Household', quickIncome:'Household income',
+    quickFpl:'FPL', quickAgent:'Agent',
   },
   es: {
     overview:'Inicio', contracts:'Contratos', policies:'Pólizas', toggleView:'Cambiar Vista',
@@ -119,6 +138,25 @@ const T = {
     signPending:'Firma pendiente', docsReady:'Documentos listos', needsAttention:'Requiere atención',
     hoursAgo:'Hace 2h', today:'Hoy', yesterday:'Ayer',
     policies:'Pólizas',
+    // --- Rediseño Pólizas ---
+    tabPolicies:'Pólizas', tabClients:'Clientes',
+    stageConsent:'Consent', stageQuoting:'Quoting', stageEligibility:'Eligibility',
+    stageDocuments:'Documents', stageEnrollment:'Enrollment', stageActive:'Active',
+    resume:'Retomar', draft:'borrador', newClient:'+ Nuevo Cliente', newClientShort:'Nuevo Cliente',
+    noPlan:'— sin plan —', planCol:'Carrier · Plan', aptcCol:'APTC', subsidyEst:'est.',
+    wzClient:'Cliente', wzConsent:'Consent', wzQuoting:'Quoting', wzEligibility:'Eligibility',
+    wzDocs:'Documentos', wzEnrollment:'Enrollment', wzBinder:'Binder',
+    wzStepOf:'Paso', wzOf:'de', skipQuoting:'Saltar quoting', back:'Atrás',
+    continueBtn:'Continuar', saveExit:'Guardar y salir', newPolicyFor:'+ Nueva póliza',
+    required:'OBLIGATORIO', skippable:'SALTABLE',
+    secIdentity:'Identidad y contacto', secLocation:'Ubicación', secLocationTag:'clave para cotizar',
+    secHousehold:'Hogar y finanzas', secHouseholdTag:'decide el subsidio', secEligibility:'Elegibilidad',
+    secMore:'Datos adicionales', secMoreNote:'(colapsado · poco usados en ACA)',
+    household:'Hogar / Miembros', addMember:'+ Agregar miembro', member:'Miembro', relation:'Relación',
+    dobShort:'Nacimiento', taxHousehold:'Household tributario', seeksCoverage:'Solicita cobertura',
+    editClient:'Editar cliente', dataTab:'Datos', paymentsTab:'Pagos',
+    quickPolicies:'Pólizas', quickHousehold:'Hogar', quickIncome:'Ingreso hogar',
+    quickFpl:'FPL', quickAgent:'Agente',
   }
 };
 
@@ -229,6 +267,24 @@ const AiBadge = ({ type = 'verified', label }) => {
         </span>
     );
 };
+
+/* Tarjetas KPI cuadradas reutilizables para filtrar por estado (Contratos y Pólizas).
+   Tamaño fijo "casi cuadrado" (124x104) idéntico en ambas secciones; envuelven en
+   pantallas estrechas. `active` es un Set; `onToggle(key)` alterna el filtro. */
+const StatusFilterCards = ({ items, active, onToggle }) => (
+    <div className="flex flex-wrap gap-3 mb-5">
+        {items.map(it => (
+            <button key={it.key} onClick={() => onToggle(it.key)}
+                className={`w-[124px] h-[104px] rounded-2xl bg-white shadow-soft hover:shadow-soft-hover transition-all duration-200 flex flex-col items-center justify-center gap-1.5
+                    ${active.has(it.key) ? 'ring-2 ring-inset ring-brand-400' : 'hover:scale-[1.02]'}`}>
+                <span className={`text-3xl font-bold font-data ${it.color || 'text-slate-700'}`}>
+                    {typeof it.count === 'number' ? it.count.toLocaleString() : it.count}
+                </span>
+                <span className="text-xs text-slate-500 font-medium text-center px-2 leading-tight">{it.label}</span>
+            </button>
+        ))}
+    </div>
+);
 
 const TwistyBarChart = () => {
     const data = [
