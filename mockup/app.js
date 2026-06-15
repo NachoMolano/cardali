@@ -2044,50 +2044,6 @@ const CLIENTS_DATA = [
 ];
 const getClient = id => CLIENTS_DATA.find(c => c.id === id);
 
-// ─── New Policy Modal ──────────────────────────────────────────────────────────
-
-const NewPolicyModal = ({ onClose }) => {
-    const lang = useLang();
-    const t = T[lang];
-    const [customer,        setCustomer]        = useState('');
-    const [effectiveDate,   setEffectiveDate]   = useState('');
-    const [prevCarrier,     setPrevCarrier]      = useState('');
-    const [carrier,         setCarrier]          = useState('');
-    const [policyType,      setPolicyType]       = useState('');
-
-    const inputCls = "w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all text-sm";
-
-    return ReactDOM.createPortal(
-        <>
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200]" onClick={onClose} />
-            <div className="fixed inset-0 flex items-center justify-center z-[201] pointer-events-none px-4">
-                <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md pointer-events-auto fade-in">
-                    <h2 className="text-2xl font-bold text-slate-800 mb-1 font-display">{t.addPolicy}</h2>
-                    <div className="space-y-5 mt-7">
-                        <div>
-                            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">{t.customer}</label>
-                            <input type="text" value={customer} onChange={e => setCustomer(e.target.value)}
-                                placeholder="Search customer…" className={inputCls} />
-                        </div>
-                        <div>
-                            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">{t.effectiveDate}</label>
-                            <input type="date" value={effectiveDate} onChange={e => setEffectiveDate(e.target.value)} className={inputCls} />
-                        </div>
-                        <SelectField label={t.prevCarrier} value={prevCarrier} onChange={setPrevCarrier} options={INSURANCE_COMPANIES} placeholder="Select previous carrier…" />
-                        <SelectField label={t.carrier}     value={carrier}     onChange={setCarrier}     options={INSURANCE_COMPANIES} placeholder="Select carrier…" />
-                        <SelectField label={t.policyType}  value={policyType}  onChange={setPolicyType}  options={POLICY_TYPES}        placeholder="Select policy type…" />
-                    </div>
-                    <div className="flex justify-end items-center gap-5 mt-8">
-                        <button onClick={onClose} className="text-slate-400 font-medium underline underline-offset-2 hover:text-slate-600 transition-colors text-sm">{t.cancel}</button>
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-2.5 rounded-lg font-semibold transition-colors shadow-sm text-sm">{t.submit}</button>
-                    </div>
-                </div>
-            </div>
-        </>,
-        document.body
-    );
-};
-
 // ─── Policies List View ────────────────────────────────────────────────────────
 
 const STATUS_PILLS = ['Completed', 'Waiting', 'Signature Pending', 'Signed'];

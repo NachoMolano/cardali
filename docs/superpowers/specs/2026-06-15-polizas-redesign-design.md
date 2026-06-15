@@ -96,3 +96,4 @@ Los wireframes del companion son solo estructura. La implementación debe **mant
 ## 8. Registro de cambios
 
 - **2026-06-15** — Creación inicial del spec a partir del brainstorming.
+- **2026-06-15** — Implementado en el mockup (T1–T11). Cambios respecto al spec: Clientes pasó a sección top-level del nav (no sub-pestaña). Gap conocido: la prosa larga dentro de los pasos del wizard (explicaciones de Aida) quedó solo en español; labels/columnas/botones sí son bilingües. La tabla de pólizas usa headers planos (se quitó ColDropdown por columna en favor de los filtros superiores).
