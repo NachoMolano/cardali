@@ -3204,9 +3204,89 @@ const ClientProfileView = ({ navigateTo, clientId }) => {
     );
 };
 
-const PolicyWizardView = ({ navigateTo, viewParams }) => (
-    <div className="fade-in p-10 text-center text-slate-400">PolicyWizardView (paso {viewParams?.step}) — próximamente</div>
+// ─── Wizard de creación de póliza (ACA) ─────────────────────────────────────────
+// Stubs de contenido por paso (se desarrollan: 1-2 en T7, 3 en T8, 4-7 en T9)
+const StepPlaceholder = ({ title }) => (
+    <div className="p-10 text-center text-slate-400">{title} — próximamente</div>
 );
+const StepClient      = (p) => <StepPlaceholder title="Paso 1 · Cliente + Hogar" />;
+const StepConsent     = (p) => <StepPlaceholder title="Paso 2 · Consent" />;
+const StepQuoting     = (p) => <StepPlaceholder title="Paso 3 · Quoting" />;
+const StepEligibility = (p) => <StepPlaceholder title="Paso 4 · Eligibility" />;
+const StepDocuments   = (p) => <StepPlaceholder title="Paso 5 · Documentos" />;
+const StepEnrollment  = (p) => <StepPlaceholder title="Paso 6 · Enrollment" />;
+const StepBinder      = (p) => <StepPlaceholder title="Paso 7 · Binder" />;
+
+const PolicyWizardView = ({ navigateTo, viewParams }) => {
+    const lang = useLang();
+    const t = T[lang];
+    const client = getClient(viewParams?.clientId);
+    const [step, setStep] = useState(Number(viewParams?.step) || 1);
+
+    const STEPS = [
+        { n: 1, label: t.wzClient },
+        { n: 2, label: t.wzConsent },
+        { n: 3, label: t.wzQuoting, skippable: true },
+        { n: 4, label: t.wzEligibility },
+        { n: 5, label: t.wzDocs },
+        { n: 6, label: t.wzEnrollment },
+        { n: 7, label: t.wzBinder },
+    ];
+
+    const goNext = () => step < 7 ? setStep(step + 1) : navigateTo('policies');
+    const goBack = () => step > 1 ? setStep(step - 1) : navigateTo('policies');
+    const stepProps = { t, client, navigateTo, goNext };
+
+    const body = {
+        1: <StepClient {...stepProps} />, 2: <StepConsent {...stepProps} />,
+        3: <StepQuoting {...stepProps} />, 4: <StepEligibility {...stepProps} />,
+        5: <StepDocuments {...stepProps} />, 6: <StepEnrollment {...stepProps} />,
+        7: <StepBinder {...stepProps} />,
+    }[step];
+
+    return (
+        <div className="fade-in">
+            <div className="flex items-center justify-between mb-1">
+                <h1 className="text-3xl font-bold text-slate-800 font-display">{t.newPolicyFor.replace('+ ', '')}{client ? ` — ${client.name}` : ''}</h1>
+                <span className="text-sm text-slate-400">{t.wzStepOf} {step} {t.wzOf} 7</span>
+            </div>
+
+            {/* Stepper */}
+            <div className="bg-white rounded-2xl border border-slate-200/70 shadow-soft px-6 py-5 my-4">
+                <div className="flex items-center">
+                    {STEPS.map((s, i) => {
+                        const done = s.n < step, current = s.n === step;
+                        return (
+                            <React.Fragment key={s.n}>
+                                <button onClick={() => setStep(s.n)} className="flex flex-col items-center gap-1.5 shrink-0">
+                                    <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors
+                                        ${done ? 'bg-brand-500 text-white' : current ? 'bg-brand-600 text-white ring-4 ring-brand-100' : 'bg-slate-100 text-slate-400'}`}>
+                                        {done ? '✓' : s.n}
+                                    </span>
+                                    <span className={`text-[11px] font-medium whitespace-nowrap ${current ? 'text-brand-700' : 'text-slate-400'}`}>{s.label}</span>
+                                </button>
+                                {i < STEPS.length - 1 && <div className={`flex-1 h-0.5 mx-1 mb-5 ${done ? 'bg-brand-500' : 'bg-slate-200'}`} />}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* Step body */}
+            <div className="bg-white rounded-2xl border border-slate-200/70 shadow-soft min-h-[300px] mb-4">{body}</div>
+
+            {/* Footer nav */}
+            <div className="flex justify-between items-center">
+                <button onClick={goBack} className="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors">‹ {t.back}</button>
+                <div className="flex items-center gap-3">
+                    {step === 3 && <button onClick={() => setStep(4)} className="text-sm text-slate-500 underline hover:text-slate-700">{t.skipQuoting} →</button>}
+                    <button onClick={() => navigateTo('policies')} className="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors">{t.saveExit}</button>
+                    <button onClick={goNext} className="px-5 py-2.5 rounded-lg bg-brand-500 text-white font-medium shadow-soft hover:bg-brand-600 transition-colors">{step === 7 ? t.stageActive : t.continueBtn} ›</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const App = () => {
     const [currentView, setCurrentView] = useState('dashboard');
