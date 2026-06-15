@@ -3209,8 +3209,88 @@ const ClientProfileView = ({ navigateTo, clientId }) => {
 const StepPlaceholder = ({ title }) => (
     <div className="p-10 text-center text-slate-400">{title} — próximamente</div>
 );
-const StepClient      = (p) => <StepPlaceholder title="Paso 1 · Cliente + Hogar" />;
-const StepConsent     = (p) => <StepPlaceholder title="Paso 2 · Consent" />;
+const StepClient = ({ t, client }) => {
+    const [mode, setMode] = useState(client ? 'existing' : 'existing');
+    const [selId, setSelId] = useState(client?.id || CLIENTS_DATA[0].id);
+    const [adding, setAdding] = useState(false);
+    const sel = getClient(selId);
+
+    return (
+        <div className="p-6">
+            {/* Elegir existente / nuevo */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                <button onClick={() => setMode('existing')} className={`text-left rounded-xl border-2 p-4 transition-colors ${mode === 'existing' ? 'border-brand-500 bg-brand-50/40' : 'border-slate-200 hover:border-slate-300'}`}>
+                    <p className={`text-sm font-bold ${mode === 'existing' ? 'text-brand-700' : 'text-slate-500'}`}>● Cliente existente</p>
+                    {mode === 'existing' && (
+                        <select value={selId} onChange={e => setSelId(e.target.value)} onClick={e => e.stopPropagation()}
+                            className="mt-3 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-brand-400">
+                            {CLIENTS_DATA.map(c => <option key={c.id} value={c.id}>{c.name} — {c.phone}</option>)}
+                        </select>
+                    )}
+                </button>
+                <button onClick={() => setMode('new')} className={`text-left rounded-xl border-2 p-4 transition-colors ${mode === 'new' ? 'border-brand-500 bg-brand-50/40' : 'border-slate-200 hover:border-slate-300'}`}>
+                    <p className={`text-sm font-bold ${mode === 'new' ? 'text-brand-700' : 'text-slate-500'}`}>○ Crear cliente nuevo</p>
+                    <p className="text-xs text-slate-400 mt-1">nombre, contacto, ZIP/estado…</p>
+                </button>
+            </div>
+
+            {/* Hogar / Miembros */}
+            <NestedCard title={t.household} rightAction={<button onClick={() => setAdding(!adding)} className="text-xs font-semibold border border-brand-400 text-brand-600 rounded-md px-3 py-1.5 hover:bg-brand-50">{t.addMember}</button>}>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                        <thead><tr className="text-[11px] text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                            <th className="text-left py-2 font-semibold">{t.member}</th>
+                            <th className="text-left py-2 font-semibold">{t.relation}</th>
+                            <th className="text-left py-2 font-semibold">{t.dobShort}</th>
+                            <th className="text-center py-2 font-semibold">{t.taxHousehold}</th>
+                            <th className="text-center py-2 font-semibold">{t.seeksCoverage}</th>
+                        </tr></thead>
+                        <tbody>
+                            {(mode === 'existing' && sel ? sel.household : []).map((m, i) => (
+                                <tr key={i} className="border-b border-slate-50">
+                                    <td className="py-3 font-medium text-slate-800">{m.name}</td>
+                                    <td className="py-3 text-slate-600">{m.relation}</td>
+                                    <td className="py-3 text-slate-600">{m.dob}</td>
+                                    <td className="py-3 text-center">{m.taxHousehold ? <span className="text-emerald-600">✓</span> : <span className="text-slate-300">—</span>}</td>
+                                    <td className="py-3 text-center">{m.seeksCoverage ? <span className="text-emerald-600">✓</span> : <span className="text-slate-300">—</span>}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                {adding && (
+                    <div className="mt-3 bg-slate-50 border border-dashed border-slate-300 rounded-lg p-3">
+                        <p className="text-xs font-semibold text-slate-500 mb-2">+ Nuevo miembro (se guarda en el cliente)</p>
+                        <div className="flex flex-wrap gap-2 items-center">
+                            {['Nombre','Relación','Nacimiento'].map(f => <input key={f} placeholder={f} className="border border-slate-200 rounded-md px-2 py-1.5 text-xs w-28 focus:outline-none focus:border-brand-400" />)}
+                            <label className="text-xs text-slate-600 flex items-center gap-1"><input type="checkbox" className="accent-brand-500" /> {t.taxHousehold}</label>
+                            <label className="text-xs text-slate-600 flex items-center gap-1"><input type="checkbox" className="accent-brand-500" /> {t.seeksCoverage}</label>
+                            <button onClick={() => setAdding(false)} className="bg-brand-500 text-white text-xs px-3 py-1.5 rounded-md font-semibold">{t.submit}</button>
+                        </div>
+                    </div>
+                )}
+                <div className="mt-3"><AidaHint>{client ? 'Cliente ya seleccionado desde su perfil.' : 'Precargué los datos del cliente. '} Cada miembro tiene dos flags independientes: household tributario y solicita cobertura.</AidaHint></div>
+            </NestedCard>
+        </div>
+    );
+};
+const StepConsent = ({ t }) => {
+    const [agreed, setAgreed] = useState(false);
+    return (
+        <div className="p-6 max-w-3xl">
+            <h3 className="text-lg font-bold text-slate-800 font-display mb-2">Consentimiento del cliente (Agent of Record)</h3>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                El cliente autoriza a este agente a gestionar su aplicación al Marketplace en su nombre,
+                acceder a su información de elegibilidad y enrollar su cobertura. Requisito de CMS para actuar como agente de registro.
+            </p>
+            <label className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-4 cursor-pointer hover:border-brand-300 transition-colors">
+                <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} className="mt-0.5 w-4 h-4 accent-brand-500" />
+                <span className="text-sm text-slate-700">El cliente otorga su consentimiento para que el agente gestione esta póliza y su aplicación de elegibilidad.</span>
+            </label>
+            <div className="mt-4"><AidaHint>El consentimiento (agent-of-record) es lo que permite, legalmente, que cotices y enrolles por el cliente. Sin él no se puede enviar la aplicación.</AidaHint></div>
+        </div>
+    );
+};
 const StepQuoting     = (p) => <StepPlaceholder title="Paso 3 · Quoting" />;
 const StepEligibility = (p) => <StepPlaceholder title="Paso 4 · Eligibility" />;
 const StepDocuments   = (p) => <StepPlaceholder title="Paso 5 · Documentos" />;
