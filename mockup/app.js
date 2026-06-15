@@ -286,6 +286,14 @@ const StatusFilterCards = ({ items, active, onToggle }) => (
     </div>
 );
 
+/* Sugerencia inline de Aida (IA). Caja sutil morada, reutilizable en wizard y perfiles. */
+const AidaHint = ({ children }) => (
+    <div className="flex items-start gap-2 bg-violet-50 border-l-2 border-violet-400 rounded-r-lg px-3 py-2 text-[13px] text-violet-800">
+        <span className="text-violet-500 font-bold shrink-0 leading-5">✦</span>
+        <span className="leading-5">{children}</span>
+    </div>
+);
+
 const TwistyBarChart = () => {
     const data = [
         { day: 'Lun', value: 40 },
@@ -2951,13 +2959,251 @@ const AidaChat = () => {
     );
 };
 
-// Stubs (se desarrollan en tareas siguientes: ClientsList/ClientProfile=T5, Wizard=T6+)
-const ClientsListView = ({ navigateTo }) => (
-    <div className="fade-in p-10 text-center text-slate-400">ClientsListView — próximamente</div>
+// ─── Clientes: lista ────────────────────────────────────────────────────────────
+const policiesOfClient = id => POLICIES_DATA.filter(p => p.clientId === id);
+
+const ClientsListView = ({ navigateTo }) => {
+    const lang = useLang();
+    const t = T[lang];
+    const [q, setQ] = useState('');
+    const rows = CLIENTS_DATA.filter(c => !q || c.name.toLowerCase().includes(q.toLowerCase()));
+
+    return (
+        <div className="fade-in">
+            <div className="flex justify-between items-center mb-5">
+                <h1 className="text-5xl font-bold text-slate-800 tracking-tight font-display">{t.tabClients}</h1>
+                <button onClick={() => navigateTo('client-profile', { clientId: 'new' })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newClient}</button>
+            </div>
+
+            <AiSearchBar />
+
+            <div className="flex items-center gap-3 mb-5 flex-wrap">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.filters}</span>
+                <div className={`flex items-center gap-2 border rounded-lg pl-3 pr-4 py-2 bg-white transition-colors ${q ? 'border-brand-400 bg-brand-50' : 'border-slate-200 hover:border-slate-300'}`}>
+                    <Icons.Search className="text-slate-400" size={14} />
+                    <input type="text" value={q} onChange={e => setQ(e.target.value)} placeholder={t.customer}
+                        className="text-sm bg-transparent border-none outline-none text-slate-700 w-32 placeholder-slate-400" />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {rows.map(c => (
+                    <div key={c.id} onClick={() => navigateTo('client-profile', { clientId: c.id })}
+                        className="bg-white rounded-2xl border border-slate-200/70 shadow-soft hover:shadow-soft-hover transition-all duration-300 p-5 cursor-pointer group">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-base font-bold">
+                                {c.firstName[0]}{c.lastName[0]}
+                            </div>
+                            <div className="min-w-0">
+                                <p className="font-semibold text-slate-800 group-hover:text-brand-700 truncate">{c.name}</p>
+                                <p className="text-xs text-slate-400">{c.city}, {c.state} · {c.zip}</p>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 text-center border-t border-slate-100 pt-3">
+                            <div><p className="text-lg font-bold font-data text-brand-700">{policiesOfClient(c.id).length}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickPolicies}</p></div>
+                            <div><p className="text-lg font-bold font-data text-slate-700">{c.householdSize}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickHousehold}</p></div>
+                            <div><p className="text-lg font-bold font-data text-emerald-600">{c.income}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickIncome}</p></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+// ─── Clientes: perfil (Datos primero) ───────────────────────────────────────────
+const DataSection = ({ num, title, tag, tagColor, children }) => (
+    <Card className="mb-3">
+        <div className="flex items-center gap-2 mb-3">
+            <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">{num} {title}</span>
+            {tag && <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-md ${tagColor}`}>{tag}</span>}
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">{children}</div>
+    </Card>
 );
-const ClientProfileView = ({ navigateTo, clientId }) => (
-    <div className="fade-in p-10 text-center text-slate-400">ClientProfileView ({clientId}) — próximamente</div>
-);
+
+const ClientProfileView = ({ navigateTo, clientId }) => {
+    const lang = useLang();
+    const t = T[lang];
+    const [activeTab, setActiveTab] = useState('data');
+    const [showMore, setShowMore] = useState(false);
+    const c = getClient(clientId);
+
+    if (!c) {
+        // clientId === 'new' u otro: alta de cliente (placeholder de formulario)
+        return (
+            <div className="fade-in max-w-2xl">
+                <button onClick={() => navigateTo('clients')} className="flex items-center gap-2 text-slate-500 hover:text-brand-600 transition-colors mb-6 font-medium">
+                    <Icons.ChevronDown className="rotate-90" size={16} /> {t.tabClients}
+                </button>
+                <h1 className="text-3xl font-bold text-slate-800 font-display mb-6">{t.newClientShort}</h1>
+                <Card>
+                    <div className="grid grid-cols-2 gap-4">
+                        {['Nombre','Apellido','Teléfono','Email','ZIP','County'].map(f => (
+                            <div key={f}><label className="block text-xs text-slate-400 uppercase tracking-wider mb-1">{f}</label>
+                                <input className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400" /></div>
+                        ))}
+                    </div>
+                    <AidaHint>Con el ZIP/County podré cotizar planes ACA en este condado. El hogar se agrega tras crear el cliente.</AidaHint>
+                    <button className="mt-4 bg-brand-500 text-white px-5 py-2.5 rounded-lg font-medium shadow-soft">{t.submit}</button>
+                </Card>
+            </div>
+        );
+    }
+
+    const QF = ({ label, value, color }) => (
+        <div className="flex items-center justify-between text-sm">
+            <span className="text-slate-400">{label}</span><span className={`font-semibold ${color || 'text-slate-700'}`}>{value}</span>
+        </div>
+    );
+
+    const TABS = [
+        { id: 'data',      label: t.dataTab },
+        { id: 'policies',  label: t.tabPolicies },
+        { id: 'household', label: t.household },
+        { id: 'payments',  label: t.paymentsTab },
+        { id: 'documents', label: t.documents },
+    ];
+
+    return (
+        <div className="fade-in">
+            <button onClick={() => navigateTo('clients')} className="flex items-center gap-2 text-slate-500 hover:text-brand-600 transition-colors mb-6 font-medium">
+                <Icons.ChevronDown className="rotate-90" size={16} /> {t.tabClients}
+            </button>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
+                {/* Sidebar */}
+                <div>
+                    <Card>
+                        <div className="text-center">
+                            <div className="w-16 h-16 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-xl font-bold mx-auto mb-2">{c.firstName[0]}{c.lastName[0]}</div>
+                            <p className="font-bold text-slate-800">{c.name}</p>
+                            <p className="text-xs text-slate-400 mb-4">Cliente desde {c.since}</p>
+                        </div>
+                        <div className="border-t border-slate-100 pt-3 space-y-2">
+                            <QF label={t.quickPolicies} value={policiesOfClient(c.id).length} />
+                            <QF label={t.quickHousehold} value={`${c.householdSize}`} />
+                            <QF label={t.quickIncome} value={c.income} color="text-emerald-600" />
+                            <QF label={t.quickFpl} value={c.fpl} />
+                            <QF label={t.quickAgent} value={c.agent} />
+                        </div>
+                        <button onClick={() => navigateTo('policy-wizard', { step: 1, clientId: c.id })} className="w-full mt-4 bg-brand-500 text-white py-2 rounded-lg font-medium shadow-soft hover:bg-brand-600 transition-colors text-sm">{t.newPolicyFor}</button>
+                        <button className="w-full mt-2 border border-slate-200 text-slate-600 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors text-sm">{t.editClient}</button>
+                    </Card>
+                </div>
+
+                {/* Main */}
+                <div>
+                    <div className="flex gap-1 border-b border-slate-200 mb-5 flex-wrap">
+                        {TABS.map(tb => (
+                            <button key={tb.id} onClick={() => setActiveTab(tb.id)}
+                                className={`px-4 py-2.5 text-sm font-semibold transition-colors border-b-2 -mb-px ${activeTab === tb.id ? 'border-brand-500 text-brand-700' : 'border-transparent text-slate-400 hover:text-slate-600'}`}>
+                                {tb.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    {activeTab === 'data' && (
+                        <div>
+                            <DataSection num="①" title={t.secIdentity}>
+                                <InfoField label="Nombre" value={c.name} />
+                                <InfoField label={t.dobShort} value={c.dob} />
+                                <InfoField label={t.phone} value={c.phone} />
+                                <InfoField label={t.email} value={c.email} />
+                                <InfoField label="Idioma" value={c.language} />
+                                <InfoField label="Estado civil" value={c.maritalStatus} />
+                            </DataSection>
+                            <DataSection num="②" title={t.secLocation} tag={t.secLocationTag} tagColor="bg-amber-100 text-amber-700">
+                                <InfoField label={t.city} value={`${c.city}, ${c.state}`} />
+                                <InfoField label="County" value={c.county} />
+                                <InfoField label="ZIP" value={c.zip} />
+                            </DataSection>
+                            <DataSection num="③" title={t.secHousehold} tag={t.secHouseholdTag} tagColor="bg-emerald-100 text-emerald-700">
+                                <InfoField label={t.quickHousehold} value={`${c.householdSize}`} />
+                                <InfoField label="Family group income" value={c.income} />
+                                <InfoField label="Income group / FPL" value={c.fpl} />
+                                <InfoField label={t.seeksCoverage} value={`${c.applicants}`} />
+                            </DataSection>
+                            <DataSection num="④" title={t.secEligibility}>
+                                <InfoField label="SSN" value={c.ssn} />
+                                <InfoField label="Immigration" value={c.immigration} />
+                                <InfoField label="Smoker" value={c.smoker} />
+                                <InfoField label="Gender" value={c.gender} />
+                            </DataSection>
+                            <button onClick={() => setShowMore(!showMore)} className="w-full text-left bg-white rounded-2xl border border-dashed border-slate-300 px-5 py-3 text-sm text-slate-400 hover:bg-slate-50 transition-colors">
+                                {showMore ? '⌃' : '⌄'} {t.secMore} <span className="text-xs">{t.secMoreNote}</span>
+                            </button>
+                            {showMore && (
+                                <Card className="mt-3">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
+                                        <InfoField label="País de nacimiento" value={c.countryOfBirth} />
+                                        <InfoField label="Apartment" value="—" />
+                                        <InfoField label="Height" value="—" />
+                                        <InfoField label="Weight" value="—" />
+                                    </div>
+                                </Card>
+                            )}
+                        </div>
+                    )}
+
+                    {activeTab === 'policies' && (
+                        <div className="space-y-3">
+                            {policiesOfClient(c.id).map(p => (
+                                <Card key={p.id} className="flex items-center justify-between cursor-pointer hover:shadow-soft-hover" >
+                                    <div onClick={() => navigateTo('policy-detail', { policyId: p.id })} className="flex-1">
+                                        <p className="font-semibold text-slate-800">{p.carrier} · {p.plan || t.noPlan}</p>
+                                        <p className="text-xs text-slate-400 mt-1">{p.effectiveDate} · APTC {p.aptc}</p>
+                                    </div>
+                                    <div className="flex items-center gap-3"><StageBadge stage={p.stage} />
+                                        <button onClick={() => navigateTo('policy-detail', { policyId: p.id })} className="text-xs font-semibold border border-brand-400 text-brand-600 rounded-md px-3 py-1.5 hover:bg-brand-50">Abrir ›</button>
+                                    </div>
+                                </Card>
+                            ))}
+                            {policiesOfClient(c.id).length === 0 && <p className="text-slate-400 text-sm p-6">Sin pólizas.</p>}
+                        </div>
+                    )}
+
+                    {activeTab === 'household' && (
+                        <Card>
+                            <div className="flex justify-between items-center mb-4">
+                                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{t.household}</span>
+                                <button className="text-xs font-semibold border border-brand-400 text-brand-600 rounded-md px-3 py-1.5 hover:bg-brand-50">{t.addMember}</button>
+                            </div>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-sm">
+                                    <thead><tr className="text-[11px] text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                                        <th className="text-left py-2 font-semibold">{t.member}</th>
+                                        <th className="text-left py-2 font-semibold">{t.relation}</th>
+                                        <th className="text-left py-2 font-semibold">{t.dobShort}</th>
+                                        <th className="text-center py-2 font-semibold">{t.taxHousehold}</th>
+                                        <th className="text-center py-2 font-semibold">{t.seeksCoverage}</th>
+                                    </tr></thead>
+                                    <tbody>
+                                        {c.household.map((m, i) => (
+                                            <tr key={i} className="border-b border-slate-50">
+                                                <td className="py-3 font-medium text-slate-800">{m.name}</td>
+                                                <td className="py-3 text-slate-600">{m.relation}</td>
+                                                <td className="py-3 text-slate-600">{m.dob}</td>
+                                                <td className="py-3 text-center">{m.taxHousehold ? <span className="text-emerald-600">✓</span> : <span className="text-slate-300">—</span>}</td>
+                                                <td className="py-3 text-center">{m.seeksCoverage ? <span className="text-emerald-600">✓</span> : <span className="text-slate-300">—</span>}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="mt-4"><AidaHint>Cada miembro tiene dos flags independientes: puede estar en el household tributario sin solicitar cobertura, y viceversa.</AidaHint></div>
+                        </Card>
+                    )}
+
+                    {(activeTab === 'payments' || activeTab === 'documents') && (
+                        <Card><p className="text-slate-400 text-sm p-6 text-center">{activeTab === 'payments' ? t.paymentsTab : t.documents} — próximamente</p></Card>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const PolicyWizardView = ({ navigateTo, viewParams }) => (
     <div className="fade-in p-10 text-center text-slate-400">PolicyWizardView (paso {viewParams?.step}) — próximamente</div>
 );
