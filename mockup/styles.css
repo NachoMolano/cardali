@@ -1,3 +1,11 @@
+/* Escala global al 90%: la página se diseñó viéndose ideal a 90% de zoom,
+   así que reducimos el rem raíz (16px → 14.4px) para que 100% se vea igual.
+   Todo lo dimensionado en rem (texto, paddings, gaps, anchos de Tailwind)
+   escala proporcionalmente. */
+html {
+    font-size: 14.4px;
+}
+
 :root {
     --brand-50:  #f0fdfa;
     --brand-100: #ccfbf1;
@@ -23,22 +31,22 @@ body.agency-mode {
 }
 
 body {
-    background-color: #e2e8f0;
-    background-image:
-        radial-gradient(at 0% 0%, hsla(180, 100%, 94%, 0.6) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, hsla(210, 100%, 92%, 0.6) 0px, transparent 50%),
-        radial-gradient(at 50% 100%, hsla(160, 100%, 94%, 0.6) 0px, transparent 50%);
-    background-attachment: fixed;
+    /* Fondo gris plano fijo — sin degradés, igual en ambos modos */
+    background-color: #FAFAFA;
     color: #1e293b;
-    transition: background-color 0.4s ease;
 }
 
-body.agency-mode {
-    background-color: #dce8f5;
-    background-image:
-        radial-gradient(at 0% 0%, hsla(214, 100%, 90%, 0.7) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, hsla(225, 100%, 88%, 0.6) 0px, transparent 50%),
-        radial-gradient(at 50% 100%, hsla(210, 100%, 86%, 0.6) 0px, transparent 50%);
+/* Difuminado progresivo del navbar: la capa de blur se extiende por debajo
+   de la barra y se desvanece con una máscara, evitando un corte recto */
+.nav-blur {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: linear-gradient(to bottom,
+        rgba(250, 250, 250, 0.9) 0%,
+        rgba(250, 250, 250, 0.65) 55%,
+        rgba(250, 250, 250, 0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 100%);
 }
 
 ::-webkit-scrollbar {
@@ -50,7 +58,7 @@ body.agency-mode {
 }
 ::-webkit-scrollbar-thumb {
     background: #cbd5e1;
-    border-radius: 10px;
+    border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
@@ -58,8 +66,8 @@ body.agency-mode {
 
 .folder-tab {
     position: relative;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     margin-right: 4px;
     transition: all 0.2s ease-in-out;
 }
@@ -116,3 +124,16 @@ body.agency-mode {
     50%       { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(147,197,253,0.25); }
 }
 .ai-pulse-border { animation: ai-pulse-border 2s ease-in-out infinite; }
+
+/* Tooltip del badge [+x] de estados extra (StatePills):
+   se muestra el listado completo al hacer hover */
+.state-tooltip { display: none; }
+.state-more:hover .state-tooltip { display: flex; }
+
+/* Grid del dashboard con filas de altura fija: cada tarjeta declara cuántas
+   columnas (col-span-N) y filas (row-span-N) ocupa. Ajustar --dash-row
+   cambia el grosor de TODAS las filas proporcionalmente. */
+.dash-grid {
+    --dash-row: 11.5rem;
+    grid-auto-rows: var(--dash-row);
+}

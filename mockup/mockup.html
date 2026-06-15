@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aidgency</title>
 
-    <!-- Fuentes: Instrument Sans & Red Hat Text -->
+    <!-- Fuentes: Instrument Sans (UI base), Google Sans (títulos), Inter (datos/tablas), Red Hat Text (legacy) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Google+Sans:wght@400;500;700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,6 +18,8 @@
                 extend: {
                     fontFamily: {
                         sans: ['"Instrument Sans"', 'sans-serif'],
+                        display: ['"Google Sans"', '"Instrument Sans"', 'sans-serif'],
+                        data: ['"Inter"', 'sans-serif'],
                         serif: ['"Red Hat Text"', 'serif'],
                     },
                     colors: {
