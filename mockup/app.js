@@ -3362,10 +3362,100 @@ const StepQuoting = ({ t, client }) => {
         </div>
     );
 };
-const StepEligibility = (p) => <StepPlaceholder title="Paso 4 · Eligibility" />;
-const StepDocuments   = (p) => <StepPlaceholder title="Paso 5 · Documentos" />;
-const StepEnrollment  = (p) => <StepPlaceholder title="Paso 6 · Enrollment" />;
-const StepBinder      = (p) => <StepPlaceholder title="Paso 7 · Binder" />;
+const StepEligibility = ({ t, client }) => {
+    const c = client || CLIENTS_DATA[2];
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 p-6">
+            <div>
+                <div className="mb-4"><AidaHint>Prellené esta aplicación con los datos del cliente y el quoting. Revisa y confirma.</AidaHint></div>
+                <NestedCard title="Hogar e ingresos" className="mb-3">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                        <InfoField label="Tamaño del hogar" value={`${c.householdSize} personas`} />
+                        <InfoField label="Solicitantes de cobertura" value={`${c.applicants}`} />
+                        <InfoField label="Ingreso anual del hogar" value={c.income} />
+                        <InfoField label="% del FPL" value={`${c.fpl} · califica APTC+CSR`} />
+                    </div>
+                </NestedCard>
+                <NestedCard title="Miembros del hogar">
+                    <div className="text-sm text-slate-600 space-y-1.5">
+                        {c.household.map((m, i) => <p key={i}>{m.name} · {m.relation}{m.seeksCoverage ? ' · solicita cobertura' : ''}</p>)}
+                    </div>
+                </NestedCard>
+            </div>
+            <div>
+                <NestedCard title="Determinación (estimada)" className="mb-3">
+                    <p className="text-xs text-slate-400">APTC mensual</p>
+                    <p className="text-2xl font-bold text-brand-700 font-data">{c.fpl === '160%' ? '$610' : '$420'}/mo</p>
+                    <p className="text-xs text-slate-400 mt-2">Nivel CSR</p>
+                    <p className="text-base font-bold text-sky-700">CSR 87% (Silver)</p>
+                    <p className="text-[11px] text-slate-400 mt-2">Cifra oficial tras enviar la aplicación al Marketplace.</p>
+                </NestedCard>
+                <NestedCard title="✦ Validación de Aida">
+                    <p className="text-sm text-emerald-600 mb-1.5">✓ Ingreso coherente con household</p>
+                    <p className="text-sm text-emerald-600 mb-1.5">✓ SSN del titular presente</p>
+                    <p className="text-sm text-amber-700">⚠ Posible Data Matching Issue: verifica el ingreso (difiere de IRS). Adjunta comprobante en Documentos.</p>
+                </NestedCard>
+            </div>
+        </div>
+    );
+};
+const StepDocuments = ({ t }) => {
+    const docs = [
+        { name: 'State ID — titular', badge: 'verified' },
+        { name: 'Comprobante de ingreso', badge: 'flagged', label: 'AI Flagged: difiere de IRS' },
+        { name: 'Employment Authorization', badge: 'pending' },
+    ];
+    return (
+        <div className="p-6 max-w-3xl">
+            <NestedCard title="Documentos legales (revisión Aida)">
+                {docs.map((d, i) => (
+                    <div key={i} className="flex items-center justify-between py-3 border-b border-slate-50 last:border-0">
+                        <span className="text-sm text-slate-700">{d.name}</span>
+                        {d.badge === 'pending'
+                            ? <span className="text-xs text-slate-400">⏳ Pendiente de subir</span>
+                            : <AiBadge type={d.badge} label={d.label} />}
+                    </div>
+                ))}
+                <button className="mt-4 text-xs font-semibold border border-brand-400 text-brand-600 rounded-md px-3 py-2 hover:bg-brand-50">+ Subir documento</button>
+            </NestedCard>
+        </div>
+    );
+};
+const StepEnrollment = ({ t }) => (
+    <div className="p-6 max-w-2xl">
+        <NestedCard title="Enrollment — HealthSherpa">
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                Aidgency lanza el flujo de enrollment de HealthSherpa con la aplicación prellenada.
+                Al completarlo, los datos vuelven a la póliza automáticamente (webhook). No hay que recapturar nada.
+            </p>
+            <button className="bg-brand-500 text-white px-5 py-2.5 rounded-lg font-medium shadow-soft hover:bg-brand-600 transition-colors text-sm">
+                Lanzar enrollment prellenado ↗
+            </button>
+            <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
+                <span className="inline-block w-2 h-2 rounded-full bg-amber-400" /> Esperando confirmación del webhook…
+            </div>
+            <div className="mt-4"><AidaHint>Te aviso en cuanto HealthSherpa confirme el enrollment y sincronice los datos. Backend-agnóstico: el día que Aidgency tenga su propio EDE, esto será 100% in-line.</AidaHint></div>
+        </NestedCard>
+    </div>
+);
+const StepBinder = ({ t }) => (
+    <div className="p-6 max-w-2xl">
+        <NestedCard title="Binder payment — activar cobertura">
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                Registro del pago de la primera prima (a la aseguradora) que <strong>efectúa</strong> la cobertura.
+                Debe pagarse máximo 30 días tras la fecha efectiva.
+            </p>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+                <InfoField label="Prima del primer mes" value="$42.00" />
+                <InfoField label="Fecha límite" value="31-Ene-2027" />
+            </div>
+            <button className="bg-brand-500 text-white px-5 py-2.5 rounded-lg font-medium shadow-soft hover:bg-brand-600 transition-colors text-sm">
+                Registrar pago y activar póliza ✓
+            </button>
+            <div className="mt-4"><AidaHint>Si el APTC cubre el 100% de la prima, no hace falta binder payment: la póliza se efectúa sola.</AidaHint></div>
+        </NestedCard>
+    </div>
+);
 
 const PolicyWizardView = ({ navigateTo, viewParams }) => {
     const lang = useLang();
