@@ -24,7 +24,7 @@ Decisiones de diseño ancladas en investigación verificada (ver memoria `aca-me
 
 ## 3. Estructura de la sección
 
-Dos pestañas: **Pólizas** y **Clientes** (separan la venta del cliente).
+**Clientes es una sección de nivel superior en el navbar** (Overview · Contracts · Policies · **Clients**), no una sub-pestaña dentro de Pólizas (decisión del 2026-06-15, cambia el diseño inicial de sub-pestañas). Pólizas y Clientes son secciones hermanas que separan la venta del cliente.
 
 ### 3.1 Pestaña Pólizas
 - Filtro de estado con **tarjetas KPI cuadradas** (mismo componente que Contratos, constancia visual), ordenadas izq→der según el pipeline: `Quoting` · `Eligibility` · `Documents` · `Enrollment` · `Active` (+ estados de firma existentes). **Decisión transversal:** Contratos también pasa a estas tarjetas (hoy son rectangulares anchas) — aplicar en la fase de materialización. Las tarjetas son de **tamaño fijo "casi cuadrado" (~124×104), idéntico en ambas secciones** (no columnas elásticas); se alinean a la izquierda y envuelven en pantallas estrechas.

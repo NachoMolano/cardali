@@ -2103,15 +2103,27 @@ const PolicyFilterPill = ({ label, value, onChange, options }) => (
     </div>
 );
 
+// Buckets del pipeline (orden canónico) para el filtro de la lista de pólizas
+const POLICY_STAGES = ['Quoting', 'Eligibility', 'Documents', 'Enrollment', 'Active'];
+const STAGE_STYLES = {
+    Quoting:     { num: 'text-indigo-700',  badge: 'bg-indigo-100 text-indigo-700' },
+    Eligibility: { num: 'text-sky-700',     badge: 'bg-sky-100 text-sky-700' },
+    Documents:   { num: 'text-amber-700',   badge: 'bg-amber-100 text-amber-700' },
+    Enrollment:  { num: 'text-violet-700',  badge: 'bg-violet-100 text-violet-700' },
+    Active:      { num: 'text-brand-700',   badge: 'bg-brand-100 text-brand-700' },
+};
+const StageBadge = ({ stage }) => (
+    <span className={`px-2.5 py-0.5 rounded-md text-xs font-semibold whitespace-nowrap ${STAGE_STYLES[stage]?.badge || 'bg-slate-100 text-slate-600'}`}>
+        {stage}
+    </span>
+);
+
 const PoliciesView = ({ navigateTo, initialTab }) => {
     const lang = useLang();
     const t = T[lang];
     const mode = useMode();
     const isAgency = mode === 'agency';
     const [activeStatuses, setActiveStatuses] = useState(new Set());
-    const [openDropdown,   setOpenDropdown]   = useState(null);
-    const [colFilters,     setColFilters]      = useState({});
-    const [showModal,      setShowModal]       = useState(false);
     const [filterCustomer, setFilterCustomer]  = useState('');
     const [filterPolicy,   setFilterPolicy]    = useState('');
     const [filterCarrier,  setFilterCarrier]   = useState('');
@@ -2119,32 +2131,19 @@ const PoliciesView = ({ navigateTo, initialTab }) => {
 
     const POLICY_AGENTS = ['Ivan Diaz', 'Nacho Molano', 'Maria Santos', 'Pedro Gil', 'Carlos Cruz'];
 
-    const baseColumns = [
-        { key: 'customer',      label: t.customerCol,    options: [{ label: 'A → Z', value: 'asc' }, { label: 'Z → A', value: 'desc' }] },
-        { key: 'location',      label: t.locationCol,    options: [{ label: 'A → Z', value: 'asc' }, { label: 'Z → A', value: 'desc' }] },
-        { key: 'generalInfo',   label: t.generalInfoCol, options: POLICY_TYPES.map(p => ({ label: p, value: p })) },
-        { key: 'policy',        label: t.policyCol,      options: INSURANCE_COMPANIES.map(c => ({ label: c, value: c })) },
-        { key: 'effectiveDate', label: t.effDateCol,     options: [{ label: 'A → Z', value: 'asc' }, { label: 'Z → A', value: 'desc' }] },
-        { key: 'status',        label: t.statusCol,      options: STATUS_PILLS.map(s => ({ label: s, value: s })) },
-    ];
-    const columns = isAgency
-        ? [{ key: 'agent', label: t.agentCol, options: POLICY_AGENTS.map(a => ({ label: a, value: a })) }, ...baseColumns]
-        : baseColumns;
-
-    useEffect(() => {
-        const close = () => setOpenDropdown(null);
-        document.addEventListener('click', close);
-        return () => document.removeEventListener('click', close);
-    }, []);
-
     const toggleStatus = s => setActiveStatuses(prev => {
         const next = new Set(prev);
         next.has(s) ? next.delete(s) : next.add(s);
         return next;
     });
 
+    const stageCounts = POLICY_STAGES.reduce((acc, st) => {
+        acc[st] = POLICIES_DATA.filter(p => p.stage === st).length;
+        return acc;
+    }, {});
+
     const visibleRows = POLICIES_DATA.filter(row => {
-        if (activeStatuses.size > 0 && !activeStatuses.has(row.status)) return false;
+        if (activeStatuses.size > 0 && !activeStatuses.has(row.stage)) return false;
         if (filterCustomer && !row.customer.toLowerCase().includes(filterCustomer.toLowerCase())) return false;
         if (filterPolicy && row.policy !== filterPolicy) return false;
         if (filterCarrier && row.carrier !== filterCarrier) return false;
@@ -2152,160 +2151,113 @@ const PoliciesView = ({ navigateTo, initialTab }) => {
         return true;
     });
 
+    const isAca = p => /ACA|Marketplace/i.test(p.policy);
+
     return (
         <div className="fade-in">
-            {showModal && <NewPolicyModal onClose={() => setShowModal(false)} />}
-
             <div className="flex justify-between items-center mb-5">
                 <h1 className="text-5xl font-bold text-slate-800 tracking-tight font-display">{isAgency ? t.agencyPolicies : t.myPolicies}</h1>
-                <button onClick={() => setShowModal(true)} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">
-                    {t.newPolicy}
-                </button>
+                <button onClick={() => navigateTo('policy-wizard', { step: 1 })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newPolicy}</button>
             </div>
 
-            <AiSearchBar />
+            <StatusFilterCards
+                    active={activeStatuses}
+                    onToggle={toggleStatus}
+                    items={POLICY_STAGES.map(st => ({ key: st, label: t['stage' + st] || st, count: stageCounts[st], color: STAGE_STYLES[st]?.num }))}
+                />
 
-            <div className="flex items-center gap-3 mb-5 flex-wrap">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.filters}</span>
-                <div className={`flex items-center gap-2 border rounded-lg pl-3 pr-4 py-2 bg-white transition-colors
-                    ${filterCustomer ? 'border-brand-400 bg-brand-50' : 'border-slate-200 hover:border-slate-300'}`}>
-                    <Icons.Search className="text-slate-400" size={14} />
-                    <input type="text" value={filterCustomer} onChange={e => setFilterCustomer(e.target.value)}
-                        placeholder={t.customer}
-                        className="text-sm bg-transparent border-none outline-none text-slate-700 w-32 placeholder-slate-400" />
-                </div>
-                <PolicyFilterPill label={t.policyType} value={filterPolicy}  onChange={setFilterPolicy}  options={POLICY_TYPES} />
-                <PolicyFilterPill label={t.carrier}    value={filterCarrier} onChange={setFilterCarrier} options={INSURANCE_COMPANIES} />
-                {isAgency && (
-                    <PolicyFilterPill label={t.agentFilter} value={filterAgent} onChange={setFilterAgent} options={POLICY_AGENTS} />
-                )}
-                {(filterCustomer || filterPolicy || filterCarrier || filterAgent) && (
-                    <button onClick={() => { setFilterCustomer(''); setFilterPolicy(''); setFilterCarrier(''); setFilterAgent(''); }}
-                        className="text-xs text-slate-400 underline hover:text-slate-600 transition-colors">
-                        {t.clearFilters}
-                    </button>
-                )}
-            </div>
+                <AiSearchBar />
 
-            <Card noPadding>
-                <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-slate-100">
-                    <span className="text-sm font-semibold text-slate-500">{t.listPolicies}</span>
-                    <div className="flex gap-2 flex-wrap justify-end">
-                        {STATUS_PILLS.map(s => (
-                            <button key={s} onClick={() => toggleStatus(s)}
-                                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap
-                                    ${activeStatuses.has(s) ? 'bg-brand-500 text-white shadow-sm' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>
-                                {s}
-                            </button>
-                        ))}
+                <div className="flex items-center gap-3 mb-5 flex-wrap">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.filters}</span>
+                    <div className={`flex items-center gap-2 border rounded-lg pl-3 pr-4 py-2 bg-white transition-colors
+                        ${filterCustomer ? 'border-brand-400 bg-brand-50' : 'border-slate-200 hover:border-slate-300'}`}>
+                        <Icons.Search className="text-slate-400" size={14} />
+                        <input type="text" value={filterCustomer} onChange={e => setFilterCustomer(e.target.value)}
+                            placeholder={t.customer}
+                            className="text-sm bg-transparent border-none outline-none text-slate-700 w-32 placeholder-slate-400" />
                     </div>
+                    <PolicyFilterPill label={t.policyType} value={filterPolicy}  onChange={setFilterPolicy}  options={POLICY_TYPES} />
+                    <PolicyFilterPill label={t.carrier}    value={filterCarrier} onChange={setFilterCarrier} options={INSURANCE_COMPANIES} />
+                    {isAgency && (
+                        <PolicyFilterPill label={t.agentFilter} value={filterAgent} onChange={setFilterAgent} options={POLICY_AGENTS} />
+                    )}
+                    {(filterCustomer || filterPolicy || filterCarrier || filterAgent) && (
+                        <button onClick={() => { setFilterCustomer(''); setFilterPolicy(''); setFilterCarrier(''); setFilterAgent(''); }}
+                            className="text-xs text-slate-400 underline hover:text-slate-600 transition-colors">
+                            {t.clearFilters}
+                        </button>
+                    )}
                 </div>
 
-                <div className="overflow-x-auto rounded-b-xl">
-                    <table className="w-full text-left border-collapse font-data">
-                        <thead>
-                            <tr className="border-b border-slate-100 text-slate-500 text-sm">
-                                {columns.map(col => (
-                                    <ColDropdown key={col.key} col={col}
-                                        open={openDropdown === col.key}
-                                        onToggle={k => setOpenDropdown(openDropdown === k ? null : k)}
-                                        onSelect={(k, v) => { setColFilters(p => ({ ...p, [k]: v })); setOpenDropdown(null); }}
-                                        activeFilter={colFilters[col.key] ?? null}
-                                    />
-                                ))}
-                                <th className="p-5 font-semibold text-slate-500 text-sm">
-                                    <div className="flex items-center justify-end gap-2">
-                                        <span>{t.editCol}</span>
-                                        <input type="checkbox" onClick={e => e.stopPropagation()}
-                                            className="w-4 h-4 rounded-md border-slate-300 cursor-pointer accent-brand-500" />
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {visibleRows.map((row, i) => {
-                                const refBadgeLabel = row.referralType === 'NPN Override' ? t.npnOverrideBadge
-                                                    : row.referralType === 'Direct'        ? t.directBadge
-                                                    :                                        t.referralBadge;
-                                const refBadgeClass = row.referralType === 'NPN Override' ? 'bg-amber-100 text-amber-700'
-                                                    : row.referralType === 'Direct'        ? 'bg-slate-100 text-slate-600'
-                                                    :                                        'bg-rose-100 text-rose-700';
-                                const subsidyAmount = row.subsidy && row.subsidy !== '$0.00' ? row.subsidy : row.familyIncome;
-                                const subsidyTag = row.incomeGroup && row.incomeGroup !== 'N/A' && row.incomeGroup !== 'Medicare'
-                                                    ? row.incomeGroup
-                                                    : (row.subsidy === '$0.00' ? t.noSubsidy : '');
-                                const stateName = row.state || row.location.split(',')[0];
-                                const Dot = ({ ok }) => (
-                                    <span className={`inline-block w-2 h-2 rounded-full ml-1 ${ok ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-                                );
-                                const statusLabel = row.status === 'Waiting' ? t.waitingOnAgent : row.status;
-                                return (
-                                <tr key={i} onClick={() => navigateTo('policy-detail', { policyId: row.id })}
-                                    className="border-b border-slate-50 hover:bg-brand-50/50 transition-colors cursor-pointer group">
-                                    {isAgency && (
-                                        <td className="p-5 align-top">
-                                            <p className="text-brand-600 font-semibold text-sm">{row.agentLicense || row.npn}</p>
-                                            <div className="flex flex-col items-start gap-1 mt-2">
-                                                <div className="w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">
-                                                    {(row.agent || '?').charAt(0).toUpperCase()}
-                                                </div>
-                                                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-md ${refBadgeClass}`}>{refBadgeLabel}</span>
-                                            </div>
-                                        </td>
-                                    )}
-                                    <td className="p-5 align-top">
-                                        <p className="font-semibold text-brand-600 group-hover:text-brand-700 text-sm">{row.customer}</p>
-                                        <p className="text-xs text-slate-500 mt-1">{row.phone}</p>
-                                        <p className="text-xs text-slate-400 mt-0.5 uppercase truncate max-w-[180px]">{row.email}</p>
-                                    </td>
-                                    <td className="p-5 align-top text-slate-600 text-sm">
-                                        <div className="flex items-center gap-1 text-slate-700">
-                                            <Icons.MapPin size={12} />
-                                            <span className="font-medium">{stateName}</span>
-                                        </div>
-                                        <p className="text-xs text-slate-400 mt-1">{row.zip || ''}</p>
-                                    </td>
-                                    <td className="p-5 align-top text-sm">
-                                        <p className="text-slate-700">{row.policyShort || row.policy}</p>
-                                        <p className="text-slate-600 mt-1">
-                                            <span className="font-semibold">{row.subsidy && row.subsidy !== '$0.00' ? row.subsidy : `$ ${row.familyIncome?.replace('$','')}`}</span>
-                                            {subsidyTag && <span className="text-rose-500 ml-1">{subsidyTag}</span>}
-                                        </p>
-                                    </td>
-                                    <td className="p-5 align-top text-sm">
-                                        <p className="font-bold text-brand-600 leading-tight">{row.carrierShort || row.carrier}</p>
-                                        <p className="text-slate-700 mt-1">{row.planShort}</p>
-                                        <p className="text-slate-500 text-xs mt-1">{t.insured} {row.insuredCount || 1}</p>
-                                    </td>
-                                    <td className="p-5 align-top text-slate-600 text-sm">{row.effectiveDate}</td>
-                                    <td className="p-5 align-top">
-                                        <Badge variant={statusBadgeVariant(row.status)}>{statusLabel}</Badge>
-                                        <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] text-slate-500">
-                                            <span className="flex items-center">Con:<Dot ok={row.progress?.consent} /></span>
-                                            <span className="flex items-center">Eli:<Dot ok={row.progress?.eligibility} /></span>
-                                            <span className="flex items-center">Doc:<Dot ok={row.progress?.documents} /></span>
-                                            <span className="flex items-center">Pmt:<Dot ok={row.progress?.payment} /></span>
-                                        </div>
-                                    </td>
-                                    <td className="p-5 align-top">
-                                        <div className="flex flex-col items-end gap-2" onClick={e => e.stopPropagation()}>
-                                            <button className="text-slate-400 hover:text-slate-700 transition-colors flex items-center gap-1">
-                                                <Icons.GridMenu size={14} />
-                                                <Icons.ChevronDown size={10} />
-                                            </button>
-                                            <input type="checkbox"
-                                                className="w-4 h-4 rounded-md border-slate-300 cursor-pointer accent-brand-500" />
-                                        </div>
-                                    </td>
+                <Card noPadding>
+                    <div className="overflow-x-auto rounded-xl">
+                        <table className="w-full text-left border-collapse font-data">
+                            <thead>
+                                <tr className="border-b border-slate-100 text-slate-400 text-xs uppercase tracking-wider">
+                                    {isAgency && <th className="p-5 font-semibold">{t.agentCol}</th>}
+                                    <th className="p-5 font-semibold">{t.customerCol}</th>
+                                    <th className="p-5 font-semibold">{t.typeCol}</th>
+                                    <th className="p-5 font-semibold">{t.planCol}</th>
+                                    <th className="p-5 font-semibold">{t.aptcCol}</th>
+                                    <th className="p-5 font-semibold">{t.effDateCol}</th>
+                                    <th className="p-5 font-semibold">{t.statusCol}</th>
                                 </tr>
-                            );})}
-                            {visibleRows.length === 0 && (
-                                <tr><td colSpan={isAgency ? 8 : 7} className="p-10 text-center text-slate-400 text-sm">{t.noPolicies}</td></tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-            </Card>
+                            </thead>
+                            <tbody>
+                                {visibleRows.map((row, i) => {
+                                    const stateName = row.state || (row.location || '').split(',')[0];
+                                    const isDraft = row.stage === 'Quoting';
+                                    return (
+                                    <tr key={i} onClick={() => navigateTo('policy-detail', { policyId: row.id })}
+                                        className="border-b border-slate-50 hover:bg-brand-50/50 transition-colors cursor-pointer group text-sm">
+                                        {isAgency && (
+                                            <td className="p-5 align-top">
+                                                <p className="text-brand-600 font-semibold">{row.agentLicense || row.npn}</p>
+                                                <p className="text-xs text-slate-400 mt-1">{row.agent}</p>
+                                            </td>
+                                        )}
+                                        <td className="p-5 align-top">
+                                            <p className="font-semibold text-brand-600 group-hover:text-brand-700">{row.customer}</p>
+                                            <p className="text-xs text-slate-500 mt-1">{row.phone}</p>
+                                            <p className="text-xs text-slate-400 mt-0.5">{stateName} · {row.zip}</p>
+                                        </td>
+                                        <td className="p-5 align-top">
+                                            {isAca(row)
+                                                ? <span className="px-2 py-0.5 rounded-md text-xs font-semibold bg-blue-100 text-blue-700">ACA</span>
+                                                : <span className="px-2 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">{row.policyShort || row.policy}</span>}
+                                        </td>
+                                        <td className="p-5 align-top">
+                                            <p className="font-bold text-brand-600 leading-tight">{row.carrierShort || row.carrier}</p>
+                                            {row.plan
+                                                ? <p className="text-slate-700 mt-1">{row.plan}</p>
+                                                : <p className="text-slate-400 italic mt-1">{t.noPlan}</p>}
+                                        </td>
+                                        <td className="p-5 align-top">
+                                            <span className={`font-bold ${row.aptc && row.aptc !== '$0.00' ? 'text-brand-700' : 'text-slate-400'}`}>{row.aptc || '—'}</span>
+                                        </td>
+                                        <td className="p-5 align-top text-slate-600">{isDraft ? <span className="text-slate-300">—</span> : row.effectiveDate}</td>
+                                        <td className="p-5 align-top">
+                                            <div className="flex items-center gap-2">
+                                                <StageBadge stage={row.stage} />
+                                                {isDraft && (
+                                                    <button onClick={e => { e.stopPropagation(); navigateTo('policy-wizard', { step: 3, policyId: row.id }); }}
+                                                        className="text-xs font-semibold border border-brand-400 text-brand-600 rounded-md px-2.5 py-1 hover:bg-brand-50 transition-colors">
+                                                        {t.resume}
+                                                    </button>
+                                                )}
+                                            </div>
+                                            {isDraft && <p className="text-[11px] text-slate-400 mt-1.5">{t.draft}</p>}
+                                        </td>
+                                    </tr>
+                                );})}
+                                {visibleRows.length === 0 && (
+                                    <tr><td colSpan={isAgency ? 7 : 6} className="p-10 text-center text-slate-400 text-sm">{t.noPolicies}</td></tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </Card>
         </div>
     );
 };
@@ -2999,6 +2951,17 @@ const AidaChat = () => {
     );
 };
 
+// Stubs (se desarrollan en tareas siguientes: ClientsList/ClientProfile=T5, Wizard=T6+)
+const ClientsListView = ({ navigateTo }) => (
+    <div className="fade-in p-10 text-center text-slate-400">ClientsListView — próximamente</div>
+);
+const ClientProfileView = ({ navigateTo, clientId }) => (
+    <div className="fade-in p-10 text-center text-slate-400">ClientProfileView ({clientId}) — próximamente</div>
+);
+const PolicyWizardView = ({ navigateTo, viewParams }) => (
+    <div className="fade-in p-10 text-center text-slate-400">PolicyWizardView (paso {viewParams?.step}) — próximamente</div>
+);
+
 const App = () => {
     const [currentView, setCurrentView] = useState('dashboard');
     const [viewParams, setViewParams] = useState({});
@@ -3063,13 +3026,14 @@ const App = () => {
                             { id: 'dashboard', label: t.overview },
                             { id: 'contracts', label: t.contracts },
                             { id: 'policies',  label: t.policies },
+                            { id: 'clients',   label: t.tabClients },
                             ...(isAgency ? [{ id: 'my-agency', label: t.myAgency }] : []),
                         ].map(item => (
                             <button
                                 key={item.id}
                                 onClick={() => navigateTo(item.id)}
                                 className={`relative pb-0.5 font-medium text-[0.9375rem] transition-colors duration-200 whitespace-nowrap border-b-2
-                                    ${currentView === item.id || (item.id === 'contracts' && currentView === 'contract-detail') || (item.id === 'policies' && currentView === 'policy-detail') || (item.id === 'my-agency' && currentView === 'agent-profile')
+                                    ${currentView === item.id || (item.id === 'contracts' && currentView === 'contract-detail') || (item.id === 'policies' && (currentView === 'policy-detail' || currentView === 'policy-wizard')) || (item.id === 'clients' && currentView === 'client-profile') || (item.id === 'my-agency' && currentView === 'agent-profile')
                                         ? 'text-slate-900 border-brand-500'
                                         : 'text-slate-500 border-transparent hover:text-slate-800'
                                     }`}
@@ -3176,6 +3140,9 @@ const App = () => {
                     {currentView === 'contract-detail' && <ContractDetailView navigateTo={navigateTo} initialTab={viewParams.tab} />}
                     {currentView === 'policies' && <PoliciesView navigateTo={navigateTo} initialTab={viewParams.tab} />}
                     {currentView === 'policy-detail' && <PolicyDetailView navigateTo={navigateTo} initialTab={viewParams.tab} />}
+                    {currentView === 'policy-wizard' && <PolicyWizardView navigateTo={navigateTo} viewParams={viewParams} />}
+                    {currentView === 'clients' && <ClientsListView navigateTo={navigateTo} />}
+                    {currentView === 'client-profile' && <ClientProfileView navigateTo={navigateTo} clientId={viewParams.clientId} />}
                     {currentView === 'profile' && <ProfileView initialTab={viewParams.tab} />}
                     {currentView === 'my-agency' && <MyAgencyView navigateTo={navigateTo} />}
                     {currentView === 'agent-profile' && <AgentProfileView navigateTo={navigateTo} agentId={viewParams.agentId} />}
