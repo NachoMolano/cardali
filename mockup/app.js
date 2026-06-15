@@ -942,27 +942,19 @@ const ContractsView = ({ navigateTo, initialTab }) => {
             </div>
 
             {/* KPI cards — agency only */}
-            <div className="grid grid-cols-4 gap-4 mb-5">
-                {[
-                    { label: t.approved,         count: isAgency ? 312  : 8,  color: 'text-brand-700',  status: 'Approved'          },
-                    { label: t.inProgress,       count: isAgency ? 1571 : 24, color: 'text-blue-700',   status: 'In Progress'       },
-                    { label: t.rejected,         count: isAgency ? 3646 : 5,  color: 'text-red-700',    status: 'Rejected'          },
-                    { label: t.newStatus,        count: isAgency ? 35   : 3,  color: 'text-slate-600',  status: 'New'               },
-                    { label: t.releaseRequested, count: isAgency ? 13   : 2,  color: 'text-yellow-700', status: 'Release Requested' },
-                    { label: t.releaseRequired,  count: isAgency ? 57   : 4,  color: 'text-yellow-700', status: 'Release Required'  },
-                    { label: t.expired,          count: isAgency ? 42   : 6,  color: 'text-slate-600',  status: 'Expired'           },
-                ].map(kpi => (
-                    <button key={kpi.label}
-                        onClick={() => toggleStatus(kpi.status)}
-                        className={`text-center py-4 px-3 rounded-xl shadow-soft transition-all duration-200 hover:shadow-soft-hover
-                            ${activeStatuses.has(kpi.status)
-                                ? 'bg-white ring-2 ring-inset ring-brand-400'
-                                : 'bg-white hover:scale-[1.02]'}`}>
-                        <p className={`text-3xl font-bold font-data ${kpi.color}`}>{kpi.count.toLocaleString()}</p>
-                        <p className="text-xs text-slate-500 mt-1 font-medium">{kpi.label}</p>
-                    </button>
-                ))}
-            </div>
+            <StatusFilterCards
+                active={activeStatuses}
+                onToggle={toggleStatus}
+                items={[
+                    { key: 'Approved',          label: t.approved,         count: isAgency ? 312  : 8,  color: 'text-brand-700'  },
+                    { key: 'In Progress',       label: t.inProgress,       count: isAgency ? 1571 : 24, color: 'text-blue-700'   },
+                    { key: 'Rejected',          label: t.rejected,         count: isAgency ? 3646 : 5,  color: 'text-red-700'    },
+                    { key: 'New',               label: t.newStatus,        count: isAgency ? 35   : 3,  color: 'text-slate-600'  },
+                    { key: 'Release Requested', label: t.releaseRequested, count: isAgency ? 13   : 2,  color: 'text-yellow-700' },
+                    { key: 'Release Required',  label: t.releaseRequired,  count: isAgency ? 57   : 4,  color: 'text-yellow-700' },
+                    { key: 'Expired',           label: t.expired,          count: isAgency ? 42   : 6,  color: 'text-slate-600'  },
+                ]}
+            />
 
             <AiSearchBar />
 
