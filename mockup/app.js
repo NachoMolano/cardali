@@ -2279,40 +2279,35 @@ const InfoField = ({ label, value }) => (
     </div>
 );
 
-const PolicyDetailView = ({ navigateTo, initialTab }) => {
+const PolicyDetailView = ({ navigateTo, policyId, initialTab }) => {
     const [activeTab, setActiveTab] = useState(initialTab || 'summary');
     const lang = useLang();
     const t = T[lang];
-    const pol = POLICIES_DATA[0]; // use first policy as the demo record
+    const pol = POLICIES_DATA.find(p => p.id === policyId) || POLICIES_DATA[0];
+    const client = getClient(pol.clientId);
 
-    const PROGRESS_STEPS = ['Consent', 'No Eligibility', 'Pending Documents', 'Binder Payment Collected?'];
-    const currentStep = 1; // 0-indexed; "No Eligibility" is active
+    const PIPELINE = ['Quoting', 'Eligibility', 'Documents', 'Enrollment', 'Active'];
+    const currentStep = PIPELINE.indexOf(pol.stage);
+    const STAGE_TO_WIZARD = { Quoting: 3, Eligibility: 4, Documents: 5, Enrollment: 6 };
 
     const TABS = [
         { id: 'summary',     label: t.polSummary },
+        { id: 'plan',        label: 'Plan y subsidio' },
         { id: 'members',     label: t.polMembers },
+        { id: 'documents',   label: t.documents },
+        { id: 'enrollment',  label: t.wzEnrollment },
         { id: 'activities',  label: t.activities },
-        { id: 'signing',     label: t.docSigning },
-        { id: 'attachments', label: t.attachments },
-        { id: 'tracking',    label: t.tracking },
     ];
 
     const sidebarRows = [
-        { label: 'Policy No',          value: pol.id },
-        { label: 'Customer',           value: pol.customer },
-        { label: 'Agente',             value: pol.agent },
-        { label: 'Agency',             value: pol.agency },
-        { label: 'Policy Type',        value: pol.policy },
-        { label: 'Carrier',            value: pol.carrier },
-        { label: 'Monthly Payment',    value: pol.monthlyPayment },
-        { label: 'Effective Date',     value: pol.effectiveDate },
-        { label: 'Family Members',     value: pol.familyMembers },
-        { label: 'Family Income',      value: pol.familyIncome },
-        { label: 'Income Group',       value: pol.incomeGroup },
-        { label: 'Referral',           value: pol.referral },
-        { label: 'Referral Type',      value: pol.referralType },
-        { label: 'Created Date',       value: pol.createdDate },
-        { label: 'Last Update',        value: pol.lastUpdate },
+        { label: 'Nº póliza',     value: pol.id },
+        { label: t.customerCol,   value: pol.customer },
+        { label: t.carrier,       value: pol.carrier },
+        { label: 'Plan',          value: pol.plan || t.noPlan },
+        { label: 'APTC',          value: pol.aptc, accent: true },
+        { label: 'Prima neta',    value: pol.monthlyPayment },
+        { label: t.effDateCol,    value: pol.stage === 'Quoting' ? '—' : pol.effectiveDate },
+        { label: t.insured,       value: pol.insuredCount || 1 },
     ];
 
     return (
@@ -2323,37 +2318,61 @@ const PolicyDetailView = ({ navigateTo, initialTab }) => {
                 <Icons.ArrowLeft /> {t.backToPolicies}
             </button>
 
-            {/* Progress bar */}
-            <div className="flex mb-6 rounded-xl overflow-hidden shadow-soft">
-                {PROGRESS_STEPS.map((step, i) => {
-                    const isDone   = i < currentStep;
-                    const isActive = i === currentStep;
-                    const bg = isDone ? 'bg-brand-400' : isActive ? 'bg-brand-500' : 'bg-slate-100';
-                    const text = isDone || isActive ? 'text-white' : 'text-slate-400';
-                    return (
-                        <div key={i} className={`flex-1 text-center py-3 text-xs font-semibold tracking-wide ${bg} ${text} transition-colors`}>
-                            {isDone && '✓ '}{step}
-                        </div>
-                    );
-                })}
-            </div>
+            {/* Pipeline + resume CTA */}
+            <Card className="mb-6">
+                <div className="flex items-center">
+                    {PIPELINE.map((step, i) => {
+                        const done = i < currentStep, current = i === currentStep;
+                        return (
+                            <React.Fragment key={step}>
+                                <div className="flex flex-col items-center gap-1 shrink-0">
+                                    <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
+                                        ${done ? 'bg-brand-500 text-white' : current ? 'bg-brand-600 text-white ring-4 ring-brand-100' : 'bg-slate-100 text-slate-400'}`}>
+                                        {done ? '✓' : i + 1}
+                                    </span>
+                                    <span className={`text-[11px] font-medium ${current ? 'text-brand-700' : done ? 'text-slate-500' : 'text-slate-400'}`}>{step}</span>
+                                </div>
+                                {i < PIPELINE.length - 1 && <div className={`flex-1 h-0.5 mx-1 mb-5 ${done ? 'bg-brand-500' : 'bg-slate-200'}`} />}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+                {pol.stage !== 'Active' && (
+                    <div className="mt-4 flex items-center justify-between bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+                        <span className="text-sm text-amber-800">⏳ Esta póliza está en <strong>{pol.stage}</strong>. Continúa el proceso donde lo dejaste.</span>
+                        <button onClick={() => navigateTo('policy-wizard', { step: STAGE_TO_WIZARD[pol.stage] || 3, policyId: pol.id, clientId: pol.clientId })}
+                            className="bg-brand-500 text-white px-4 py-2 rounded-lg font-medium text-sm shadow-soft hover:bg-brand-600 transition-colors shrink-0 ml-3">
+                            {t.resume} en {pol.stage} ›
+                        </button>
+                    </div>
+                )}
+            </Card>
 
             {/* Body: sidebar + main */}
             <div className="flex flex-col md:flex-row gap-6">
                 {/* Sidebar */}
                 <div className="w-full md:w-72 flex-shrink-0 bg-white rounded-xl shadow-soft p-5 h-fit">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="font-bold text-slate-800 text-base">Policy Details</h2>
-                        <Badge variant={statusBadgeVariant(pol.status)}>{pol.status}</Badge>
+                        <h2 className="font-bold text-slate-800 text-base">Ficha</h2>
+                        <StageBadge stage={pol.stage} />
                     </div>
                     <div className="text-sm">
                         {sidebarRows.map(row => (
                             <div key={row.label} className="flex justify-between items-start py-2.5 border-b border-slate-100 last:border-0">
                                 <span className="text-slate-400 shrink-0 mr-2">{row.label}:</span>
-                                <span className="font-medium text-slate-700 text-right">{row.value}</span>
+                                <span className={`font-medium text-right ${row.accent ? 'text-brand-700 font-bold' : 'text-slate-700'}`}>{row.value}</span>
                             </div>
                         ))}
+                        <div className="flex justify-between items-center py-2.5">
+                            <span className="text-slate-400">Firma:</span>
+                            <Badge variant={statusBadgeVariant(pol.status)}>{pol.status}</Badge>
+                        </div>
                     </div>
+                    {client && (
+                        <button onClick={() => navigateTo('client-profile', { clientId: client.id })} className="mt-3 text-sm text-brand-600 font-medium hover:text-brand-700">
+                            {t.goToProfile} →
+                        </button>
+                    )}
                 </div>
 
                 {/* Main content */}
@@ -2474,9 +2493,63 @@ const PolicyDetailView = ({ navigateTo, initialTab }) => {
                         </div>
                     )}
 
-                    {activeTab !== 'summary' && (
+                    {activeTab === 'plan' && (
+                        <Card className="fade-in">
+                            <h3 className="text-base font-bold text-slate-700 mb-5">Plan y subsidio</h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-5">
+                                <InfoField label="Plan" value={`${pol.carrier} ${pol.plan || ''}`} />
+                                <InfoField label="Marketplace NPN" value={pol.npn} />
+                                <InfoField label="APTC mensual" value={pol.aptc} />
+                                <InfoField label="Prima neta" value={pol.monthlyPayment} />
+                                <InfoField label="Insurance Plan" value={pol.insurancePlan} />
+                                <InfoField label="Income group / FPL" value={client?.fpl || pol.incomeGroup} />
+                            </div>
+                        </Card>
+                    )}
+
+                    {activeTab === 'documents' && (
+                        <Card noPadding className="fade-in">
+                            <div className="px-6 pt-5 pb-3 border-b border-slate-100">
+                                <h3 className="text-base font-bold text-slate-700">{t.legalDocs} (revisión Aida)</h3>
+                            </div>
+                            <div className="overflow-x-auto rounded-b-xl">
+                                <table className="w-full text-left text-sm font-data">
+                                    <thead>
+                                        <tr className="border-b border-slate-100 text-slate-400 text-xs uppercase tracking-wider">
+                                            <th className="px-6 py-3 font-semibold">Documento</th>
+                                            <th className="px-6 py-3 font-semibold">Expiración</th>
+                                            <th className="px-6 py-3 font-semibold">Revisión IA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="border-b border-slate-50">
+                                            <td className="px-6 py-4 text-slate-700 font-medium">Employment Authorization</td>
+                                            <td className="px-6 py-4 text-slate-500">Jan-14-2026</td>
+                                            <td className="px-6 py-4"><AiBadge type="flagged" label="AI: Expiring soon" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="px-6 py-4 text-slate-700 font-medium">State ID</td>
+                                            <td className="px-6 py-4 text-slate-500">Mar-01-2027</td>
+                                            <td className="px-6 py-4"><AiBadge type="verified" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Card>
+                    )}
+
+                    {activeTab === 'enrollment' && (
+                        <Card className="fade-in">
+                            <h3 className="text-base font-bold text-slate-700 mb-3">Enrollment</h3>
+                            <p className="text-sm text-slate-600 mb-4">Flujo de enrollment vía HealthSherpa (hosted). El estado y los datos se sincronizan por webhook.</p>
+                            <Badge variant={pol.stage === 'Active' ? 'green' : 'blue'}>{pol.stage === 'Active' ? 'Enrolled' : 'Pendiente'}</Badge>
+                            <div className="mt-4"><AidaHint>Backend-agnóstico: hoy lanza el flujo hosted de HealthSherpa; el día que Aidgency tenga su propio EDE será 100% in-line.</AidaHint></div>
+                        </Card>
+                    )}
+
+                    {(activeTab === 'members' || activeTab === 'activities') && (
                         <Card className="fade-in flex items-center justify-center h-48 text-slate-400">
-                            <p className="text-sm">{TABS.find(tab => tab.id === activeTab)?.label} — Coming soon</p>
+                            <p className="text-sm">{TABS.find(tab => tab.id === activeTab)?.label} — próximamente</p>
                         </Card>
                     )}
                 </div>
@@ -3705,7 +3778,7 @@ const App = () => {
                     {currentView === 'contracts' && <ContractsView navigateTo={navigateTo} initialTab={viewParams.tab} />}
                     {currentView === 'contract-detail' && <ContractDetailView navigateTo={navigateTo} initialTab={viewParams.tab} />}
                     {currentView === 'policies' && <PoliciesView navigateTo={navigateTo} initialTab={viewParams.tab} />}
-                    {currentView === 'policy-detail' && <PolicyDetailView navigateTo={navigateTo} initialTab={viewParams.tab} />}
+                    {currentView === 'policy-detail' && <PolicyDetailView navigateTo={navigateTo} policyId={viewParams.policyId} initialTab={viewParams.tab} />}
                     {currentView === 'policy-wizard' && <PolicyWizardView navigateTo={navigateTo} viewParams={viewParams} />}
                     {currentView === 'clients' && <ClientsListView navigateTo={navigateTo} />}
                     {currentView === 'client-profile' && <ClientProfileView navigateTo={navigateTo} clientId={viewParams.clientId} />}
