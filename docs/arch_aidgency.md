@@ -105,21 +105,42 @@ Un toggle global ("Cambiar Vista") alterna entre modo Agente y modo Agencia (en 
 
 **Flujos:** se llega desde la lista de Contratos, el Dashboard, el panel de notificaciones (directo a Mensajes) o el perfil de un agente. "Ir a Perfil" lleva al Perfil propio para completar datos.
 
-### 3.4 Pólizas (lista)
+### 3.4 Pólizas (lista) — rediseñado 2026-06-15 (ACA-first)
 
-**Propósito:** ver y filtrar la cartera de pólizas de clientes finales y dar de alta nuevas.
+**Propósito:** ver y filtrar la cartera de pólizas y arrancar el ciclo de vida completo de una póliza ACA dentro de la plataforma (quoting → eligibility → enrollment), asistido por IA.
 
 **Contenido:**
-- Búsqueda IA + filtros: nombre de cliente, tipo de póliza, carrier, agente (solo agencia).
-- Pills de estado clicables como filtro: Completed (verde), Waiting (azul), Signature Pending (amarillo), Signed (gris).
-- Tabla: [Agente con NPN y tipo de captación — solo agencia], Cliente (nombre, teléfono, email), Ubicación (estado + zip), Tipo de póliza (con subsidio y grupo de ingreso CSR), Carrier (con plan y nº de asegurados), Fecha de efectividad, Estado + **matriz de progreso 2×2** (Consent / Eligibility / Documents / Payment, ✓ o ✗ cada uno).
-- Tipos de captación del agente (badge): Referral, NPN Override, Direct.
+- **Tarjetas KPI cuadradas** como filtro de estado (mismo componente que Contratos), ordenadas por pipeline: `Quoting · Eligibility · Documents · Enrollment · Active`.
+- Búsqueda IA + filtros (cliente, tipo, carrier; agente en agencia).
+- Tabla: [Agente — solo agencia], Cliente (nombre, teléfono, ubicación+zip), Tipo (badge **ACA**), Carrier · Plan, **APTC** (subsidio), Fecha efectiva, Estado (StageBadge). Las pólizas en `Quoting` se muestran como **borrador** con botón **Retomar** que reabre el wizard donde se dejó.
 
 **Acciones y flujos:**
-- "Nueva Póliza" → modal **Agregar Póliza** (cliente, fecha de efectividad, carrier anterior, carrier, tipo de póliza).
-- Click en fila → Detalle de póliza (con el id de la póliza).
+- "+ Nueva Póliza" → **wizard de creación** (no un modal): 7 pasos (ver §3.4b).
+- Click en fila → Detalle de póliza.
 
-**Reglas:** una póliza está operativamente completa cuando los 4 pasos del pipeline (consentimiento, elegibilidad, documentos, pago inicial/binder) están cumplidos; el estado de firma corre en paralelo.
+**Reglas:** estado canónico `Consent → Quoting → Eligibility → Documents → Enrollment → Active`; `Quoting` es borrador; el binder payment transiciona Enrollment→Active; el estado de firma corre en paralelo.
+
+### 3.4b Wizard de creación de póliza (ACA)
+
+Flujo lineal con barra de progreso de 7 pasos; **guardar y salir** en cualquier paso (la póliza queda en ese estado). Aida asiste inline en cada paso.
+
+1. **Cliente** (obligatorio): elegir existente o crear nuevo; incluye bloque Hogar/Miembros (agregar miembros que se guardan en el cliente).
+2. **Consent**: consentimiento agent-of-record (requisito CMS/EDE).
+3. **Quoting** (saltable): inputs a la izquierda, planes en vivo a la derecha con APTC estimado y short-list recomendado por Aida; multi-selección de candidatos.
+4. **Eligibility**: aplicación al Marketplace prellenada por Aida → APTC/CSR reales; validación en segundo plano (Data Matching Issues).
+5. **Documentos**: recolección con revisión IA (Verified/Flagged/Pendiente).
+6. **Enrollment**: lanza el flujo hosted/deeplink de HealthSherpa; retorno por webhook (backend-agnóstico).
+7. **Binder / Active**: registro del pago de la primera prima que efectúa la cobertura.
+
+### 3.4c Clientes (sección de nivel superior, nueva) — 2026-06-15
+
+**Propósito:** CRM de clientes, separado de las pólizas. Es una sección top-level del nav (Overview · Contracts · Policies · **Clients**).
+
+**Contenido:**
+- **Lista:** tarjetas de cliente (avatar, nombre, ubicación, nº pólizas, tamaño de hogar, ingreso) + búsqueda IA + "+ Nuevo Cliente".
+- **Perfil de cliente:** sidebar con quick facts (pólizas, hogar, ingreso, FPL, agente) + "+ Nueva póliza" / "Editar". Pestañas: **Datos** (default, jerarquizada en 4 secciones — Identidad, Ubicación [ZIP/County clave para cotizar], Hogar y finanzas [decide subsidio], Elegibilidad — + datos adicionales colapsados), **Pólizas** (del cliente), **Hogar/Miembros** (tabla con dos flags: household tributario y solicita cobertura), **Pagos**, **Documentos**.
+
+**Regla de datos:** los miembros del hogar son del **cliente**, no de la póliza (fuente única); editables desde el perfil o desde el wizard.
 
 ### 3.5 Detalle de póliza
 
@@ -248,5 +269,6 @@ Aún sin decidir. Defaults del proyecto a validar cuando arranque el desarrollo 
 
 ## 9. Registro de cambios de este documento
 
+- **2026-06-15** — Rediseño de Pólizas (ACA-first): tarjetas KPI de estado, wizard de creación de 7 pasos (Cliente→Consent→Quoting→Eligibility→Documentos→Enrollment→Binder/Active), Aida inline, detalle de póliza con pipeline + Retomar. Nueva sección top-level **Clientes** (lista + perfil con Datos primero y Hogar/Miembros). Integraciones objetivo verificadas: HealthSherpa ONE (quoting self-serve + enrollment hosted), eligibility = aplicación Marketplace (APTC/CSR), NIPR para licencias. Contratos: KPIs pasan a tarjetas cuadradas. Implementado en `mockup/app.js`. Spec: `docs/superpowers/specs/2026-06-15-polizas-redesign-design.md`.
 - **2026-06-11** — Reestructuración a registro funcional: propósito, contenido, acciones, flujos y reglas por pantalla; flujos end-to-end; catálogos del dominio; anexo técnico. Sustituye a la primera versión (solo estructural).
 - **2026-06-11** — Creación inicial a partir del mockup existente.
