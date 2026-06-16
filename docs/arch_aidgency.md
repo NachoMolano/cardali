@@ -146,13 +146,12 @@ Flujo lineal con barra de progreso de 7 pasos; **guardar y salir** en cualquier 
 
 **Propósito:** expediente completo de una póliza: datos del asegurado, plan, documentos legales y progreso.
 
-**Contenido:**
-- Barra de progreso superior de 4 pasos: Consent → Eligibility → Pending Documents → Binder Payment.
-- Sidebar con la ficha: nº de póliza, cliente, agente, agencia, tipo, carrier, pago mensual, fecha de efectividad, miembros y nivel de ingreso familiar, grupo de ingreso, referido y tipo, fechas de creación/actualización.
-- Pestañas: **Policy Summary** (activa), Policy Members, Activities, Document Signing, Attachments, Tracking (estas cinco son placeholders "coming soon" en el mockup — funcionalidad planificada).
-- Policy Summary: tarjeta de información del seguro (NPN del marketplace, plan, subsidio, pago mensual, member ID), datos completos del titular (identidad, contacto, SSN, país de nacimiento, estatus migratorio, estado civil, dirección), dirección postal, y tabla de **documentos legales** con verificación de IA (p. ej. Employment Authorization → "AI Flagged: expiring soon"; State ID → "AI Verified").
+**Contenido (rediseñado 2026-06-15):**
+- **Pipeline superior** de 5 hitos (`Quoting · Eligibility · Documents · Enrollment · Active`) con el actual resaltado, y una franja **"Retomar en <estado> →"** que reabre el wizard en el paso correspondiente si la póliza no está Active.
+- Sidebar **Ficha**: nº, cliente, carrier, plan, **APTC**, prima neta, fecha efectiva, asegurados, estado de firma; enlace **"Ir al perfil de cliente"**.
+- Pestañas: **Policy Summary** (info del seguro + titular + dirección + documentos legales con revisión IA), **Plan y subsidio**, Policy Members, **Documentos** (revisión IA), **Enrollment** (estado del flujo hosted), Activities.
 
-**Acciones y flujos:** volver a la lista; cambiar de pestaña; enlace "Go to Client Profile" (apunta a un futuro módulo de perfil de cliente, aún inexistente).
+**Acciones y flujos:** volver a la lista; cambiar de pestaña; **Retomar** entra al wizard en el paso del estado actual; "Ir al perfil de cliente" navega al perfil del cliente real asociado.
 
 ### 3.6 Perfil del usuario
 
@@ -215,11 +214,11 @@ Flujo lineal con barra de progreso de 7 pasos; **guardar y salir** en cualquier 
 5. Resolución: **Approved**, **Rejected**, o más adelante **Expired** / **Release Requested** / **Release Required**.
 6. Todo queda auditado en el Registro de Actividad (actor + evento + fecha, incluidos eventos de System y de Aidgency AI).
 
-**Ciclo de vida de una póliza:**
-1. Alta desde "Agregar Póliza" (cliente, fechas, carriers, tipo).
-2. Avanza por el pipeline: **Consent → Eligibility → Documents → Binder Payment**, en paralelo con el estado de firma (Waiting / Signature Pending / Signed / Completed).
-3. Los documentos legales del cliente se verifican con IA (verified / flagged, p. ej. permiso de trabajo próximo a vencer).
-4. La comisión esperada del agente se proyecta en el Dashboard a partir de las pólizas activas por carrier.
+**Ciclo de vida de una póliza (ACA, rediseñado 2026-06-15):**
+1. Alta desde "+ Nueva Póliza" → wizard. Paso 1 obliga a elegir/crear cliente.
+2. Avanza por el wizard: **Cliente → Consent → Quoting (saltable) → Eligibility → Documentos → Enrollment → Binder/Active**. Estado canónico de la póliza: `Consent → Quoting → Eligibility → Documents → Enrollment → Active` (`Quoting` = borrador). Estado de firma en paralelo.
+3. Quoting usa la API de HealthSherpa (objetivo) con APTC estimado; Eligibility determina APTC/CSR reales; Enrollment se hace vía flujo hosted de HealthSherpa con retorno por webhook; el binder payment efectúa la cobertura (Active).
+4. Aida asiste en cada paso (recomendación de planes, prellenado, validación, revisión de documentos). La comisión esperada se proyecta en el Dashboard a partir de las pólizas activas por carrier.
 
 **Cumplimiento de licencias:** las licencias estatales alimentan los contadores del Dashboard y la franja de Contratos; al acercarse el vencimiento pasan a "Expiring Soon" (alerta) y luego "Expired". Renovación/alta desde Perfil → Licencias.
 
