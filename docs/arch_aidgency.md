@@ -254,20 +254,26 @@ Flujo lineal con barra de progreso de 7 pasos; **guardar y salir** en cualquier 
 
 - Ubicación: `mockup/` en el repo. Sin build, sin router, sin persistencia; datos hardcodeados.
 - `mockup/mockup.html`: shell HTML; Tailwind por CDN con config inline (fuentes Instrument Sans / Google Sans / Inter / Red Hat Text; paleta `brand` 50–700 vía variables CSS; sombras personalizadas); React 18 UMD + Babel standalone.
-- `mockup/app.js` (~3.100 líneas): toda la app. Componente raíz `App` con navegación por estado (`currentView` + `viewParams`), contextos `ModeContext` (agent/agency) y `LangContext` (en/es), diccionario de traducciones `T`.
+- `mockup/app.js`: toda la app. Componente raíz `App` con navegación por estado (`currentView` + `viewParams`), contextos `ModeContext` (agent/agency) y `LangContext` (en/es), diccionario de traducciones `T`. Vistas nuevas del rediseño: `ClientsListView`, `ClientProfileView`, `PolicyWizardView` (con pasos `StepClient`/`StepConsent`/`StepQuoting`/`StepEligibility`/`StepDocuments`/`StepEnrollment`/`StepBinder`). Componentes nuevos: `StatusFilterCards`, `StageBadge`, `AidaHint`, `DataSection`.
 - `mockup/styles.css`: tokens de marca (`--brand-50..700`), fondo, clase `agency-mode` en `body` que recolorea la marca según el modo.
-- Vistas: `DashboardView`, `ContractsView`, `ContractDetailView`, `PoliciesView`, `PolicyDetailView`, `ProfileView`, `MyAgencyView`, `AgentProfileView`; overlays `AidaChat` y panel de notificaciones.
-- UI base reutilizable: `Card`, `NestedCard`, `Badge`, `StatePills`, `AiBadge`, `ShareToggle`, `SelectField`, `InfoField`, `PolicyFilterPill`, `ColDropdown`, `AiSearchBar`, `Icons`, `TwistyBarChart`, `NewsCard`.
-- Datos mock a sustituir por API: `AGENTS_DATA`, `CONTRACT_NOTIFS`, `NOTIFICATIONS`, `POLICIES_DATA`, `POLICY_TYPES`, `INSURANCE_COMPANIES`, `US_STATES`, `CONTRACT_STATUSES`, `STATUS_PILLS`, `AIDA_SUGGESTIONS`.
+- Datos mock a sustituir por API: `AGENTS_DATA`, `CONTRACT_NOTIFS`, `NOTIFICATIONS`, `POLICIES_DATA` (con `stage/aptc/plan/clientId`), `CLIENTS_DATA` (con `household`), `POLICY_TYPES`, `INSURANCE_COMPANIES`, `US_STATES`, `CONTRACT_STATUSES`, `STATUS_PILLS`, `AIDA_SUGGESTIONS`.
+- Limitación conocida: la prosa larga dentro de los pasos del wizard (textos de Aida) está solo en español; labels/columnas/botones sí son bilingües.
 
 ## 8. Arquitectura objetivo (pendiente de definir)
 
 Aún sin decidir. Defaults del proyecto a validar cuando arranque el desarrollo real: frontend React/Next.js; backend Python/FastAPI o Node/TypeScript; base de datos Supabase; cloud AWS o GCP. Cuando se definan, documentar aquí módulos de backend, modelo de datos, APIs y servicios de IA.
 
+### Integraciones objetivo (verificadas por investigación, 2026-06)
+- **Quoting/Enrollment ACA → HealthSherpa ONE API.** Quoting self-serve (API key, on/off-exchange en 50 estados+DC con estimación APTC). Enrollment vía flujo hosted/deeplinks + webhooks (approval-gated, partner onboarding). Permite usar HealthSherpa como vendor EDE sin convertirse en Primary EDE entity.
+- **Eligibility ACA:** única aplicación al Marketplace que determina APTC (subsidio) y CSR (solo planes Silver), según ingreso y tamaño del hogar.
+- **Enrollment NO es obligatoriamente externo:** bajo EDE se completa in-platform (Classic DE retirado el 31/10/2025). El diseño es backend-agnóstico (hosted hoy, in-line si Aidgency obtiene su propio EDE).
+- **Licencias → NIPR PDB API:** verificación en tiempo real (refresh diario) de licencias y appointments por NPN (vía Gateway o reseller; FCRA permissible purpose).
+- **Medicare es un ecosistema separado** (Sunfire/Connecture/MedicareCENTER/Integrity, SOA, AEP/OEP/SEP, reglas TPMO) — fuera del alcance ACA-first actual; requiere su propia investigación antes de diseñar su flujo.
+
 ---
 
 ## 9. Registro de cambios de este documento
 
-- **2026-06-15** — Rediseño de Pólizas (ACA-first): tarjetas KPI de estado, wizard de creación de 7 pasos (Cliente→Consent→Quoting→Eligibility→Documentos→Enrollment→Binder/Active), Aida inline, detalle de póliza con pipeline + Retomar. Nueva sección top-level **Clientes** (lista + perfil con Datos primero y Hogar/Miembros). Integraciones objetivo verificadas: HealthSherpa ONE (quoting self-serve + enrollment hosted), eligibility = aplicación Marketplace (APTC/CSR), NIPR para licencias. Contratos: KPIs pasan a tarjetas cuadradas. Implementado en `mockup/app.js`. Spec: `docs/superpowers/specs/2026-06-15-polizas-redesign-design.md`.
+- **2026-06-16** — Rediseño de Pólizas (ACA-first) implementado en el mockup: tarjetas KPI cuadradas de estado (también en Contratos), wizard de creación de 7 pasos (Cliente→Consent→Quoting→Eligibility→Documentos→Enrollment→Binder/Active) con Aida inline, detalle de póliza con pipeline + Retomar. Nueva sección top-level **Clientes** (lista + perfil con Datos primero y Hogar/Miembros con dos flags). Integraciones objetivo verificadas (HealthSherpa ONE, eligibility Marketplace APTC/CSR, NIPR, separación ACA/Medicare). Copia subida a Drive `/CARDALI`. Spec: `docs/superpowers/specs/2026-06-15-polizas-redesign-design.md`.
 - **2026-06-11** — Reestructuración a registro funcional: propósito, contenido, acciones, flujos y reglas por pantalla; flujos end-to-end; catálogos del dominio; anexo técnico. Sustituye a la primera versión (solo estructural).
 - **2026-06-11** — Creación inicial a partir del mockup existente.
