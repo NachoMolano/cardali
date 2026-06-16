@@ -1,6 +1,6 @@
 # Registro de Arquitectura Funcional — Aidgency (proyecto Cardali)
 
-**Última actualización:** 2026-06-11
+**Última actualización:** 2026-06-16
 **Estado del proyecto:** Fase de mockup (no existe aún front ni back reales)
 **Fuente de verdad:** este archivo (`docs/arch_aidgency.md`), versionado en git. En cada cambio de arquitectura o estructura se actualiza este archivo y se sube una copia fresca al Google Drive (carpeta `/CARDALI`).
 
