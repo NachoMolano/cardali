@@ -1987,6 +1987,15 @@ const POLICIES_DATA = [
       familyIncome: '$42,000.00', incomeGroup: 'N/A', referral: 'Feb-20-2026 No',
       referralType: 'Direct', createdDate: 'Feb-18-2026', lastUpdate: 'Mar-01-2026',
       clientId: 'CLI-005', stage: 'Active', aptc: '$0.00', plan: 'Humana D/V Combo' },
+    // --- Red de agencia (otros agentes); solo visibles en modo agencia ---
+    { id: 'POL-2026-1006', customer: 'David Kim', phone: '(212)555-0440', location: 'Queens, NY', state: 'New York', zip: '11354', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Oscar Health', carrierShort: 'OSCAR', plan: 'Oscar Silver Simple', aptc: '$210.00', monthlyPayment: '$48.00', effectiveDate: 'Jul-01-2026', stage: 'Eligibility', status: 'Waiting', npn: '20114455', agent: 'Maria Santos', agentLicense: '150881NY', clientId: 'CLI-006', insuredCount: 1, dob: '02-09-1992', insurancePlan: 'Oscar Silver Simple', incomeGroup: 'CSR A' },
+    { id: 'POL-2026-1007', customer: 'Sofia Reyes', phone: '(602)555-0782', location: 'Phoenix, AZ', state: 'Arizona', zip: '85004', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Ambetter', carrierShort: 'AMBETTER', plan: 'Ambetter Silver 7', aptc: '$540.00', monthlyPayment: '$0.00', effectiveDate: 'Jun-01-2026', stage: 'Active', status: 'Completed', npn: '20114455', agent: 'Maria Santos', agentLicense: '150881AZ', clientId: 'CLI-007', insuredCount: 4, dob: '06-18-1987', insurancePlan: 'Ambetter Silver 7', incomeGroup: 'CSR B' },
+    { id: 'POL-2026-1008', customer: 'Marcus Johnson', phone: '(404)555-0913', location: 'Atlanta, GA', state: 'Georgia', zip: '30303', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Anthem Blue Cross', carrierShort: 'ANTHEM', plan: '', aptc: '$190 est.', monthlyPayment: '—', effectiveDate: '', stage: 'Quoting', status: 'Waiting', npn: '20227788', agent: 'Pedro Gil', agentLicense: '151220GA', clientId: 'CLI-008', insuredCount: 1, dob: '11-02-1995', insurancePlan: '', incomeGroup: 'CSR A' },
+    { id: 'POL-2026-1009', customer: 'Elena Petrova', phone: '(312)555-0228', location: 'Chicago, IL', state: 'Illinois', zip: '60601', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Blue Cross Blue Shield', carrierShort: 'BCBS', plan: 'BCBS Gold PPO', aptc: '$120.00', monthlyPayment: '$305.00', effectiveDate: 'May-01-2026', stage: 'Documents', status: 'Signature Pending', npn: '20227788', agent: 'Pedro Gil', agentLicense: '151220IL', clientId: 'CLI-009', insuredCount: 2, dob: '09-25-1983', insurancePlan: 'BCBS Gold PPO', incomeGroup: 'N/A' },
+    { id: 'POL-2026-1010', customer: 'Tomás Herrera', phone: '(915)555-0556', location: 'El Paso, TX', state: 'Texas', zip: '79901', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Molina Healthcare', carrierShort: 'MOLINA', plan: 'Molina Silver 250', aptc: '$720.00', monthlyPayment: '$0.00', effectiveDate: 'Apr-01-2026', stage: 'Active', status: 'Completed', npn: '20339900', agent: 'Carlos Cruz', agentLicense: '151544TX', clientId: 'CLI-010', insuredCount: 5, dob: '04-14-1979', insurancePlan: 'Molina Silver 250', incomeGroup: 'CSR C' },
+    { id: 'POL-2026-1011', customer: 'Grace Okafor', phone: '(713)555-0667', location: 'Houston, TX', state: 'Texas', zip: '77002', policy: 'Health (ACA / Marketplace)', policyShort: 'Obamacare (ACA)', carrier: 'Cigna', carrierShort: 'CIGNA', plan: 'Cigna Silver 5500', aptc: '$160.00', monthlyPayment: '$112.00', effectiveDate: 'Jun-01-2026', stage: 'Enrollment', status: 'Signed', npn: '20339900', agent: 'Carlos Cruz', agentLicense: '151544TX', clientId: 'CLI-011', insuredCount: 2, dob: '12-30-1990', insurancePlan: 'Cigna Silver 5500', incomeGroup: 'N/A' },
+    { id: 'POL-2026-1012', customer: 'Robert Nguyen', phone: '(714)555-0345', location: 'Santa Ana, CA', state: 'California', zip: '92701', policy: 'Medicare Advantage', policyShort: 'Medicare Advantage', carrier: 'Humana', carrierShort: 'HUMANA', plan: 'Humana MAPD HMO', aptc: '$0.00', monthlyPayment: '$0.00', effectiveDate: 'Jan-01-2026', stage: 'Active', status: 'Completed', npn: '17031536', agent: 'Ivan Diaz', agentLicense: '149633CA', clientId: 'CLI-012', insuredCount: 1, dob: '07-07-1975', insurancePlan: 'Humana MAPD HMO', incomeGroup: 'Medicare' },
+    { id: 'POL-2026-1013', customer: 'Robert Nguyen', phone: '(714)555-0345', location: 'Santa Ana, CA', state: 'California', zip: '92701', policy: 'Dental & Vision', policyShort: 'Dental or Vision Insurance', carrier: 'Aetna', carrierShort: 'AETNA', plan: 'Aetna Dental PPO', aptc: '$0.00', monthlyPayment: '$26.00', effectiveDate: 'Feb-01-2026', stage: 'Active', status: 'Completed', npn: '17031536', agent: 'Ivan Diaz', agentLicense: '149633CA', clientId: 'CLI-012', insuredCount: 1, dob: '07-07-1975', insurancePlan: 'Aetna Dental PPO', incomeGroup: 'N/A' },
 ];
 
 // ─── Clientes (fuente única; el household vive aquí, no en la póliza) ────────────
@@ -2041,7 +2050,16 @@ const CLIENTS_DATA = [
       household: [
         { name: 'Maria Gonzalez', relation: 'Principal', dob: '1985', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-9876', immigration: 'Permanent Resident' },
       ] },
+    // --- Red de agencia (otros agentes); solo visibles en modo agencia ---
+    { id: 'CLI-006', name: 'David Kim', firstName: 'David', lastName: 'Kim', phone: '(212) 555-0440', email: 'dkim@email.com', city: 'Queens', state: 'NY', zip: '11354', county: 'Queens', language: 'English', maritalStatus: 'Single', dob: '02-09-1992', ssn: '•••-••-3321', immigration: 'Citizen', smoker: 'No', gender: 'Male', countryOfBirth: 'USA', income: '$31,000', householdSize: 1, fpl: '124%', applicants: 1, agent: 'Maria Santos', since: 'Apr 2026', household: [{ name: 'David Kim', relation: 'Principal', dob: '1992', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-3321', immigration: 'Citizen' }] },
+    { id: 'CLI-007', name: 'Sofia Reyes', firstName: 'Sofia', lastName: 'Reyes', phone: '(602) 555-0782', email: 'sreyes@email.com', city: 'Phoenix', state: 'AZ', zip: '85004', county: 'Maricopa', language: 'Spanish', maritalStatus: 'Married', dob: '06-18-1987', ssn: '•••-••-6654', immigration: 'Permanent Resident', smoker: 'No', gender: 'Female', countryOfBirth: 'Mexico', income: '$56,000', householdSize: 4, fpl: '180%', applicants: 4, agent: 'Maria Santos', since: 'Mar 2026', household: [{ name: 'Sofia Reyes', relation: 'Principal', dob: '1987', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-6654', immigration: 'Permanent Resident' }, { name: 'Luis Reyes', relation: 'Cónyuge', dob: '1985', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-7765', immigration: 'Permanent Resident' }] },
+    { id: 'CLI-008', name: 'Marcus Johnson', firstName: 'Marcus', lastName: 'Johnson', phone: '(404) 555-0913', email: 'mjohnson@email.com', city: 'Atlanta', state: 'GA', zip: '30303', county: 'Fulton', language: 'English', maritalStatus: 'Single', dob: '11-02-1995', ssn: '•••-••-1190', immigration: 'Citizen', smoker: 'Yes', gender: 'Male', countryOfBirth: 'USA', income: '$22,000', householdSize: 1, fpl: '147%', applicants: 1, agent: 'Pedro Gil', since: 'Feb 2026', household: [{ name: 'Marcus Johnson', relation: 'Principal', dob: '1995', taxHousehold: true, seeksCoverage: true, smoker: 'Yes', ssn: '•••-••-1190', immigration: 'Citizen' }] },
+    { id: 'CLI-009', name: 'Elena Petrova', firstName: 'Elena', lastName: 'Petrova', phone: '(312) 555-0228', email: 'epetrova@email.com', city: 'Chicago', state: 'IL', zip: '60601', county: 'Cook', language: 'English', maritalStatus: 'Married', dob: '09-25-1983', ssn: '•••-••-4407', immigration: 'Permanent Resident', smoker: 'No', gender: 'Female', countryOfBirth: 'Ukraine', income: '$68,000', householdSize: 3, fpl: '270%', applicants: 2, agent: 'Pedro Gil', since: 'Jan 2026', household: [{ name: 'Elena Petrova', relation: 'Principal', dob: '1983', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-4407', immigration: 'Permanent Resident' }] },
+    { id: 'CLI-010', name: 'Tomás Herrera', firstName: 'Tomás', lastName: 'Herrera', phone: '(915) 555-0556', email: 'therrera@email.com', city: 'El Paso', state: 'TX', zip: '79901', county: 'El Paso', language: 'Spanish', maritalStatus: 'Married', dob: '04-14-1979', ssn: '•••-••-8830', immigration: 'Citizen', smoker: 'No', gender: 'Male', countryOfBirth: 'Mexico', income: '$39,000', householdSize: 5, fpl: '130%', applicants: 5, agent: 'Carlos Cruz', since: 'Mar 2026', household: [{ name: 'Tomás Herrera', relation: 'Principal', dob: '1979', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-8830', immigration: 'Citizen' }] },
+    { id: 'CLI-011', name: 'Grace Okafor', firstName: 'Grace', lastName: 'Okafor', phone: '(713) 555-0667', email: 'gokafor@email.com', city: 'Houston', state: 'TX', zip: '77002', county: 'Harris', language: 'English', maritalStatus: 'Single', dob: '12-30-1990', ssn: '•••-••-2218', immigration: 'Permanent Resident', smoker: 'No', gender: 'Female', countryOfBirth: 'Nigeria', income: '$45,000', householdSize: 2, fpl: '230%', applicants: 2, agent: 'Carlos Cruz', since: 'Feb 2026', household: [{ name: 'Grace Okafor', relation: 'Principal', dob: '1990', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-2218', immigration: 'Permanent Resident' }] },
+    { id: 'CLI-012', name: 'Robert Nguyen', firstName: 'Robert', lastName: 'Nguyen', phone: '(714) 555-0345', email: 'rnguyen@email.com', city: 'Santa Ana', state: 'CA', zip: '92701', county: 'Orange', language: 'English', maritalStatus: 'Married', dob: '07-07-1975', ssn: '•••-••-5512', immigration: 'Citizen', smoker: 'No', gender: 'Male', countryOfBirth: 'Vietnam', income: '$82,000', householdSize: 4, fpl: '320%', applicants: 3, agent: 'Ivan Diaz', since: 'Jan 2026', household: [{ name: 'Robert Nguyen', relation: 'Principal', dob: '1975', taxHousehold: true, seeksCoverage: true, smoker: 'No', ssn: '•••-••-5512', immigration: 'Citizen' }] },
 ];
+const CURRENT_AGENT = 'Nacho Molano';
 const getClient = id => CLIENTS_DATA.find(c => c.id === id);
 
 // ─── Policies List View ────────────────────────────────────────────────────────
@@ -2101,12 +2119,15 @@ const PoliciesView = ({ navigateTo, initialTab }) => {
         return next;
     });
 
+    // Modo agente: solo las propias. Modo agencia: toda la red.
+    const scopedPolicies = isAgency ? POLICIES_DATA : POLICIES_DATA.filter(p => p.agent === CURRENT_AGENT);
+
     const stageCounts = POLICY_STAGES.reduce((acc, st) => {
-        acc[st] = POLICIES_DATA.filter(p => p.stage === st).length;
+        acc[st] = scopedPolicies.filter(p => p.stage === st).length;
         return acc;
     }, {});
 
-    const visibleRows = POLICIES_DATA.filter(row => {
+    const visibleRows = scopedPolicies.filter(row => {
         if (activeStatuses.size > 0 && !activeStatuses.has(row.stage)) return false;
         if (filterCustomer && !row.customer.toLowerCase().includes(filterCustomer.toLowerCase())) return false;
         if (filterPolicy && row.policy !== filterPolicy) return false;
@@ -2121,7 +2142,7 @@ const PoliciesView = ({ navigateTo, initialTab }) => {
         <div className="fade-in">
             <div className="flex justify-between items-center mb-5">
                 <h1 className="text-5xl font-bold text-slate-800 tracking-tight font-display">{isAgency ? t.agencyPolicies : t.myPolicies}</h1>
-                <button onClick={() => navigateTo('policy-wizard', { step: 1 })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newPolicy}</button>
+                {!isAgency && <button onClick={() => navigateTo('policy-wizard', { step: 1 })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newPolicy}</button>}
             </div>
 
             <StatusFilterCards
@@ -2377,7 +2398,7 @@ const PolicyDetailView = ({ navigateTo, policyId, initialTab }) => {
                                         <InfoField label="Second Last Name" value={pol.secondLastName || '—'} />
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 pt-4 border-t border-slate-100">
-                                        <InfoField label={`DOB — Age ${new Date().getFullYear() - parseInt(pol.dob.slice(-4))}`} value={pol.dob} />
+                                        <InfoField label={pol.dob ? `DOB — Age ${new Date().getFullYear() - parseInt(pol.dob.slice(-4))}` : 'DOB'} value={pol.dob} />
                                         <InfoField label="Email" value={pol.email} />
                                         <InfoField label="Phone" value={pol.phone} />
                                         <InfoField label="Social Security Number" value={pol.ssn} />
@@ -2994,14 +3015,23 @@ const policiesOfClient = id => POLICIES_DATA.filter(p => p.clientId === id);
 const ClientsListView = ({ navigateTo }) => {
     const lang = useLang();
     const t = T[lang];
+    const mode = useMode();
+    const isAgency = mode === 'agency';
     const [q, setQ] = useState('');
-    const rows = CLIENTS_DATA.filter(c => !q || c.name.toLowerCase().includes(q.toLowerCase()));
+    const [filterAgent, setFilterAgent] = useState('');
+    const POLICY_AGENTS = ['Ivan Diaz', 'Nacho Molano', 'Maria Santos', 'Pedro Gil', 'Carlos Cruz'];
+
+    // Modo agente: solo sus clientes. Modo agencia: toda la red.
+    const scoped = isAgency ? CLIENTS_DATA : CLIENTS_DATA.filter(c => c.agent === CURRENT_AGENT);
+    const rows = scoped.filter(c =>
+        (!q || c.name.toLowerCase().includes(q.toLowerCase())) &&
+        (!filterAgent || c.agent === filterAgent));
 
     return (
         <div className="fade-in">
             <div className="flex justify-between items-center mb-5">
                 <h1 className="text-5xl font-bold text-slate-800 tracking-tight font-display">{t.tabClients}</h1>
-                <button onClick={() => navigateTo('client-profile', { clientId: 'new' })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newClient}</button>
+                {!isAgency && <button onClick={() => navigateTo('client-profile', { clientId: 'new' })} className="bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-soft">{t.newClient}</button>}
             </div>
 
             <AiSearchBar />
@@ -3013,29 +3043,49 @@ const ClientsListView = ({ navigateTo }) => {
                     <input type="text" value={q} onChange={e => setQ(e.target.value)} placeholder={t.customer}
                         className="text-sm bg-transparent border-none outline-none text-slate-700 w-32 placeholder-slate-400" />
                 </div>
+                {isAgency && <PolicyFilterPill label={t.agentFilter} value={filterAgent} onChange={setFilterAgent} options={POLICY_AGENTS} />}
+                {(q || filterAgent) && (
+                    <button onClick={() => { setQ(''); setFilterAgent(''); }} className="text-xs text-slate-400 underline hover:text-slate-600 transition-colors">{t.clearFilters}</button>
+                )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {rows.map(c => (
-                    <div key={c.id} onClick={() => navigateTo('client-profile', { clientId: c.id })}
-                        className="bg-white rounded-2xl border border-slate-200/70 shadow-soft hover:shadow-soft-hover transition-all duration-300 p-5 cursor-pointer group">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-base font-bold">
-                                {c.firstName[0]}{c.lastName[0]}
-                            </div>
-                            <div className="min-w-0">
-                                <p className="font-semibold text-slate-800 group-hover:text-brand-700 truncate">{c.name}</p>
-                                <p className="text-xs text-slate-400">{c.city}, {c.state} · {c.zip}</p>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-3 gap-2 text-center border-t border-slate-100 pt-3">
-                            <div><p className="text-lg font-bold font-data text-brand-700">{policiesOfClient(c.id).length}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickPolicies}</p></div>
-                            <div><p className="text-lg font-bold font-data text-slate-700">{c.householdSize}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickHousehold}</p></div>
-                            <div><p className="text-lg font-bold font-data text-emerald-600">{c.income}</p><p className="text-[10px] text-slate-400 uppercase">{t.quickIncome}</p></div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <Card noPadding>
+                <div className="overflow-x-auto rounded-xl">
+                    <table className="w-full text-left border-collapse font-data">
+                        <thead>
+                            <tr className="border-b border-slate-100 text-slate-400 text-xs uppercase tracking-wider">
+                                {isAgency && <th className="p-5 font-semibold">{t.agentCol}</th>}
+                                <th className="p-5 font-semibold">{t.customerCol}</th>
+                                <th className="p-5 font-semibold">{t.locationCol}</th>
+                                <th className="p-5 font-semibold">{t.quickHousehold}</th>
+                                <th className="p-5 font-semibold">{t.quickIncome}</th>
+                                <th className="p-5 font-semibold">{t.quickFpl}</th>
+                                <th className="p-5 font-semibold">{t.quickPolicies}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map(c => (
+                                <tr key={c.id} onClick={() => navigateTo('client-profile', { clientId: c.id })}
+                                    className="border-b border-slate-50 hover:bg-brand-50/50 transition-colors cursor-pointer group text-sm">
+                                    {isAgency && <td className="p-5 align-top text-slate-500">{c.agent}</td>}
+                                    <td className="p-5 align-top">
+                                        <p className="font-semibold text-brand-600 group-hover:text-brand-700">{c.name}</p>
+                                        <p className="text-xs text-slate-500 mt-1">{c.phone}</p>
+                                    </td>
+                                    <td className="p-5 align-top text-slate-600">{c.city}, {c.state}<p className="text-xs text-slate-400 mt-1">{c.zip}</p></td>
+                                    <td className="p-5 align-top text-slate-600">{c.householdSize}</td>
+                                    <td className="p-5 align-top font-semibold text-emerald-600">{c.income}</td>
+                                    <td className="p-5 align-top text-slate-600">{c.fpl}</td>
+                                    <td className="p-5 align-top"><span className="font-bold text-brand-700">{policiesOfClient(c.id).length}</span></td>
+                                </tr>
+                            ))}
+                            {rows.length === 0 && (
+                                <tr><td colSpan={isAgency ? 7 : 6} className="p-10 text-center text-slate-400 text-sm">—</td></tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </Card>
         </div>
     );
 };
@@ -3054,6 +3104,7 @@ const DataSection = ({ num, title, tag, tagColor, children }) => (
 const ClientProfileView = ({ navigateTo, clientId }) => {
     const lang = useLang();
     const t = T[lang];
+    const isAgency = useMode() === 'agency';
     const [activeTab, setActiveTab] = useState('data');
     const [showMore, setShowMore] = useState(false);
     const c = getClient(clientId);
@@ -3116,7 +3167,7 @@ const ClientProfileView = ({ navigateTo, clientId }) => {
                             <QF label={t.quickFpl} value={c.fpl} />
                             <QF label={t.quickAgent} value={c.agent} />
                         </div>
-                        <button onClick={() => navigateTo('policy-wizard', { step: 1, clientId: c.id })} className="w-full mt-4 bg-brand-500 text-white py-2 rounded-lg font-medium shadow-soft hover:bg-brand-600 transition-colors text-sm">{t.newPolicyFor}</button>
+                        {!isAgency && <button onClick={() => navigateTo('policy-wizard', { step: 1, clientId: c.id })} className="w-full mt-4 bg-brand-500 text-white py-2 rounded-lg font-medium shadow-soft hover:bg-brand-600 transition-colors text-sm">{t.newPolicyFor}</button>}
                         <button className="w-full mt-2 border border-slate-200 text-slate-600 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors text-sm">{t.editClient}</button>
                     </Card>
                 </div>
