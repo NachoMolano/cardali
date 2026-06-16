@@ -137,7 +137,8 @@ Flujo lineal con barra de progreso de 7 pasos; **guardar y salir** en cualquier 
 **Propósito:** CRM de clientes, separado de las pólizas. Es una sección top-level del nav (Overview · Contracts · Policies · **Clients**).
 
 **Contenido:**
-- **Lista:** tarjetas de cliente (avatar, nombre, ubicación, nº pólizas, tamaño de hogar, ingreso) + búsqueda IA + "+ Nuevo Cliente".
+- **Lista (tabla):** columnas Cliente, Ubicación, Hogar, Ingreso, FPL, nº Pólizas (+ **Agente** en modo agencia) + búsqueda IA y filtro por agente. "+ Nuevo Cliente" solo en modo agente.
+- **Reglas de modo:** modo agente ve solo sus clientes; modo agencia ve toda la red. La agencia **no crea** clientes ni pólizas (supervisa); los botones de creación y el wizard se ocultan en modo agencia.
 - **Perfil de cliente:** sidebar con quick facts (pólizas, hogar, ingreso, FPL, agente) + "+ Nueva póliza" / "Editar". Pestañas: **Datos** (default, jerarquizada en 4 secciones — Identidad, Ubicación [ZIP/County clave para cotizar], Hogar y finanzas [decide subsidio], Elegibilidad — + datos adicionales colapsados), **Pólizas** (del cliente), **Hogar/Miembros** (tabla con dos flags: household tributario y solicita cobertura), **Pagos**, **Documentos**.
 
 **Regla de datos:** los miembros del hogar son del **cliente**, no de la póliza (fuente única); editables desde el perfil o desde el wizard.
